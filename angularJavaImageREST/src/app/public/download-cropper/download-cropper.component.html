@@ -1,0 +1,115 @@
+<app-search-toolbar></app-search-toolbar>
+
+<mat-drawer-container class="example-container">
+  <mat-drawer class="example-sidenav" mode="side" #drawer opened>
+
+    <div class="example-sidenav-content">
+      <div class="details">
+
+        <span class="title"><strong>Crop your image with SpecShots</strong></span>
+        <mat-divider class="title-divider"></mat-divider>
+        <div class="icon">
+          <img width="40px" height="40px" src="assets/Specshots-Logo.png">
+        </div>
+
+
+        <mat-form-field class="width" disabled="true" style="font-size: 20px; width: 100%; color: white"
+                        appearance="fill">
+          <mat-label>Width</mat-label>
+          <input class="white-color" readonly type="number" (change)="changedWidthFunc(input.value)"
+                 [formControl]="widthInputField" matInput #input>
+          <mat-hint class="white-color" *ngIf="$details | async as imgDetail">
+            Original width : {{(input.value * diffRatio).toFixed(2)}}
+          </mat-hint>
+        </mat-form-field>
+
+
+        <mat-form-field class="height" disabled="true" style="font-size: 20px; width: 100%;; margin-top: 20px"
+                        appearance="fill">
+          <mat-label>Height</mat-label>
+          <input readonly type="number" [formControl]="heightInputField" matInput #input2>
+          <mat-hint *ngIf="$details | async as imgDetail">Original height :
+            {{(input2.value * diffRatio).toFixed(2)}}
+          </mat-hint>
+        </mat-form-field>
+
+
+        <button *ngIf="showSpinner === false" class="download-btn"
+                [matMenuTriggerFor]="menu" (onMenuOpen)="cropAndDownload(input.value, input2.value)" mat-raised-button>
+          Download
+        </button>
+        <mat-menu style="width: 100%" #menu="matMenu">
+          <div *ngIf="$croppedValues | async as croppedDetails">
+            <div class="hoverable" *ngFor="let detail of croppedDetails.possibleResolutions">
+              <button (click)="download(detail)" style="width: 100%; border-radius: 50%" mat-menu-item>
+                <mat-icon>download</mat-icon>
+                <span>{{detail}}</span>
+              </button>
+            </div>
+          </div>
+
+        </mat-menu>
+        <div class="" *ngIf="showSpinner">
+          <div class="load-image loading" style="margin: 0 auto;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px">
+            <mat-spinner diameter='50'></mat-spinner>
+            <span style="font-size: 16px; margin-top: 20px">
+              <strong style="color: #A9A9A9">
+                {{'Processing request. This can take a while..'}}
+              </strong>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </mat-drawer>
+  <mat-drawer-content class="drawer-content">
+
+
+    <!--<button *ngIf="finishedLoadingImage || isDownLoadingImage !== null" [matMenuTriggerFor]="menu" (onMenuOpen)="cropAndDownload(input.value, input2.value)" mat-icon-button >
+      <mat-icon>more_horiz</mat-icon>
+    </button>
+    <mat-menu style="width: 100%" #menu="matMenu">
+      <div *ngIf="$croppedValues | async as croppedDetails">
+        <div class="hoverable" *ngFor="let detail of croppedDetails.possibleResolutions">
+          <button (click)="download(detail)" style="width: 100%; border-radius: 50%" mat-menu-item>
+            <mat-icon>download</mat-icon>
+            <span>{{detail}}</span>
+          </button>
+        </div>
+      </div>
+
+    </mat-menu>-->
+
+    <div *ngIf="$base64 | async as img" class="cropper">
+      <div>
+        <image-cropper #event [imageBase64]="img"
+                       [maintainAspectRatio]="true"
+                       [cropper]="cropper"
+                       (imageLoaded)="imageLoaded()"
+                       (cropperReady)="foo($event)"
+                       [aspectRatio]="$ratio | async"
+                       (imageCropped)="imageCropped($event)">
+        </image-cropper>
+
+      </div>
+
+      <!--<div class="overlay">
+        <button mat-icon-button>
+          <button *ngIf="finishedLoadingImage || isDownLoadingImage !== null" [matMenuTriggerFor]="menu"
+                  (onMenuOpen)="cropAndDownload(input.value, input2.value)" mat-icon-button>
+            <mat-icon class="more-icon">more_horiz</mat-icon>
+          </button>
+          <mat-menu style="width: 100%" #menu="matMenu">
+            <button mat-raised-button (click)="drawer.toggle()">Show</button>
+          </mat-menu>
+        </button>
+      </div>-->
+
+    </div>
+
+
+  </mat-drawer-content>
+</mat-drawer-container>
+
