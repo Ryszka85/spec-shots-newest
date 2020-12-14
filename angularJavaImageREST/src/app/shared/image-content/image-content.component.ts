@@ -37,6 +37,11 @@ export class ImageContentComponent implements OnInit {
   @Input('data') models: Observable<ImageModel[]>;
   @Input('isProfile') isProfile: boolean;
 
+
+  @Input() cols = 3;
+  @Input() rowHeight = 15;
+  @Input() gutterSize = 40;
+
   panelOpenState = false;
   //fetched data
   public data: ImageModel[];
@@ -263,6 +268,7 @@ export class ImageContentComponent implements OnInit {
 
   // when not logged user likes image then redirect to login page
 
+
   likeImage(item: ImageModel, userId: string): void {
     console.log(this.store.selectSnapshot(LoginStateModel.loggedUserId));
     this.store.dispatch(new IsLoggedIn())
@@ -271,6 +277,10 @@ export class ImageContentComponent implements OnInit {
           .subscribe(value => console.log(value));
         this.store.dispatch(new UserDetailsActions.GetUserDetails(userId))
       });
+  }
+
+  fooTest() {
+    console.log("FOOOOOOOOOOOO")
   }
 }
 

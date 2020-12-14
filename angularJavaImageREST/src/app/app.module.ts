@@ -101,6 +101,7 @@ import {PassDataToCropperDialogState} from "./shared/app-state/states/pass-data-
 import { CropperDetailsBarComponent } from './public/cropper-details-bar/cropper-details-bar.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatBadgeModule} from '@angular/material/badge';
+import { ImageItemComponent } from './public/image-item/image-item.component';
 
 
 @NgModule({
@@ -130,7 +131,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     NotFoundPageComponent,
     BootstrapPlaygroundComponent,
     ChangeEmailThirdPartyComponent,
-    CropperDetailsBarComponent
+    CropperDetailsBarComponent,
+    ImageItemComponent
   ],
   imports: [
     BrowserModule,
