@@ -27,13 +27,7 @@
   border-color:red;
 }
 
-@media screen and (max-width: 570px) {
-  .mat-tab-group {
-    height:unset!important;
-    width: 900px;
-    overflow: hidden !important;
-  }
-}
+
 
 .mat-step-header .mat-step-icon-selected {
   background-color: #941B85;
@@ -73,6 +67,10 @@ body { margin: 0; font-family: Inconsolata, serif; }
 
 .add-tag-dialog .mat-dialog-container::-webkit-scrollbar {
   width: 7px;
+}
+
+.mat-tab-body.mat-tab-body-active {
+  overflow-y: hidden;
 }
 
 .image-details .mat-dialog-container::-webkit-color-swatch {

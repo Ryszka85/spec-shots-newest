@@ -71,28 +71,32 @@
   }
 }
 
-.mat-tab-group {
-  padding: 80px;
+@media screen and (min-width: 1200px) {
+  .mat-tab-group {
+    padding: 80px;
+  }
 }
-
 
 @media screen and (max-width: 1198px) {
   .mat-tab-group {
     margin-top: 12%;
     height: 100vh;
     overflow: hidden !important;
+    padding: 30px;
   }
 }
 
-.mat-tab-group {
-  overflow: hidden !important;
+@media screen and (min-width: 571px) {
+  .mat-tab-group {
+    overflow: hidden !important;
+  }
 }
 
 @media screen and (max-width: 570px) {
   .mat-tab-group {
     margin-top: 35%;
     height: 100vh;
-    /*overflow: hidden !important;*/
+    overflow: hidden !important;
   }
 }
 

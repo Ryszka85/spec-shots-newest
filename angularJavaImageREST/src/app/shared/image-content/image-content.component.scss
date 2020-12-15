@@ -1,20 +1,24 @@
 :host {
   font-family: Inconsolata, serif;
+  overflow: hidden;
 }
 
 
 
 .img-list {
   margin-top: 50px;
+  overflow: hidden;
 }
 
 .item-container  {
   font-family: Inconsolata, serif;
+  overflow: hidden;
 }
 
 
 .item-container {
   display: none;
+  overflow: hidden;
 }
 
 .grid-tile:hover .item-container {
@@ -57,6 +61,7 @@
     position: absolute;
     top: 8px;
     right: 10px;
+
   }
   .white-icon {
     color: white;

@@ -68,13 +68,15 @@ export class ImageContentComponent implements OnInit {
   downloadLink: any;
   rows = new Subject<ImageRowView[]>();
   imageViewModel: ImageViewModel[];
+  device: string = '';
 
   constructor(private store: Store,
               public imgReqService: ImageRequestService,
               private router: Router,
               private updateUserService: UpdateUserService,
               private dialog: MatDialog,
-              private downloadService: ImageDownloadService) {
+              private downloadService: ImageDownloadService,
+              public deviceObserverService: DeviceObserverService) {
   }
 
 
@@ -84,27 +86,6 @@ export class ImageContentComponent implements OnInit {
       const imageRowViews: ImageRowView[] = ImageRowMapper.mapToImageRow(value);
       // if (imageRowViews) console.log(imageRowViews.length);
       this.rows.next(imageRowViews);
-      // let countRow: number = 0;
-      // let countItem: number = 0;
-      // let rowModels: ImageRowView[] = [];
-      // let temp: ImageModel[] = [];
-      // let diffRatio: ImageRowView = {row: null, content: []};
-      // if (value !== undefined && value !== null) {
-      //   value.forEach((value1, index) => {
-      //     countItem++;
-      //     if (countItem <= 3) temp.push(value1);
-      //     if (countItem == 3) {
-      //       countItem = 0;
-      //       rowModels.push({row: countRow, content: temp});
-      //       temp = [];
-      //       countRow++;
-      //     }
-      //     if (index == value.length - 1) {
-      //       rowModels.push({row: countRow, content: temp});
-      //     }
-      //   })
-      //   console.log(rowModels);
-      // }
     })
 
     this.$loggedUserId.subscribe(id => {
@@ -127,21 +108,10 @@ export class ImageContentComponent implements OnInit {
 
     console.log(this.editable);
 
-    // const batchMap = this.offset.pipe(
-    //   throttleTime(500),
-    //   tap(x => console.log(x))
-    // );
-    //
-    //
-    // batchMap.subscribe(value => console.log(value))
+    this.deviceObserverService
+      .getActiveDevice()
+      .subscribe(value => this.device = value);
 
-    // this.fData$.subscribe(value => {
-    //   if (value !== undefined && value != null) {
-    //     this.dataEvenRowSize = Math.floor(value.length / 3);
-    //     this.data = value;
-    //     this.evenRowLimit.next(true)
-    //   }
-    // })
 
   }
 
@@ -301,3 +271,4 @@ import * as FileSaver from "file-saver";
 import {ImageDownloadService} from "../../serviceV2/image-download.service";
 import {ChangeImageDetailsDialogComponent} from "../../private/change-image-details-dialog/change-image-details-dialog.component";
 import {FileSaverService} from "ngx-filesaver";
+import {DeviceObserverService} from "../../serviceV2/device-observer.service";
