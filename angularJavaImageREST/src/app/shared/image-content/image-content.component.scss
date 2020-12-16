@@ -21,55 +21,216 @@
   overflow: hidden;
 }
 
-.grid-tile:hover .item-container {
-  background: rgba(0, 0, 0, .15);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  display: inline-block;
-  .profile-icon {
+
+@media screen and (max-width: 600px) {
+  .grid-tile:hover .item-container {
+    background: rgba(0, 0, 0, .15);
     position: absolute;
-    bottom: 30px;
-    left: 15px;
-  }
-  .user-name {
-    position: absolute;
-    bottom: 35px;
-    left: 65px;
-    color: white;
-    font-size: 1.5em;
-    margin-left: 10px;
-    font-family: "Inconsolata", serif;
-    /*margin-bottom: 30px;*/
-  }
-  .img-settings {
-    position: absolute;
-    top: 10px;
-    left: 5px;
-  }
-  .download-image {
-    position: absolute;
-    top: 10px;
-    right: 50px;
-    .icon-size {
-      font-size: 2.3em;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: inline-block;
+
+    .profile-icon {
+      position: absolute;
+      bottom: 5px;
+      left: 5px;
+    }
+
+    .user-name {
+      position: absolute;
+      bottom: 18px;
+      left: 37px;
+      color: white;
+      font-size: 1.0em;
+      margin-left: 10px;
+      font-family: "Inconsolata", serif;
+      /*margin-bottom: 30px;*/
+    }
+
+    .setting-icon {
+      font-size: 1.0em;
+    }
+
+    .action_icon {
+      font-size: 1.0em;
+    }
+
+    .img-settings {
+      position: absolute;
+      top: 0;
+      left: 5px;
+    }
+
+    .download-image {
+      position: absolute;
+      top: 0;
+      right: 30px;
+
+      .mobile-icon {
+        font-size: 1.0em;
+      }
+      .icon {
+        font-size: 1.0em;
+      }
+    }
+
+
+
+    .actions {
+      position: absolute;
+      top: 0;
+      right: 0px;
+
+    }
+
+    .white-icon {
+      color: white;
+    }
+
+    .link-reference {
+      position: absolute;
+      bottom: 20px;
+      right: 10px;
     }
   }
-  .actions {
-    position: absolute;
-    top: 8px;
-    right: 10px;
+}
 
-  }
-  .white-icon {
-    color: white;
-  }
-  .link-reference {
+@media screen and (min-width: 600px) and (max-width: 1918px) {
+  .grid-tile:hover .item-container {
+    background: rgba(0, 0, 0, .15);
     position: absolute;
-    bottom: 20px;
-    right: 10px;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: inline-block;
+
+    .profile-icon {
+      position: absolute;
+      bottom: 10px;
+      left: 15px;
+    }
+
+    .user-name {
+      position: absolute;
+      bottom: 27px;
+      left: 65px;
+      color: white;
+      font-size: 1.3em;
+      margin-left: 10px;
+      font-family: "Inconsolata", serif;
+      /*margin-bottom: 30px;*/
+    }
+
+    .img-settings {
+      position: absolute;
+      top: 10px;
+      left: 5px;
+    }
+
+    .download-image {
+      position: absolute;
+      top: 10px;
+      right: 50px;
+
+      .mobile-icon {
+        font-size: 1.5em;
+      }
+    }
+
+
+
+    .actions {
+      position: absolute;
+      top: 6px;
+      right: 10px;
+
+    }
+
+    .white-icon {
+      color: white;
+    }
+
+    .link-reference {
+      position: absolute;
+      bottom: 20px;
+      right: 10px;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+@media screen and (min-width: 1920px) {
+  .grid-tile:hover .item-container {
+    background: rgba(0, 0, 0, .15);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: inline-block;
+
+    .profile-icon {
+      position: absolute;
+      bottom: 30px;
+      left: 15px;
+    }
+
+    .user-name {
+      position: absolute;
+      bottom: 35px;
+      left: 65px;
+      color: white;
+      font-size: 1.5em;
+      margin-left: 10px;
+      font-family: "Inconsolata", serif;
+      /*margin-bottom: 30px;*/
+    }
+
+    .icon {
+      font-size: 2.3em;
+    }
+
+    .img-settings {
+      position: absolute;
+      top: 10px;
+      left: 5px;
+    }
+
+    .download-image {
+      position: absolute;
+      top: 10px;
+      right: 50px;
+
+      .icon-size {
+        font-size: 2.3em;
+      }
+    }
+
+    .actions {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+
+    }
+
+    .white-icon {
+      color: white;
+    }
+
+    .link-reference {
+      position: absolute;
+      bottom: 20px;
+      right: 10px;
+    }
   }
 }
 
@@ -78,11 +239,32 @@
   flex-direction: row;
 }
 
-#img-profile {
-  border-radius: 100%;
-  width: 50px;
-  height: 50px;
-  margin-bottom: 10px;
+@media screen and (max-width: 600px) {
+  #img-profile {
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    margin-bottom: 10px;
+  }
+}
+
+
+@media screen and (min-width: 600px) and (max-width: 1918px) {
+  #img-profile {
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  #img-profile {
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
 }
 
 .tags {
