@@ -14,7 +14,7 @@
 <!--</div>-->
 
 
-<mat-grid-list class="img-list" [cols]="device === 'sm' ? 3 : device === 'xs' ? 1 : 4"
+<mat-grid-list class="img-list" [cols]="device === 'sm' || device === 'md' ? 2 : device === 'xs' ? 1 : 4"
                [rowHeight]="10"
                [gutterSize]="20+'px'" >
   <mat-grid-tile class="grid-tile" [rowspan]="item.rows" *ngFor="let imgItem of (models | async); index as i; trackBy: track" >
@@ -45,18 +45,18 @@
         </div>
 
         <div *ngIf="editable && isProfile" class="img-settings">
-          <button mat-icon-button>
-            <mat-icon class="white-icon" matTooltip="This image is public" (click)="changeImageDetails(imgItem)"
+          <a mat-icon-button>
+            <mat-icon class="setting-icon icon white-icon mobile-icon" matTooltip="This image is public" (click)="changeImageDetails(imgItem)"
                       *ngIf="imgItem.isPublic">settings
             </mat-icon>
-          </button>
+          </a>
         </div>
 
         <div class="download-image">
           <div class="likes">
             <a class="thumbUp" (click)="likeImage(imgItem, imgItem.userId)"
                mat-icon-button>
-              <mat-icon style="font-size: 30px; color: white">thumb_up</mat-icon>
+              <mat-icon class="white-icon icon mobile-icon" style="">thumb_up</mat-icon>
             </a>
           </div>
 
@@ -67,11 +67,11 @@
 
         <div class="actions">
           <button matTooltip="Click to open menu"
-                  style="color: white; font-size: 50px"
+                  style="color: white;"
                   mat-icon-button
                   [matMenuTriggerFor]="menu"
                   aria-label="Example icon-button with a menu">
-            <mat-icon style="font-size: 30px">more_vert</mat-icon>
+            <mat-icon class="action_icon icon white-icon mobile-icon" style="">more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
             <button *ngIf="editable && isProfile"
