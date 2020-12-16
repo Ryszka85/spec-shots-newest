@@ -81,8 +81,7 @@
     .actions {
       position: absolute;
       top: 0;
-      right: 0px;
-
+      right: 0;
     }
 
     .white-icon {
@@ -99,6 +98,7 @@
 
 @media screen and (min-width: 600px) and (max-width: 1918px) {
   .grid-tile:hover .item-container {
+    overflow: hidden;
     background: rgba(0, 0, 0, .15);
     position: absolute;
     width: 100%;
@@ -135,16 +135,17 @@
       top: 10px;
       right: 50px;
 
-      .mobile-icon {
-        font-size: 1.5em;
+      .mobile-icon .action_icon {
+        font-size: 1.2em;
       }
+
     }
 
 
 
     .actions {
       position: absolute;
-      top: 6px;
+      top: 10px;
       right: 10px;
 
     }

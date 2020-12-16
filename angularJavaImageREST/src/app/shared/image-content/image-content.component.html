@@ -14,7 +14,7 @@
 <!--</div>-->
 
 
-<mat-grid-list class="img-list" [cols]="device === 'sm' ? 2 : device === 'xs' ? 1 : 4"
+<mat-grid-list class="img-list" [cols]="device === 'sm' || device === 'md' ? 2 : device === 'xs' ? 1 : 4"
                [rowHeight]="10"
                [gutterSize]="20+'px'" >
   <mat-grid-tile class="grid-tile" [rowspan]="item.rows" *ngFor="let imgItem of (models | async); index as i; trackBy: track" >
