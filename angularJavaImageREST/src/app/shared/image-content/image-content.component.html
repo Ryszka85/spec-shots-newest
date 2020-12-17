@@ -1,24 +1,7 @@
-<!--<div class="testing">-->
-<!--  <cdk-virtual-scroll-viewport itemSize="2" class="example-viewport">-->
-<!--    <div *cdkVirtualFor="let item of rows | async" class="example-item">-->
-<!--&lt;!&ndash;      <div style="width: 1450px; height: 450px;&ndash;&gt;-->
-<!--&lt;!&ndash;                color: #3f51b5;&ndash;&gt;-->
-<!--&lt;!&ndash;                display: grid; grid-column-gap: 10px; grid-template-columns: 33%33%33%;">&ndash;&gt;-->
-<!--&lt;!&ndash;        <div style="margin: 10px; width: 100%" *ngFor="let item2 of item.content">&ndash;&gt;-->
-<!--&lt;!&ndash;          <img class="img" width="330px" height="200px" [src]="item2.link">&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-
-<!--    </div>-->
-<!--  </cdk-virtual-scroll-viewport>-->
-<!--</div>-->
-
-
 <mat-grid-list class="img-list" [cols]="device === 'sm' || device === 'md' ? 2 : device === 'xs' ? 1 : 4"
                [rowHeight]="10"
                [gutterSize]="20+'px'" >
   <mat-grid-tile class="grid-tile" [rowspan]="item.rows" *ngFor="let imgItem of (models | async); index as i; trackBy: track" >
-    <!--<div class="item-container">-->
       <app-image-item class="img-item" #item [image]="imgItem"
                       [rowHeight]="10"
                       [gutterSize]="20">
@@ -27,10 +10,16 @@
 
       <div (click)="fooTest()" class="item-container">
           <button mat-icon-button *ngIf="imgItem.user.profileImgPath" class="account-btn profile-icon" (click)="navigateToUser(imgItem)">
-            <img class="shadow3" id="img-profile" [src]="imgItem.user.profileImgPath" alt="">
+            <img class="shadow3 user-profile-img" id="img-profile" [src]="imgItem.user.profileImgPath" alt="">
           </button>
         <span class="user-name" id="user-txt">{{ imgItem.user.email.substr(0, imgItem.user.email.indexOf('@')) }}</span>
 
+          <a class="img-download"
+             matTooltip="Click to download this image"
+             mat-fab
+             (click)="download(imgItem)">
+            <mat-icon style="font-weight: bolder" class="white-icon">save_alt</mat-icon>
+          </a>
 
 
 
@@ -52,7 +41,7 @@
           </a>
         </div>
 
-        <div class="download-image">
+        <div class="likes-box">
           <div class="likes">
             <a class="thumbUp" (click)="likeImage(imgItem, imgItem.userId)"
                mat-icon-button>
@@ -84,10 +73,10 @@
               <mat-icon>fullscreen</mat-icon>
               <span>Fullscreen</span>
             </button>
-            <a mat-menu-item (click)="download(imgItem)">
+            <!--<a mat-menu-item (click)="download(imgItem)">
               <mat-icon>save_alt</mat-icon>
               <span>Download image</span>
-            </a>
+            </a>-->
             <a matTooltip="Go to {{imgItem.linkReference}}"
                mat-menu-item
                [href]="imgItem.linkReference">
