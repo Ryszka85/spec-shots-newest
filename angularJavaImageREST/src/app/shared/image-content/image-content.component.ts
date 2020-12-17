@@ -185,15 +185,17 @@ export class ImageContentComponent implements OnInit {
     )
   }
 
-  showImageDetailDialog(item: ImageModel): void {
+  showFullscreenImage(item: ImageModel): void {
     this.store.dispatch(new SelectImage(item))
       .subscribe(value => {
         const ref = new MatDialogConfig();
         this.dialog.open(ImageDetailViewComponent,
           {
-            width: '1150px',
-            height: '600px',
-            data: item
+          height: '1000px',
+          width: '100vw',
+          maxWidth: '100vw',
+            data: item,
+            panelClass: 'show-fullscreen-img'
             // disableClose: true,
             // autoFocus: false
           });

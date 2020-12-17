@@ -7,6 +7,7 @@ export interface ImageModel {
   link: string;
   name: string;
   profileImg?: string;
+  originalImgPath?: string;
   linkReference?: string;
   isPublic?: boolean;
   tags: TagModel[];

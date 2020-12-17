@@ -80,7 +80,7 @@
               <mat-icon>edit</mat-icon>
               <span>Add tags</span>
             </button>
-            <button (click)="showImageDetailDialog(imgItem)" mat-menu-item>
+            <button (click)="showFullscreenImage(imgItem)" mat-menu-item>
               <mat-icon>fullscreen</mat-icon>
               <span>Fullscreen</span>
             </button>
@@ -102,127 +102,7 @@
           <mat-icon style="color: white">public</mat-icon>
         </a>-->
       </div>
-
-
-
-
-
-    <!--<img class="img"  [src]="item.link">-->
-    <!--<div class="tile-container">
-      <div class="img-tile">
-        <img class="img"  [src]="item.link">
-      </div>
-      <div class="details">
-
-
-
-
-
-
-
-        <div *ngIf="!item.user.profileImgPath" class="profile-icon">
-          <button class="btn" mat-icon-button>
-            <mat-icon style="font-size: 70px; color: white">account_circle</mat-icon>
-          </button>
-          <a mat-button style="font-size: 20px" *ngIf="!item.user.profileImgPath" class="header"
-             (click)="navigateToUser(item)">
-            {{ item.user.email.substr(0, item.user.email.indexOf('@')) }}
-          </a>
-        </div>
-
-        <div *ngIf="item.user.profileImgPath" class="profile-img">
-          <a mat-button *ngIf="item.user.profileImgPath" class="account-btn" (click)="navigateToUser(item)">
-            <img class="shadow3" id="img-profile" [src]="item.user.profileImgPath" alt="">
-            <span id="user-txt">{{ item.user.email.substr(0, item.user.email.indexOf('@')) }}</span>
-          </a>
-          &lt;!&ndash;          <a mat-button *ngIf="item.user.profileImgPath" class="header2" (click)="navigateToUser(item)">&ndash;&gt;
-          &lt;!&ndash;            {{ item.user.email.substr(0, item.user.email.indexOf('@')) }}&ndash;&gt;
-          &lt;!&ndash;          </a>&ndash;&gt;
-        </div>
-
-
-        <div class="link">
-          <a mat-button>
-            <mat-icon matTooltip="This image is public" (click)="changeImageDetails(item)"
-                      *ngIf="item.isPublic">public
-            </mat-icon>
-            <mat-icon matTooltip="This image is private" (click)="changeImageDetails(item)"
-                      *ngIf="!item.isPublic">lock
-            </mat-icon>
-          </a>
-        </div>
-
-        <div class="content-btn">
-          <button matTooltip="Click to open menu"
-                  style="color: white; font-size: 50px"
-                  mat-icon-button
-                  [matMenuTriggerFor]="menu"
-                  aria-label="Example icon-button with a menu">
-            <mat-icon style="font-size: 30px">more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button *ngIf="editable && isProfile"
-                    (click)="showAddTagsDialog(item)"
-                    mat-menu-item>
-              <mat-icon>edit</mat-icon>
-              <span>Add tags</span>
-            </button>
-            <button (click)="showImageDetailDialog(item)" mat-menu-item>
-              <mat-icon>fullscreen</mat-icon>
-              <span>Fullscreen</span>
-            </button>
-            <a mat-menu-item (click)="download(item)">
-              <mat-icon>save_alt</mat-icon>
-              <span>Download image</span>
-            </a>
-            <a matTooltip="Go to {{item.linkReference}}"
-               mat-menu-item
-               [href]="item.linkReference">
-              <mat-icon>public</mat-icon>
-              <span>Go to source</span>
-            </a>
-          </mat-menu>
-        </div>
-        <div class="likes">
-          <a class="thumbUp" (click)="likeImage(item, item.userId)"
-             mat-icon-button>
-            <mat-icon style="font-size: 30px; color: white">thumb_up</mat-icon>
-          </a>
-        </div>
-      </div>
-    </div>-->
-    <!--<div class="tags">
-      <a class="shadow" (click)="clickedTag(i.tag)" href="#" style="background-color: #f4f1de;
-        color: black;
-        text-decoration: none;
-        padding: 5px 20px;
-        border-radius: 20px;
-        margin-top: 2%; margin-right: 1%" *ngFor="let i of item.tags">{{'# ' + i.tag }}
-      </a>
-    </div>-->
-
-    <!--<div class="tags">
-      <a class="shadow" (click)="clickedTag(i.tag)" href="#" style="background-color: #f4f1de;
-        color: black;
-        text-decoration: none;
-        padding: 5px 20px;
-        border-radius: 20px;
-        margin-top: 2%; margin-right: 1%" *ngFor="let i of imgItem.tags">{{'# ' + i.tag }}
-      </a>
-    </div>-->
   </mat-grid-tile>
-
-  <!--<br>
-  <div class="load-btn" *ngIf="evenRowLimit | async">
-    <button (click)="loadNextPage()" color="primary" style="margin-bottom: 2%;
-         width: 100%; height: 60px ;
-         font-size: 30px;" mat-raised-button>
-      Load more
-      <mat-icon>more_horiz</mat-icon>
-    </button>
-  </div>-->
-
-
 </mat-grid-list>
 
 

@@ -3,7 +3,7 @@ import {Select} from "@ngxs/store";
 import {SelectImageState} from "../app-state/states/select-image.state";
 import {ImageModel} from "../domain/imageModel/image.model";
 import {Observable} from "rxjs";
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-image-detail-view',
@@ -17,10 +17,14 @@ export class ImageDetailViewComponent implements OnInit {
   panelOpenState: boolean;
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ImageModel) { }
+  constructor(private dialogRef: MatDialogRef<ImageDetailViewComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: ImageModel) { }
 
   ngOnInit(): void {
 
   }
 
+  closeFullscreen() {
+    this.dialogRef.close();
+  }
 }

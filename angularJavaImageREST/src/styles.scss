@@ -58,6 +58,14 @@
   background: red;
 }
 
+.show-fullscreen-img .mat-dialog-container {
+  max-width: 100vw;
+  width: 100vw;
+  height: 1000px;
+  background-color: transparent;
+  margin: 0;
+}
+
 .change-img-details .mat-dialog-container {
 
 }
