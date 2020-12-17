@@ -191,7 +191,7 @@ export class ImageContentComponent implements OnInit {
         const ref = new MatDialogConfig();
         this.dialog.open(ImageDetailViewComponent,
           {
-          height: '1000px',
+          height: '100%',
           width: '100vw',
           maxWidth: '100vw',
             data: item,
