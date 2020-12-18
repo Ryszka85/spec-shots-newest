@@ -51,6 +51,22 @@
       /*margin-bottom: 30px;*/
     }
 
+    .expand-icon {
+      width: 25px;
+      height: 25px;
+
+    }
+
+    .fullscreen-icon {
+      top: 47%;
+      left: 47%;
+    }
+
+    .fullscreen-icon {
+      top: 47%;
+      left: 47%;
+    }
+
     .setting-icon {
       font-size: 1.5em;
     }
@@ -68,7 +84,7 @@
     .likes-box {
       position: absolute;
       top: 0;
-      right: 30px;
+      right: 6px;
 
       .mobile-icon {
         font-size: 1.5em;
@@ -79,19 +95,28 @@
     }
 
     .img-download {
-      position: absolute;
-      bottom: 8px;
-      right: 15px;
+      font-size: 1.3rem;
     }
 
-    .actions {
+    .img-download {
       position: absolute;
-      top: 0;
-      right: 0;
+      bottom: 10px;
+      right: 5px;
     }
 
     .white-icon {
       color: white;
+    }
+
+    .actions {
+      position: absolute;
+      top: 40px;
+      right: 0;
+    }
+
+    .expand-icon {
+      width: 20px;
+      height: 20px;
     }
 
     .link-reference {
@@ -102,10 +127,6 @@
   }
 }
 
-.img-download {
-  background-color: transparent;
-  font-size: 2rem;
-}
 
 @media screen and (min-width: 600px) and (max-width: 1918px) {
   .grid-tile:hover .item-container {
@@ -117,6 +138,17 @@
     top: 0;
     left: 0;
     display: inline-block;
+
+    .expand-icon {
+      width: 25px;
+      height: 25px;
+
+    }
+
+    .fullscreen-icon {
+      top: 47%;
+      left: 47%;
+    }
 
     .profile-icon {
       position: absolute;
@@ -144,7 +176,7 @@
     .likes-box {
       position: absolute;
       top: 10px;
-      right: 50px;
+      right: 8px;
 
       .mobile-icon .action_icon {
         font-size: 1.2em;
@@ -153,25 +185,28 @@
     }
 
     .img-download {
-      position: absolute;
-      bottom: 20px;
-      right: 15px;
-    }
-
-    .actions {
-      position: absolute;
-      top: 10px;
-      right: 10px;
+      font-size: 1.5rem;
     }
 
     .img-download {
       position: absolute;
       bottom: 15px;
-      right: 5px;
+      right: 10px;
     }
 
     .white-icon {
       color: white;
+    }
+
+    .actions {
+      position: absolute;
+      top: 50px;
+      right: 0;
+    }
+
+    .expand-icon {
+      width: 25px;
+      height: 25px;
     }
 
     .link-reference {
@@ -186,9 +221,6 @@
 
 
 
-
-
-
 @media screen and (min-width: 1920px) {
   .grid-tile:hover .item-container {
     background: rgba(0, 0, 0, .15);
@@ -198,6 +230,27 @@
     top: 0;
     left: 0;
     display: inline-block;
+
+    .img-download {
+      font-size: 2rem;
+    }
+
+    .fullscreen-img {
+      width: 50px;
+      height: 50px;
+    }
+
+    .fullscreen-icon {
+      top: 47%;
+      left: 47%;
+      font-size: 4rem;
+    }
+
+    .expand-icon {
+      width: 30px;
+      height: 30px;
+    }
+
 
     .profile-icon {
       position: absolute;
@@ -218,7 +271,7 @@
 
     .img-download {
       position: absolute;
-      bottom: 20px;
+      bottom: 18px;
       right: 15px;
     }
 
@@ -235,7 +288,7 @@
     .likes-box {
       position: absolute;
       top: 10px;
-      right: 50px;
+      right: 20px;
 
       .icon-size {
         font-size: 2.3em;
@@ -244,9 +297,8 @@
 
     .actions {
       position: absolute;
-      top: 11px;
-      right: 10px;
-
+      top: 60px;
+      right: 5px;
     }
 
     .white-icon {

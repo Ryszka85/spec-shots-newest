@@ -69,7 +69,7 @@
       <mat-error>Invalid url</mat-error>
     </mat-form-field>
   </mat-step>
-  <mat-step>
+  <!--<mat-step>
       <ng-template  matStepLabel>Edit image for your gallery view</ng-template>
       <div>
         <button (click)="cropImageForGallery()"
@@ -77,7 +77,7 @@
                 matTooltip="Select the part of your image which will be displayed as an thumbnail."
                 matTooltipPosition="below"
                 mat-raised-button>Edit</button>
-<!--        <button mat-button matStepperNext>Next</button>-->
+&lt;!&ndash;        <button mat-button matStepperNext>Next</button>&ndash;&gt;
       </div>
     <div class="cropped-image">
       <div *ngIf="!displayCroppedImage" style="width: 500px; height: 460px"></div>
@@ -87,12 +87,12 @@
              [src]="this.$galleryFile | async" />
       </div>
     </div>
-  </mat-step>
+  </mat-step>-->
   <mat-step>
     <ng-template  matStepLabel>Edit image for the download view</ng-template>
     <div>
       <button (click)="cropImageForDownloadView()"
-              mat-button [disabled]="!(this.$galleryFile | async)"
+              mat-button [disabled]="!(this.$imageData | async)"
               matTooltip="Select the part of your image which will be displayed in the download view."
               matTooltipPosition="below"
               mat-raised-button>Edit</button>
@@ -108,8 +108,7 @@
     </div>
   </mat-step>
   <mat-step >
-    <form >
-      <!--<ng-template matStepLabel>Upload file</ng-template>-->
+      <ng-template matStepLabel>Upload file</ng-template>
       <button mat-raised-button *ngIf="isValidToUpload && !(this.spinner | async)"
               (click)="upload()"  mat-flat-button>Upload</button>
       <mat-spinner *ngIf="this.spinner | async" ></mat-spinner>
@@ -117,7 +116,6 @@
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
       </div>
-    </form>
   </mat-step>
 </mat-horizontal-stepper>
 <mat-divider></mat-divider>
