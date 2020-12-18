@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Select, Store} from "@ngxs/store";
 import {ImageRequestService} from "../../serviceV2/image-request.service";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {ImageModel} from "../../shared/domain/imageModel/image.model";
 import {MatRadioChange} from "@angular/material/radio";
 import {AbstractControl, FormBuilder, FormControl, ValidatorFn} from "@angular/forms";
@@ -15,6 +15,7 @@ import {DeleteImageService} from "../../serviceV2/delete-image.service";
 import {Router} from "@angular/router";
 import {Navigate} from "@ngxs/router-plugin";
 import {UserDetailsActions} from "../../shared/app-state/actions/user-details.action";
+import {AddTagsDialogComponent} from "../add-tags-dialog/add-tags-dialog.component";
 
 @Component({
   selector: 'app-change-image-details-dialog',
@@ -42,7 +43,8 @@ export class ChangeImageDetailsDialogComponent implements OnInit {
               private dialogRef: MatDialogRef<ChangeImageDetailsDialogComponent>,
               private updateImgService: UpdateImageDetailsService,
               private deleteImageService: DeleteImageService,
-              private router: Router) {
+              private router: Router,
+              private dialog: MatDialog,) {
   }
 
   ngOnInit(): void {
@@ -143,6 +145,20 @@ export class ChangeImageDetailsDialogComponent implements OnInit {
           ));*/
         });
 
+  }
+
+  addTags(item: ImageModel) {
+    const ref = new MatDialogConfig();
+    // ref.disableClose = true;
+    this.store.dispatch(new SelectImage(item))
+    this.dialog.open(AddTagsDialogComponent,
+      {
+        width: '500px',
+        height: '750px',
+        data: item,
+        panelClass: 'add-tag-dialog'
+      }
+    );
   }
 }
 

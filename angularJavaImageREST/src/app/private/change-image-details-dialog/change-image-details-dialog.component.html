@@ -1,6 +1,6 @@
 <div class="container" *ngIf="$selectedImage | async as img">
   <h2 style="font-family: 'agave Nerd Font',sans-serif;">
-    Change image details
+    <strong>Change image details</strong>
   </h2>
   <mat-divider></mat-divider>
   <br>
@@ -42,7 +42,7 @@
       <h5 id="testus">+ {{img.downloaded}} downloads since last month</h5>
       <mat-divider></mat-divider>
 
-      <div class="image-views">
+      <!--<div class="image-views">
         <a style="color: black" disabled disableRipple mat-icon-button>
           <mat-icon>visibility</mat-icon>
           <span>Views</span>
@@ -50,7 +50,7 @@
         <h2 id="views"><strong>{{img.downloaded}}</strong></h2>
         <h5>+ {{img.downloaded}} view since last month</h5>
         <mat-divider></mat-divider>
-      </div>
+      </div>-->
       <div class="image-likes">
         <a style="color: black" disabled disableRipple mat-icon-button>
           <mat-icon>thumb_up</mat-icon>
@@ -79,6 +79,7 @@
 
   <button style="margin-right: 5px" color="primary" *ngIf="$detailsChanged | async" mat-raised-button (click)="saveChanges()">Save changes</button>
   <button id="del_btn" mat-raised-button (click)="deleteImage(img)">Delete image</button>
+  <button (click)="addTags(img)" class="add-tags" mat-raised-button>Add Tags</button>
   <mat-spinner *ngIf="pressedDelete && finishedDeleting === false">
 
   </mat-spinner>

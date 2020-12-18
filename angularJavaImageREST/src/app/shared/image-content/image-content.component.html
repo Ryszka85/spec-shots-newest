@@ -16,10 +16,27 @@
 
           <a class="img-download"
              matTooltip="Click to download this image"
-             mat-fab
+             mat-icon-button
              (click)="download(imgItem)">
-            <mat-icon style="font-weight: bolder" class="white-icon">save_alt</mat-icon>
+            <mat-icon style="font-weight: bolder" class="img-download white-icon">save_alt</mat-icon>
           </a>
+
+
+
+
+        <!--<img class="fullscreen-img" src="assets/arrows_fullscreen_icon_160438.png" alt="">-->
+
+
+
+
+        <a (click)="showFullscreenImage(imgItem)" class="fullscreen-icon"
+           matTooltip="Click to view full screen"
+           mat-icon-button>
+          <!--<mat-icon class="fullscreen-icon" style="font-weight: bolder; color: white">fullscreen</mat-icon>-->
+          <img class="expand-icon"
+               matTooltip="Click to view full screen"
+               src="assets/expand-512.png" alt="">
+        </a>
 
 
 
@@ -35,7 +52,9 @@
 
         <div *ngIf="editable && isProfile" class="img-settings">
           <a mat-icon-button>
-            <mat-icon class="setting-icon icon white-icon mobile-icon" matTooltip="This image is public" (click)="changeImageDetails(imgItem)"
+            <mat-icon class="setting-icon icon white-icon mobile-icon"
+                      matTooltip="Open settings menu"
+                      (click)="changeImageDetails(imgItem)"
                       *ngIf="imgItem.isPublic">settings
             </mat-icon>
           </a>
@@ -54,7 +73,16 @@
           </button>-->
         </div>
 
-        <div class="actions">
+        <a *ngIf="imgItem.linkReference !== 'null' && imgItem.linkReference.length > 0"
+           class="actions"
+           matTooltip="{{'Go to ' + imgItem.linkReference}}"
+           mat-menu-item
+           [href]="imgItem.linkReference">
+        <img class="expand-icon"
+             src="assets/link-5-512.png" alt="">
+        </a>
+
+        <!--<div class="actions">
           <button matTooltip="Click to open menu"
                   style="color: white;"
                   mat-icon-button
@@ -69,14 +97,14 @@
               <mat-icon>edit</mat-icon>
               <span>Add tags</span>
             </button>
-            <button (click)="showFullscreenImage(imgItem)" mat-menu-item>
+            &lt;!&ndash;<button (click)="showFullscreenImage(imgItem)" mat-menu-item>
               <mat-icon>fullscreen</mat-icon>
               <span>Fullscreen</span>
-            </button>
-            <!--<a mat-menu-item (click)="download(imgItem)">
+            </button>&ndash;&gt;
+            &lt;!&ndash;<a mat-menu-item (click)="download(imgItem)">
               <mat-icon>save_alt</mat-icon>
               <span>Download image</span>
-            </a>-->
+            </a>&ndash;&gt;
             <a matTooltip="Go to {{imgItem.linkReference}}"
                mat-menu-item
                [href]="imgItem.linkReference">
@@ -84,7 +112,7 @@
               <span>Go to source</span>
             </a>
           </mat-menu>
-        </div>
+        </div>-->
         <!--<a *ngIf="imgItem.linkReference !== 'null'" class="link-reference" matTooltip="Go to {{imgItem.linkReference}}"
            mat-menu-item
            [href]="imgItem.linkReference">
