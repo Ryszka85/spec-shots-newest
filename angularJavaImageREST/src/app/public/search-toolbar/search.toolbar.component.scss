@@ -54,7 +54,25 @@ $toolbarBackground: #3C4A59;
   /*grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));*/
   /*grid-template-columns: 0.5fr 2fr 0.3fr 0.3fr;*/
   grid-template:
-      "api-logo         search            user_actions   account_info" auto
+      "api-logo         search           search          user_actions   " auto
+      ".              search_detail     .              .           " auto
+      "filter_details filter_details  filter_details  filter_details" auto
+    / 0.5fr             1.3fr             0.5fr           0.3fr;
+  padding: 10px;
+}
+
+.tablet-logged-container {
+  text-align: center;
+  min-width: 100%;
+  //height: 18%;
+  display: grid;
+  place-items: center;
+  /*background-color: #3d405b;*/
+  /*grid-template-columns: 22%50%15%12%;*/
+  /*grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));*/
+  /*grid-template-columns: 0.5fr 2fr 0.3fr 0.3fr;*/
+  grid-template:
+      "api-logo         search           search          account_info" auto
       ".              search_detail     .              .           " auto
       "filter_details filter_details  filter_details  filter_details" auto
     / 0.5fr             1.3fr             0.5fr           0.3fr;

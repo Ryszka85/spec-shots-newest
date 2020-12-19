@@ -1,9 +1,10 @@
 <div class="primary-color"  [ngClass]="[isMobileDevice && ($isLoggedIn | async) == true ? 'mobile-logged-container' :
                   isMobileDevice ? 'mobile-container' :
                   isDesktopDevice  && ($isLoggedIn | async) == true ? 'container' :
-                   isDesktopDevice ?  'container-not-logged': 'tablet-container']">
+                   isDesktopDevice ?  'container-not-logged':
+                   ($isLoggedIn | async) == true ? 'tablet-logged-container' : 'tablet-container']">
   <div *ngIf="isDesktopDevice || isTabletDevice" class="left">
-    <a>
+    <a mat-icon-button>
       <!--<mat-icon style="margin-top: 5px">android</mat-icon>-->
       <img width="60px" height="60px"  src="assets/Specshots-Logo.png">
     </a>
