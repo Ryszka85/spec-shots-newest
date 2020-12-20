@@ -102,6 +102,7 @@ import { CropperDetailsBarComponent } from './public/cropper-details-bar/cropper
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatBadgeModule} from '@angular/material/badge';
 import { ImageItemComponent } from './public/image-item/image-item.component';
+import { ChangePasswordComponent } from './private/change-password/change-password.component';
 
 
 @NgModule({
@@ -132,7 +133,8 @@ import { ImageItemComponent } from './public/image-item/image-item.component';
     BootstrapPlaygroundComponent,
     ChangeEmailThirdPartyComponent,
     CropperDetailsBarComponent,
-    ImageItemComponent
+    ImageItemComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

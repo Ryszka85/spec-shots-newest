@@ -163,6 +163,7 @@ export class SignupComponent implements OnInit {
 
   closeDialog(): void {
     // this.dialogRef.close(this.formGroup.value);
+    this.store.dispatch(new RequestMessageAction(null))
     this.dialogRef.close();
   }
 
