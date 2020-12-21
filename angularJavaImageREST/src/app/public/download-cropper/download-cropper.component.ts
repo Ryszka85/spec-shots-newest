@@ -106,7 +106,7 @@ export class DownloadCropperComponent implements OnInit {
       this.wasCropped = true;
       this.widthInputField.setValue(width.toFixed(2));
       const height = $event.cropperPosition.y2 - $event.cropperPosition.y1;
-      console.log("Cropper height : " + height); // fooo baaaarrrr
+      console.log("Cropper height : " + height);
       this.heightInputField.setValue(height.toFixed(2));
       this.wasCropped = false;
     }
