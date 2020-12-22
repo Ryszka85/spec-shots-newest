@@ -18,6 +18,7 @@
           <mat-label>Width</mat-label>
           <input class="white-color" readonly type="number" (change)="changedWidthFunc(input.value)"
                  [formControl]="widthInputField" matInput #input>
+          <!--<mat-hint>{{widthInputField.value * diffRatio}}</mat-hint>-->
         </mat-form-field>
 
 
@@ -25,11 +26,12 @@
                         appearance="fill">
           <mat-label>Height</mat-label>
           <input readonly type="number" [formControl]="heightInputField" matInput #input2>
+          <!--<mat-hint>{{heightInputField.value * diffRatio}}</mat-hint>-->
         </mat-form-field>
 
 
         <div class="ratio">
-          <mat-button-toggle-group class="toggle-group" appearance="legacy" #group="matButtonToggleGroup">
+          <mat-button-toggle-group class="toggle-group"  #group="matButtonToggleGroup">
             <mat-button-toggle (click)="$aspectRatioSubj.next(4 / 3)" value="4 / 3" aria-label="Text align left">
               4 / 3
             </mat-button-toggle>
@@ -39,10 +41,10 @@
             <mat-button-toggle (click)="$aspectRatioSubj.next(3 / 2)" value="3 / 2" aria-label="Text align right">
               3 / 2
             </mat-button-toggle>
-            <mat-button-toggle checked value="original" aria-label="Text align justify">
+            <mat-button-toggle (click)="$aspectRatioSubj.next(originalRatio)" checked value="original" aria-label="Text align justify">
               Original
             </mat-button-toggle>
-            <mat-button-toggle value="original" aria-label="Text align justify">
+            <mat-button-toggle (click)="$aspectRatioSubj.next(-1)" value="free" aria-label="Text align justify">
               Free
             </mat-button-toggle>
           </mat-button-toggle-group>
@@ -98,13 +100,13 @@
     </mat-menu>-->
 
     <div *ngIf="$base64 | async as img" class="cropper">
-      <div>
+      <div class="img-cropper">
         <image-cropper #event [imageBase64]="img"
-                       [maintainAspectRatio]="true"
+                       [maintainAspectRatio]="($aspectRatioSubj | async) !== -1"
                        [cropper]="cropper"
                        (imageLoaded)="imageLoaded()"
                        (cropperReady)="foo($event)"
-                       [aspectRatio]="$aspectRatioSubj| async"
+                       [aspectRatio]="$aspectRatioSubj | async"
                        (imageCropped)="imageCropped($event)">
         </image-cropper>
 

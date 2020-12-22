@@ -2,6 +2,7 @@
   background: #eeeeee;
 }
 
+
 .example-container {
   width: 100vw;
   height: 100vh;
@@ -11,14 +12,22 @@
 
 .cropper {
   position: relative;
+  display: grid;
+  place-items: center;
   /*padding: 50px;*/
+}
+
+.img-cropper {
+  width: 100%;
+  max-width: 1200px;
+  max-height: 1100px;
 }
 
 @media screen and (min-width: 600px) {
   .example-sidenav {
     display: grid;
 
-    padding: 40px;
+    padding: 20px;
     grid-template:
       "details" auto
      / auto;
@@ -46,6 +55,7 @@
 }
 
 .details {
+  width: 100%;
   display: grid;
   grid-template:
       "icon" 1fr
@@ -62,11 +72,23 @@
 
 .toggle-group {
   color: black;
+  display: grid;
+  grid-template-columns: minmax(100px, 1fr);
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 1200px) {
   .details {
-    grid-template-columns: minmax(200px, 1fr);
+    position: relative;
+    grid-template-columns: minmax(300px, 0.8fr);
+    width: 100%;
+    min-width: 100%;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1198px) {
+  .details {
+    position: relative;
+    grid-template-columns: minmax(150px, 0.5fr);
     width: 100%;
     min-width: 100%;
   }
@@ -108,6 +130,7 @@
 
 .ratio {
   grid-area: ratio;
+
 }
 
 
@@ -120,6 +143,8 @@
   align-items: center;
   justify-content: center;*!
 }*/
+
+
 
 .cropper {
   position: relative;
@@ -144,9 +169,13 @@
 .title {
   grid-area: title;
   margin-bottom: 15px;
-  font-size: 20px;
+  --minFontSize: 12px;
+  --maxFontSize: 18px;
+  --scaler: 10vw;
+  font-size: clamp( var(--minFontSize), var(--scaler), var(--maxFontSize) );
   color: black;
   font-family: 'Quicksand', sans-serif;
+  text-align: center;
 }
 
 .more-icon {
@@ -162,6 +191,7 @@
 }
 
 .icon {
+  grid-area: icon;
   display: grid;
   place-items: center;
   color: white;
