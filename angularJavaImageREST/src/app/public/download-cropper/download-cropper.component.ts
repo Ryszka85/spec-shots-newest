@@ -108,12 +108,12 @@ export class DownloadCropperComponent implements OnInit {
     if (!this.croppedWidth || !this.croppedHeight) {
       console.log("Cropper width : " + width);
       this.wasCropped = true;
-      const widthWithFactor = width * this.diffRatio;
-      this.widthInputField.setValue(widthWithFactor.toFixed(2));
+      const widthWithFactor = width;
+      this.widthInputField.setValue(widthWithFactor.toFixed(0));
       const height = $event.cropperPosition.y2 - $event.cropperPosition.y1;
       console.log("Cropper height : " + height);
-      const heightWithFactor = height * this.diffRatio;
-      this.heightInputField.setValue(heightWithFactor.toFixed(2));
+      const heightWithFactor = height;
+      this.heightInputField.setValue(heightWithFactor.toFixed(0));
       this.wasCropped = false;
     }
     /*if (this.loaded == 0) {
@@ -137,8 +137,8 @@ export class DownloadCropperComponent implements OnInit {
       this.cropper = {
         x1: 0,
         y1: 0,
-        x2: width * 0.6,
-        y2: imageFileDetails.height * 0.6
+        x2: width,
+        y2: imageFileDetails.height
       };
       this.showSpinner = false;
     });
@@ -153,15 +153,30 @@ export class DownloadCropperComponent implements OnInit {
   }
 
   public cropAndDownload(width: string, height: string): void {
-    const parsedWidth: number = Number.parseFloat(width);
-    const parsedHeight: number = Number.parseFloat(height);
+    const imageFileDetails = this.store.selectSnapshot(GetImageByIdState.getFileDetails);
+    const parsedWidth: number = Math.floor(Number.parseFloat(width));
+    const parsedHeight: number = Math.floor(Number.parseFloat(height));
+    let subImageWidth =
+      (this.cropper.x1 * this.diffRatio) + parsedWidth * this.diffRatio > imageFileDetails.width ?
+        imageFileDetails.width - this.cropper.x1 : parsedWidth * this.diffRatio;
+    let subImageHeight =
+      (this.cropper.y1 * this.diffRatio) + parsedHeight * this.diffRatio > imageFileDetails.height ?
+        imageFileDetails.height - this.cropper.y1 : parsedHeight * this.diffRatio;
+    console.log(imageFileDetails.width);
+    console.log(this.cropper.x1 * this.diffRatio);
+    console.log((this.cropper.x1 * this.diffRatio) + parsedWidth);
+    console.log(subImageWidth);
+    console.log(imageFileDetails.height);
+    console.log(this.cropper.y1 * this.diffRatio);
+    console.log((this.cropper.y1 * this.diffRatio) + parsedHeight);
+    console.log(subImageHeight);
     this.store.dispatch(
       new SetCroppedOffsetValues(
         this.store.selectSnapshot(GetImageByIdState.getImageDetail).imageId,
         this.cropper.x1 * this.diffRatio,
         this.cropper.y1 * this.diffRatio,
-        parsedWidth,
-        parsedHeight
+        subImageWidth,
+        subImageHeight
       )
     )
   }

@@ -104,7 +104,7 @@
                        [cropper]="cropper"
                        (imageLoaded)="imageLoaded()"
                        (cropperReady)="foo($event)"
-                       [aspectRatio]="$ratio | async"
+                       [aspectRatio]="$aspectRatioSubj| async"
                        (imageCropped)="imageCropped($event)">
         </image-cropper>
 
