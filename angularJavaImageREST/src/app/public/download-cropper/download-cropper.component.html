@@ -1,7 +1,7 @@
 <app-search-toolbar></app-search-toolbar>
 
 <mat-drawer-container class="example-container">
-  <mat-drawer class="example-sidenav" mode="side" #drawer opened>
+  <mat-drawer class="example-sidenav" mode="side" #drawer opened [disableClose]="true">
 
     <div class="example-sidenav-content">
       <div class="details">
@@ -18,9 +18,6 @@
           <mat-label>Width</mat-label>
           <input class="white-color" readonly type="number" (change)="changedWidthFunc(input.value)"
                  [formControl]="widthInputField" matInput #input>
-          <mat-hint class="white-color" *ngIf="$details | async as imgDetail">
-            Original width : {{(input.value * diffRatio).toFixed(2)}}
-          </mat-hint>
         </mat-form-field>
 
 
@@ -28,10 +25,28 @@
                         appearance="fill">
           <mat-label>Height</mat-label>
           <input readonly type="number" [formControl]="heightInputField" matInput #input2>
-          <mat-hint *ngIf="$details | async as imgDetail">Original height :
-            {{(input2.value * diffRatio).toFixed(2)}}
-          </mat-hint>
         </mat-form-field>
+
+
+        <div class="ratio">
+          <mat-button-toggle-group class="toggle-group" appearance="legacy" #group="matButtonToggleGroup">
+            <mat-button-toggle (click)="$aspectRatioSubj.next(4 / 3)" value="4 / 3" aria-label="Text align left">
+              4 / 3
+            </mat-button-toggle>
+            <mat-button-toggle (click)="$aspectRatioSubj.next(16 / 9)" value="16 / 9" aria-label="Text align center">
+              16 / 9
+            </mat-button-toggle>
+            <mat-button-toggle (click)="$aspectRatioSubj.next(3 / 2)" value="3 / 2" aria-label="Text align right">
+              3 / 2
+            </mat-button-toggle>
+            <mat-button-toggle checked value="original" aria-label="Text align justify">
+              Original
+            </mat-button-toggle>
+            <mat-button-toggle value="original" aria-label="Text align justify">
+              Free
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
 
 
         <button *ngIf="showSpinner === false" class="download-btn"

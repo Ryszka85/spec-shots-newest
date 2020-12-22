@@ -7,6 +7,8 @@
   height: 100vh;
 }
 
+
+
 .cropper {
   position: relative;
   /*padding: 50px;*/
@@ -51,10 +53,15 @@
       "divider"
       "width" 0.3fr
       "height" 0.3fr
+      "ratio"
       "download-button" 0.3fr
       "loading";
   place-items: center;
   gap: 15px;
+}
+
+.toggle-group {
+  color: black;
 }
 
 @media screen and (min-width: 600px) {
@@ -97,6 +104,10 @@
 
 .height {
   grid-area: height;
+}
+
+.ratio {
+  grid-area: ratio;
 }
 
 

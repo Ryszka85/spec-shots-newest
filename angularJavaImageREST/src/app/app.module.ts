@@ -102,7 +102,7 @@ import { CropperDetailsBarComponent } from './public/cropper-details-bar/cropper
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatBadgeModule} from '@angular/material/badge';
 import { ImageItemComponent } from './public/image-item/image-item.component';
-
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -146,6 +146,7 @@ import { ImageItemComponent } from './public/image-item/image-item.component';
     ImageCropperModule,
     MatSlideToggleModule,
     MatTooltipModule,
+    MatButtonToggleModule,
     MatRadioModule,
     MatChipsModule,
     MatSnackBarModule,

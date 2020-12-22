@@ -40,6 +40,9 @@ export class DownloadCropperComponent implements OnInit {
   public isDownLoadingImage: boolean = null;
   public showSpinner = true;
 
+
+  $aspectRatioSubj: Subject<number>;
+
   public widthChanged: number;
   public croppedWidth: boolean = false;
   public croppedHeight: boolean = false;
@@ -67,8 +70,11 @@ export class DownloadCropperComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.$aspectRatioSubj = new Subject<number>();
     const imageFileDetails = this.store.selectSnapshot(GetImageByIdState.getFileDetails);
     this.extractImageIdFromRequest(imageFileDetails);
+
+    this.$aspectRatioSubj.subscribe(value => console.log(value))
     /*this.subscribeToWidthInput(imageFileDetails);
     this.subscribeToHeightInput(imageFileDetails);*/
   }
@@ -99,15 +105,15 @@ export class DownloadCropperComponent implements OnInit {
     console.log("Starting Cropper method.....................................................");
     const ratio = imageFileDetails.width / imageFileDetails.height;
     const width = $event.cropperPosition.x2 - $event.cropperPosition.x1;
-    console.log($event.cropperPosition.x1);
-    console.log($event.cropperPosition.x2);
     if (!this.croppedWidth || !this.croppedHeight) {
       console.log("Cropper width : " + width);
       this.wasCropped = true;
-      this.widthInputField.setValue(width.toFixed(2));
+      const widthWithFactor = width * this.diffRatio;
+      this.widthInputField.setValue(widthWithFactor.toFixed(2));
       const height = $event.cropperPosition.y2 - $event.cropperPosition.y1;
       console.log("Cropper height : " + height);
-      this.heightInputField.setValue(height.toFixed(2));
+      const heightWithFactor = height * this.diffRatio;
+      this.heightInputField.setValue(heightWithFactor.toFixed(2));
       this.wasCropped = false;
     }
     /*if (this.loaded == 0) {
@@ -131,8 +137,8 @@ export class DownloadCropperComponent implements OnInit {
       this.cropper = {
         x1: 0,
         y1: 0,
-        x2: width,
-        y2: imageFileDetails.height
+        x2: width * 0.6,
+        y2: imageFileDetails.height * 0.6
       };
       this.showSpinner = false;
     });
@@ -154,8 +160,8 @@ export class DownloadCropperComponent implements OnInit {
         this.store.selectSnapshot(GetImageByIdState.getImageDetail).imageId,
         this.cropper.x1 * this.diffRatio,
         this.cropper.y1 * this.diffRatio,
-        parsedWidth * this.diffRatio,
-        parsedHeight * this.diffRatio
+        parsedWidth,
+        parsedHeight
       )
     )
   }
@@ -176,6 +182,21 @@ export class DownloadCropperComponent implements OnInit {
   foo($event: Dimensions) {
     const imageFileDetails = this.store.selectSnapshot(GetImageByIdState.getFileDetails);
     this.diffRatio = imageFileDetails.width / $event.width;
+    this.$aspectRatioSubj.next(imageFileDetails.width / imageFileDetails.height);
     this.diffRatio.toFixed(2);
   }
+
+  getAspectRatio(width: number, height: number): string {
+    const start = width < height ? width : height;
+    console.log(start);
+    let ratio = width + '/' + height;
+    for ( let i = start; i >= 1; i-- ) {
+      if (width % i === 0 && height % i === 0) {
+        console.log('Hallo??');
+        console.log(i);
+        return width / i + '/' + height / i;
+      }
+    }
+    return ratio;
+}
 }

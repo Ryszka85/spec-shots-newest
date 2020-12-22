@@ -54,6 +54,21 @@
   border-color: white
 }
 
+.mat-button-toggle-checked {
+  background-color: #e0e0e0;
+  color: black;
+}
+
+.mat-button-toggle {
+  font-size: 1.5em;
+  color: black;
+}
+
+.mat-button-toggle {
+  color: rgba(0,0,0,.38);
+
+}
+
 .uploadError {
   background: red;
 }
