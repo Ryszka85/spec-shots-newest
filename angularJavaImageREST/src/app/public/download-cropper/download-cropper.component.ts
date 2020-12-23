@@ -18,6 +18,7 @@ import {PrepareCroppedForDownloadState} from "../../shared/app-state/states/prep
 import {ImageDownloadService} from "../../serviceV2/image-download.service";
 import {resolveProvidersRequiringFactory} from "@angular/compiler-cli/src/ngtsc/annotations/src/util";
 import {DeviceDetectorService} from "ngx-device-detector";
+import {Device, DeviceObserverService} from "../../serviceV2/device-observer.service";
 
 @Component({
   selector: 'app-download-cropper',
@@ -40,6 +41,10 @@ export class DownloadCropperComponent implements OnInit {
   public isDownLoadingImage: boolean = null;
   public showSpinner = true;
 
+
+  $aspectRatioSubj: Subject<number>;
+  downloadError = false;
+
   public widthChanged: number;
   public croppedWidth: boolean = false;
   public croppedHeight: boolean = false;
@@ -54,6 +59,10 @@ export class DownloadCropperComponent implements OnInit {
     x2: 0,
     y2: 0
   };
+
+  isMobile: boolean = false;
+
+  originalRatio: number;
   enableUserInput: any;
   showFiller: boolean = false;
 
@@ -63,12 +72,21 @@ export class DownloadCropperComponent implements OnInit {
               private dialog: MatDialog,
               private service: ImageRequestService,
               private downloadService: ImageDownloadService,
-              private deviceService: DeviceDetectorService,) {
+              public deviceObserverService: DeviceObserverService) {
   }
 
   ngOnInit(): void {
+
+    this.deviceObserverService
+      .getActiveDevice()
+      .subscribe(device => this.isMobile = device === 'xs');
+
+    this.originalRatio = 0;
+    this.$aspectRatioSubj = new Subject<number>();
     const imageFileDetails = this.store.selectSnapshot(GetImageByIdState.getFileDetails);
     this.extractImageIdFromRequest(imageFileDetails);
+    this.originalRatio = imageFileDetails.width / imageFileDetails.height;
+
     /*this.subscribeToWidthInput(imageFileDetails);
     this.subscribeToHeightInput(imageFileDetails);*/
   }
@@ -99,15 +117,18 @@ export class DownloadCropperComponent implements OnInit {
     console.log("Starting Cropper method.....................................................");
     const ratio = imageFileDetails.width / imageFileDetails.height;
     const width = $event.cropperPosition.x2 - $event.cropperPosition.x1;
-    console.log($event.cropperPosition.x1);
-    console.log($event.cropperPosition.x2);
     if (!this.croppedWidth || !this.croppedHeight) {
       console.log("Cropper width : " + width);
       this.wasCropped = true;
-      this.widthInputField.setValue(width.toFixed(2));
+      const widthWithFactor = width * this.diffRatio;
+      console.log(width * this.diffRatio);
+      this.widthInputField.setValue(widthWithFactor.toFixed(0));
       const height = $event.cropperPosition.y2 - $event.cropperPosition.y1;
       console.log("Cropper height : " + height);
-      this.heightInputField.setValue(height.toFixed(2));
+      console.log(height * this.diffRatio);
+      console.log(Math.floor((this.cropper.y1 * this.diffRatio)) + Math.floor((height * this.diffRatio)));
+      const heightWithFactor = Math.floor(height) * this.diffRatio;
+      this.heightInputField.setValue(heightWithFactor.toFixed(0));
       this.wasCropped = false;
     }
     /*if (this.loaded == 0) {
@@ -147,15 +168,20 @@ export class DownloadCropperComponent implements OnInit {
   }
 
   public cropAndDownload(width: string, height: string): void {
-    const parsedWidth: number = Number.parseFloat(width);
-    const parsedHeight: number = Number.parseFloat(height);
+    const imageFileDetails = this.store.selectSnapshot(GetImageByIdState.getFileDetails);
+    const offsetY1 = this.cropper.y1 * this.diffRatio;
+    const offsetX1 = this.cropper.x1 * this.diffRatio;
+    const heightFactored = (this.cropper.y2 - this.cropper.y1) * this.diffRatio;
+    const widthFactored = (this.cropper.x2 - this.cropper.x1) * this.diffRatio;
+    const subImageWidth = offsetX1 + widthFactored > imageFileDetails.width ? imageFileDetails.width - offsetX1 : widthFactored;
+    const subImageHeight = offsetY1 + heightFactored > imageFileDetails.height ? imageFileDetails.height - offsetY1 : heightFactored;
     this.store.dispatch(
       new SetCroppedOffsetValues(
         this.store.selectSnapshot(GetImageByIdState.getImageDetail).imageId,
         this.cropper.x1 * this.diffRatio,
         this.cropper.y1 * this.diffRatio,
-        parsedWidth * this.diffRatio,
-        parsedHeight * this.diffRatio
+        subImageWidth,
+        subImageHeight
       )
     )
   }
@@ -163,6 +189,7 @@ export class DownloadCropperComponent implements OnInit {
 
   download(detail: string): void {
     this.showSpinner = true;
+    this.downloadError = false;
     let croppedDownloadRequest = this.store.selectSnapshot(PrepareCroppedForDownloadState.getCroppedValues);
     croppedDownloadRequest.imageId = this.store.selectSnapshot(GetImageByIdState.getImageDetail).imageId;
     croppedDownloadRequest.selectedWidth = Number.parseFloat(detail.split(' x ')[0]);
@@ -170,12 +197,33 @@ export class DownloadCropperComponent implements OnInit {
     console.log(croppedDownloadRequest.selectedWidth);
     this.downloadService
       .downloadIndividualImage(croppedDownloadRequest, true)
-      .subscribe(res => this.showSpinner = false);
+      .subscribe(res => {
+        this.showSpinner = false;
+        this.downloadError = false;
+      }, error => {
+        this.downloadError = true;
+        this.showSpinner = false;
+      });
   }
 
   foo($event: Dimensions) {
     const imageFileDetails = this.store.selectSnapshot(GetImageByIdState.getFileDetails);
     this.diffRatio = imageFileDetails.width / $event.width;
+    this.$aspectRatioSubj.next(imageFileDetails.width / imageFileDetails.height);
     this.diffRatio.toFixed(2);
   }
+
+  getAspectRatio(width: number, height: number): string {
+    const start = width < height ? width : height;
+    console.log(start);
+    let ratio = width + '/' + height;
+    for ( let i = start; i >= 1; i-- ) {
+      if (width % i === 0 && height % i === 0) {
+        console.log('Hallo??');
+        console.log(i);
+        return width / i + '/' + height / i;
+      }
+    }
+    return ratio;
+}
 }

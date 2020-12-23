@@ -5,7 +5,7 @@ import {connectableObservableDescriptor} from "rxjs/internal/observable/Connecta
 import {UserDetailsState} from "../../shared/app-state/states/User-details.state";
 import {UserDetailsActions} from "../../shared/app-state/actions/user-details.action";
 import {AuthenticationActions} from "../../shared/app-state/actions/authentication-action";
-import {debounceTime, distinctUntilChanged, map, share} from "rxjs/operators";
+import {debounceTime, distinctUntilChanged, map, share, tap} from "rxjs/operators";
 import {Navigate} from "@ngxs/router-plugin";
 import {LoggedInUserModel} from "../../shared/domain/userModel/UserLoginModel";
 import {ImagesByUserIDAction} from "../../shared/app-state/actions/image.action";
@@ -15,7 +15,7 @@ import {AbstractControl, Form, FormBuilder, FormControl, ValidatorFn, Validators
 import {BaseUserDetails} from "../../shared/domain/userModel/user-details.model";
 import {IUserAuthState} from "../../shared/domain/UserAuthStateModel";
 import {SelectedImage} from "../../shared/domain/imageModel/image.model";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {ChangeEmailThirdPartyComponent} from "../change-email-third-party/change-email-third-party.component";
 import {BehaviorSubject, Observable, Subject} from "rxjs";
 import SearchUsers = UserDetailsActions.SearchUsers;
@@ -23,6 +23,8 @@ import {SearchByUsersState} from "../../shared/app-state/states/search-by-users.
 import {UpdateUserService} from "../../serviceV2/update-user.service";
 import {SearchByUsersService} from "../../serviceV2/search-by-users.service";
 import IsLoggedIn = AuthenticationActions.IsLoggedIn;
+import {ChangePasswordComponent} from "../change-password/change-password.component";
+import {DeviceObserverService} from "../../serviceV2/device-observer.service";
 
 @Component({
   selector: 'app-edit-profile',
@@ -53,14 +55,22 @@ export class EditProfileComponent implements OnInit {
 
   loggedUser: BaseUserDetails;
 
+  isMobile = false;
+
   constructor(private store: Store,
               private service: UserAuthenticationService,
               private dialog: MatDialog,
               private formBuilder: FormBuilder,
               private updateUserService: UpdateUserService,
-              private userService: SearchByUsersService) { }
+              private userService: SearchByUsersService,
+              private deviceObserver: DeviceObserverService) { }
 
   ngOnInit(): void {
+
+    this.deviceObserver
+      .getActiveDevice()
+      .subscribe(device =>
+        this.isMobile = device === 'xs');
 
     /*this.emailValChange$
       .pipe(debounceTime(1000), distinctUntilChanged())
@@ -277,6 +287,22 @@ export class EditProfileComponent implements OnInit {
     } else {
       this.lastValChange$.next(false);
     }
+  }
+
+  changePassword(): void {
+    const userDetails: BaseUserDetails =
+      this.store.selectSnapshot(LoginStateModel.loggedInUser);
+    if (this.isMobile) {
+      this.dialog.open(ChangePasswordComponent, {
+        data: userDetails,
+        minWidth: '100vw'
+      });
+    } else {
+      this.dialog.open(ChangePasswordComponent, {
+        data: userDetails
+      });
+    }
+    console.log(userDetails);
   }
 }
 

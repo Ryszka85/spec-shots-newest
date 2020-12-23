@@ -1,8 +1,10 @@
 :host {
   font-family: Inconsolata, serif;
-  overflow: hidden;
 }
 
+.img-list {
+  margin-left: 15px;
+}
 
 
 .img-list {
@@ -55,6 +57,10 @@
       width: 25px;
       height: 25px;
 
+    }
+
+    .img-list {
+      overflow-y: hidden;
     }
 
     .fullscreen-icon {
@@ -126,6 +132,9 @@
     }
   }
 }
+
+
+
 
 
 @media screen and (min-width: 600px) and (max-width: 1918px) {

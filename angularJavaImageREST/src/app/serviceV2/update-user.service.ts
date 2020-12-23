@@ -11,8 +11,20 @@ export class UpdateUserService {
   private readonly UPLOAD_PROFILE_IMAGE = environment.apiUrl + "user/set/profile-image/";
   private readonly ADD_USER_LIKE = environment.apiUrl + "user/set/likes/";
   private readonly CHANGE_USER_EMAIL = environment.apiUrl + "user/set/email/";
+  private readonly CHANGE_USER_PASSWORD = environment.apiUrl + "user/set/password/";
 
   constructor(private http: HttpClient) {
+  }
+
+  public changeUserPassword(userId: string, changePassword: { oldPassword: string, newPassword: string } ): Observable<any> {
+    return this.http.post(
+      this.CHANGE_USER_PASSWORD,
+      {
+        userId,
+        oldPassword: changePassword.oldPassword,
+        newPassword: changePassword.newPassword
+      },
+      {observe: 'response'});
   }
 
   public setUserProfile(userId: string, image: FormData): Observable<any> {

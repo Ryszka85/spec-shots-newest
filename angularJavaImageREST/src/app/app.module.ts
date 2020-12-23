@@ -103,6 +103,10 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatBadgeModule} from '@angular/material/badge';
 import { ImageItemComponent } from './public/image-item/image-item.component';
 
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
+import { ChangePasswordComponent } from './private/change-password/change-password.component';
+
 
 @NgModule({
   declarations: [
@@ -132,7 +136,8 @@ import { ImageItemComponent } from './public/image-item/image-item.component';
     BootstrapPlaygroundComponent,
     ChangeEmailThirdPartyComponent,
     CropperDetailsBarComponent,
-    ImageItemComponent
+    ImageItemComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -146,6 +151,7 @@ import { ImageItemComponent } from './public/image-item/image-item.component';
     ImageCropperModule,
     MatSlideToggleModule,
     MatTooltipModule,
+    MatButtonToggleModule,
     MatRadioModule,
     MatChipsModule,
     MatSnackBarModule,
