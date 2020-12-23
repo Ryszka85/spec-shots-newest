@@ -48,6 +48,9 @@ export class CookieAuthInterceptorService implements HttpInterceptor{
             this.store.dispatch(new RequestMessageAction({ message: error.error }))
             /*this.router.navigate(['not-found']);*/
             return throwError(error);
+          } else if (error.url === 'http://localhost:8880/image-app/library/download/cropped/file/') {
+            this.store.dispatch(new RequestMessageAction({message: 'Error while downloading.'}));
+            return throwError(error);
           }
           console.log(error.statusText);
           if (error.error !== null && error.error.message !== null) {

@@ -43,6 +43,7 @@ export class DownloadCropperComponent implements OnInit {
 
 
   $aspectRatioSubj: Subject<number>;
+  downloadError = false;
 
   public widthChanged: number;
   public croppedWidth: boolean = false;
@@ -58,6 +59,8 @@ export class DownloadCropperComponent implements OnInit {
     x2: 0,
     y2: 0
   };
+
+  isMobile: boolean = false;
 
   originalRatio: number;
   enableUserInput: any;
@@ -76,10 +79,7 @@ export class DownloadCropperComponent implements OnInit {
 
     this.deviceObserverService
       .getActiveDevice()
-      .subscribe(device => {
-        console.log(device);
-        console.log(device === Device.MOBILE);
-      })
+      .subscribe(device => this.isMobile = device === 'xs');
 
     this.originalRatio = 0;
     this.$aspectRatioSubj = new Subject<number>();
@@ -189,6 +189,7 @@ export class DownloadCropperComponent implements OnInit {
 
   download(detail: string): void {
     this.showSpinner = true;
+    this.downloadError = false;
     let croppedDownloadRequest = this.store.selectSnapshot(PrepareCroppedForDownloadState.getCroppedValues);
     croppedDownloadRequest.imageId = this.store.selectSnapshot(GetImageByIdState.getImageDetail).imageId;
     croppedDownloadRequest.selectedWidth = Number.parseFloat(detail.split(' x ')[0]);
@@ -196,7 +197,13 @@ export class DownloadCropperComponent implements OnInit {
     console.log(croppedDownloadRequest.selectedWidth);
     this.downloadService
       .downloadIndividualImage(croppedDownloadRequest, true)
-      .subscribe(res => this.showSpinner = false);
+      .subscribe(res => {
+        this.showSpinner = false;
+        this.downloadError = false;
+      }, error => {
+        this.downloadError = true;
+        this.showSpinner = false;
+      });
   }
 
   foo($event: Dimensions) {
