@@ -77,38 +77,42 @@
   }
 }
 
-@media screen and (max-width: 1198px) {
+@media screen and (min-width: 600px) and (max-width: 1198px) {
   .mat-tab-group {
     margin-top: 12%;
-    height: 100vh;
+
     overflow: hidden !important;
     padding: 30px;
   }
 }
 
-@media screen and (min-width: 571px) {
-  .mat-tab-group {
-    overflow: hidden !important;
-  }
-}
-
-@media screen and (max-width: 570px) {
-  .mat-tab-group {
-    margin-top: 35%;
-    height: 100vh;
-    overflow: hidden !important;
-  }
-}
-
-
-
-
-.mat-tab-body-content {
-  height: 100%;
-  background-color: pink;
-
+.tab {
   overflow: hidden !important;
 }
+
+.template {
+  overflow: hidden !important;
+}
+
+
+@media screen and (max-width: 598px) {
+  .mat-tab-group {
+    margin-top: 35%;
+    overflow: hidden !important;
+  }
+  .template {
+    margin-left: 10px;
+  }
+
+  .gallery-content {
+    margin-left: 10px;
+
+  }
+}
+
+
+
+
 
 .profile_icon {
   width: 30%;

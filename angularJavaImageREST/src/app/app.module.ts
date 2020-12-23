@@ -102,6 +102,9 @@ import { CropperDetailsBarComponent } from './public/cropper-details-bar/cropper
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatBadgeModule} from '@angular/material/badge';
 import { ImageItemComponent } from './public/image-item/image-item.component';
+
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
 import { ChangePasswordComponent } from './private/change-password/change-password.component';
 
 
@@ -148,6 +151,7 @@ import { ChangePasswordComponent } from './private/change-password/change-passwo
     ImageCropperModule,
     MatSlideToggleModule,
     MatTooltipModule,
+    MatButtonToggleModule,
     MatRadioModule,
     MatChipsModule,
     MatSnackBarModule,
