@@ -1,37 +1,60 @@
 <app-search-toolbar></app-search-toolbar>
 
-<mat-drawer-container class="example-container">
-  <mat-drawer class="example-sidenav" mode="side" #drawer opened>
+<mat-drawer-container class="example-container" [hasBackdrop]="isMobile">
+  <mat-drawer class="example-sidenav"
+              mode="side" #drawer [opened]="!isMobile"
+              [disableClose]="isMobile">
 
     <div class="example-sidenav-content">
       <div class="details">
 
-        <span class="title"><strong>Crop your image with SpecShots</strong></span>
-        <mat-divider class="title-divider"></mat-divider>
-        <div class="icon">
+        <button class="close" *ngIf="isMobile" (click)="drawer.toggle()" mat-icon-button>
+          <mat-icon>close</mat-icon>
+        </button>
+        <span *ngIf="!isMobile" class="title"><strong>Crop your image with SpecShots</strong></span>
+        <mat-divider *ngIf="!isMobile" class="title-divider"></mat-divider>
+        <div class="icon" *ngIf="!isMobile">
           <img width="40px" height="40px" src="assets/Specshots-Logo.png">
         </div>
 
 
-        <mat-form-field class="width" disabled="true" style="font-size: 20px; width: 100%; color: white"
+        <mat-form-field  class="width" disabled="true" style="color: white"
                         appearance="fill">
           <mat-label>Width</mat-label>
           <input class="white-color" readonly type="number" (change)="changedWidthFunc(input.value)"
                  [formControl]="widthInputField" matInput #input>
-          <mat-hint class="white-color" *ngIf="$details | async as imgDetail">
-            Original width : {{(input.value * diffRatio).toFixed(2)}}
-          </mat-hint>
+          <!--<mat-hint>{{widthInputField.value * diffRatio}}</mat-hint>-->
         </mat-form-field>
 
 
-        <mat-form-field class="height" disabled="true" style="font-size: 20px; width: 100%;; margin-top: 20px"
+        <mat-form-field class="height" disabled="true"
                         appearance="fill">
           <mat-label>Height</mat-label>
           <input readonly type="number" [formControl]="heightInputField" matInput #input2>
-          <mat-hint *ngIf="$details | async as imgDetail">Original height :
-            {{(input2.value * diffRatio).toFixed(2)}}
-          </mat-hint>
+          <!--<mat-hint>{{heightInputField.value * diffRatio}}</mat-hint>-->
         </mat-form-field>
+
+
+        <div class="ratio">
+          <mat-button-toggle-group *ngIf="!isMobile" class="toggle-group" #group="matButtonToggleGroup">
+            <mat-button-toggle (click)="$aspectRatioSubj.next(4 / 3)" value="4 / 3" aria-label="Text align left">
+              4 / 3
+            </mat-button-toggle>
+            <mat-button-toggle (click)="$aspectRatioSubj.next(16 / 9)" value="16 / 9" aria-label="Text align center">
+              16 / 9
+            </mat-button-toggle>
+            <mat-button-toggle (click)="$aspectRatioSubj.next(3 / 2)" value="3 / 2" aria-label="Text align right">
+              3 / 2
+            </mat-button-toggle>
+            <mat-button-toggle (click)="$aspectRatioSubj.next(originalRatio)" checked value="original"
+                               aria-label="Text align justify">
+              Original
+            </mat-button-toggle>
+            <mat-button-toggle (click)="$aspectRatioSubj.next(-1)" value="free" aria-label="Text align justify">
+              Free
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
 
 
         <button *ngIf="showSpinner === false" class="download-btn"
@@ -49,10 +72,10 @@
           </div>
 
         </mat-menu>
+        <span *ngIf="downloadError">Error while downloading file.</span>
         <div class="" *ngIf="showSpinner">
-          <div class="load-image loading" style="margin: 0 auto;
-  display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px">
-            <mat-spinner diameter='50'></mat-spinner>
+          <div class="load-image loading" style="">
+            <mat-spinner class="foo" diameter='30'></mat-spinner>
             <span style="font-size: 16px; margin-top: 20px">
               <strong style="color: #A9A9A9">
                 {{'Processing request. This can take a while..'}}
@@ -83,13 +106,18 @@
     </mat-menu>-->
 
     <div *ngIf="$base64 | async as img" class="cropper">
-      <div>
+      <div class="wrapper" style="display: flex; flex-direction: column">
+        <button *ngIf="isMobile" (click)="drawer.toggle()" mat-icon-button style="margin-bottom: 5px">
+          <mat-icon>download</mat-icon>
+        </button>
+      </div>
+      <div class="img-cropper">
         <image-cropper #event [imageBase64]="img"
-                       [maintainAspectRatio]="true"
+                       [maintainAspectRatio]="($aspectRatioSubj | async) !== -1"
                        [cropper]="cropper"
                        (imageLoaded)="imageLoaded()"
                        (cropperReady)="foo($event)"
-                       [aspectRatio]="$ratio | async"
+                       [aspectRatio]="$aspectRatioSubj | async"
                        (imageCropped)="imageCropped($event)">
         </image-cropper>
 
