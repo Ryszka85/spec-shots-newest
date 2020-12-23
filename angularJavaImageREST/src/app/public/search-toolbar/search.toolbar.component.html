@@ -4,7 +4,7 @@
                    isDesktopDevice ?  'container-not-logged':
                    ($isLoggedIn | async) == true ? 'tablet-logged-container' : 'tablet-container']">
   <div *ngIf="isDesktopDevice || isTabletDevice || isMobileDevice" class="left">
-    <a mat-icon-button class="home_button">
+    <a routerLink="/welcome" mat-icon-button class="home_button">
       <!--<mat-icon style="margin-top: 5px">android</mat-icon>-->
       <img width="60px" height="60px" style="margin-top: 0px"  src="assets/Specshots-Logo.png">
     </a>
