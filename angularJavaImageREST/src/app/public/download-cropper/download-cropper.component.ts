@@ -41,7 +41,7 @@ export class DownloadCropperComponent implements OnInit {
   public isDownLoadingImage: boolean = null;
   public showSpinner = true;
 
-
+  maintainAspectRatio: boolean = true;
   $aspectRatioSubj: Subject<number>;
   downloadError = false;
 
@@ -77,12 +77,17 @@ export class DownloadCropperComponent implements OnInit {
 
   ngOnInit(): void {
 
+
     this.deviceObserverService
       .getActiveDevice()
       .subscribe(device => this.isMobile = device === 'xs');
 
     this.originalRatio = 0;
+
     this.$aspectRatioSubj = new Subject<number>();
+    this.$aspectRatioSubj.subscribe(value => {
+      this.maintainAspectRatio = value !== -1;
+    })
     const imageFileDetails = this.store.selectSnapshot(GetImageByIdState.getFileDetails);
     this.extractImageIdFromRequest(imageFileDetails);
     this.originalRatio = imageFileDetails.width / imageFileDetails.height;
