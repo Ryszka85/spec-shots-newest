@@ -6,6 +6,8 @@
 .example-container {
   width: 100vw;
   height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 
@@ -24,6 +26,7 @@
     width: 100%;
     min-width: 100%;
     min-height: 100%;
+
   }
 }
 
@@ -35,7 +38,14 @@
   }
 }
 
+.mat-drawer-content {
+
+}
+
 @media screen and (min-width: 1200px) {
+  .example-sidenav {
+    width: 0.5fr;
+  }
   .icon {
     margin-top: 40px;
     margin-bottom: 5px;
