@@ -2,21 +2,106 @@
   background: #eeeeee;
 }
 
+
 .example-container {
   width: 100vw;
   height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
+
+
 
 .cropper {
   position: relative;
+  display: grid;
+  place-items: center;
   /*padding: 50px;*/
 }
 
-@media screen and (min-width: 600px) {
+
+
+@media screen and (min-width: 0px) and (max-width: 1198px) {
+  .img-cropper {
+    width: 100%;
+    min-width: 100%;
+    min-height: 100%;
+
+  }
+}
+
+
+@media screen and (min-width: 1200px) {
+  .img-cropper {
+    max-width: 1200px;
+    max-height: 1100px;
+  }
+}
+
+.mat-drawer-content {
+
+}
+
+@media screen and (min-width: 1200px) {
+  .example-sidenav {
+    width: 0.5fr;
+  }
+  .icon {
+    margin-top: 40px;
+    margin-bottom: 5px;
+    padding: 10px;
+    height: 40px;
+    width: 40px;
+  }
+
+  .title {
+    font-size: 1.2em;
+    text-align: center;
+  }
+
+  .mat-button-toggle {
+    font-size: 1.2em;
+    color: black;
+  }
+
+  .download-btn {
+    margin-top: 50px;
+  }
+
+
+  .details {
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template:
+      "icon" 1fr
+      "title" auto
+      "divider"
+      "width" 0.3fr
+      "height" 0.3fr
+      "ratio"
+      "download-button" 0.3fr
+      "loading";
+    place-items: center;
+    gap: 15px;
+  }
+
+  .width {
+    width: 100%;
+    font-size: 18px;
+  }
+
+  .height {
+    width: 100%;
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1190px) {
   .example-sidenav {
     display: grid;
 
-    padding: 40px;
+    padding: 20px;
     grid-template:
       "details" auto
      / auto;
@@ -28,12 +113,93 @@
     8.9px 4px 6px rgba(0, 0, 0, 0.06),
     10.1px 2px 5px rgba(0, 0, 0, 0.04);
   }
+
+  .details {
+    width: 100%;
+    display: grid;
+    grid-template:
+      "icon" 1fr
+      "title" auto
+      "divider"
+      "width" 0.3fr
+      "height" 0.3fr
+      "ratio"
+      "download-button" 0.3fr
+      "loading";
+    place-items: center;
+    gap: 15px;
+  }
+
+  .icon {
+    margin-bottom: 5px;
+    padding: 10px;
+    height: 40px;
+    width: 40px;
+  }
+
+  .width {
+    width: 100%;
+    font-size: 17px;
+  }
+
+  .height {
+    width: 100%;
+    font-size: 17px;
+  }
+}
+
+.close {
+  grid-area: close;
+  place-items: flex-end;
 }
 
 @media screen and (min-width: 0px) and (max-width: 599.98px) {
    .example-sidenav {
-     width: 150px;
+     width: 200px;
+     height: 100%;
    }
+
+  .loading {
+    display: grid;
+    place-items: center;
+
+  }
+
+
+  .details {
+    display: grid;
+    grid-template:
+      "close" 0.7fr
+      "width" 0.3fr
+      "height" 0.3fr
+      "download-button" 0.3fr;
+    place-items: center;
+    gap: 15px;
+  }
+
+
+  .download-btn {
+    margin-top: 10px;
+  }
+
+  .mat-button-toggle {
+    font-size: 0.8em;
+    color: black;
+  }
+
+  .details {
+    font-size: 15px;
+  }
+
+  .width {
+    font-size: 13px;
+    width: 90%;
+  }
+
+  .height {
+    font-size: 13px;
+    width: 90%;
+  }
 }
 
 
@@ -43,33 +209,38 @@
   grid-area: details;
 }
 
-.details {
+
+
+.toggle-group {
+  color: black;
   display: grid;
-  grid-template:
-      "icon" 1fr
-      "title" auto
-      "divider"
-      "width" 0.3fr
-      "height" 0.3fr
-      "download-button" 0.3fr
-      "loading";
-  place-items: center;
-  gap: 15px;
+  grid-template-columns: minmax(100px, 1fr);
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 1200px) {
   .details {
-    grid-template-columns: minmax(200px, 1fr);
+    position: relative;
+    grid-template-columns: minmax(300px, 0.8fr);
     width: 100%;
     min-width: 100%;
   }
 }
 
-@media screen and (min-width: 0px) and (max-width: 599.98px) {
+@media screen and (min-width: 600px) and (max-width: 1198px) {
+  .details {
+    position: relative;
+    grid-template-columns: minmax(150px, 0.5fr);
+    width: 100%;
+    min-width: 100%;
+  }
+}
+
+/*@media screen and (min-width: 0px) and (max-width: 599.98px) {
   .details {
     width: 100px;
   }
-}
+
+}*/
 
 /*@media screen and (min-width: 960px) {
   .example-sidenav {
@@ -99,6 +270,11 @@
   grid-area: height;
 }
 
+.ratio {
+  grid-area: ratio;
+
+}
+
 
 /*.example-sidenav-content {
   display: grid;
@@ -109,6 +285,8 @@
   align-items: center;
   justify-content: center;*!
 }*/
+
+
 
 .cropper {
   position: relative;
@@ -132,10 +310,6 @@
 
 .title {
   grid-area: title;
-  margin-bottom: 15px;
-  font-size: 20px;
-  color: black;
-  font-family: 'Quicksand', sans-serif;
 }
 
 .more-icon {
@@ -151,14 +325,10 @@
 }
 
 .icon {
+  grid-area: icon;
   display: grid;
   place-items: center;
   color: white;
-
-  margin-bottom: 15px;
-  padding: 10px;
-  height: 60px;
-  width: 60px;
   background-color: #D7AB3E;
   border-radius: 100%;
   box-shadow: 1.3px 12px 30px rgba(0, 0, 0, 0.12),
@@ -174,7 +344,6 @@
   border-radius: 5px;
   display: grid;
   place-items: center;
-  margin-bottom: 50px;
 }
 
 .download-btn {
@@ -185,7 +354,6 @@
   10.1px 2px 5px rgba(0, 0, 0, 0.04);
   width: 120px;
   background-color: #F65767;
-  margin-top: 50px;
   color: white;
   grid-area: download-button;
 }
