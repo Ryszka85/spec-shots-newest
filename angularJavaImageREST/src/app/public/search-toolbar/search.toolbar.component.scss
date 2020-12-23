@@ -87,7 +87,7 @@ $toolbarBackground: #3C4A59;
   place-items: center;
   /*background-color: #3d405b;*/
   grid-template:
-      "search         search           search         account_info" auto
+      "api-logo         search           search         account_info" auto
       ".              search_detail     .              .           " auto
       "filter_details filter_details  filter_details  filter_details" auto
     / 0.5fr             1.5fr             0.3fr           0.3fr;
@@ -105,7 +105,7 @@ $toolbarBackground: #3C4A59;
   place-items: center;
   /*background-color: #3d405b;*/
   grid-template:
-      "user_actions   search            search   account_info" auto
+      "api-logo   search            search   user_actions" auto
       ".              search_detail     .              .           " auto
       "filter_details filter_details  filter_details  filter_details" auto
     / 0.5fr             1.5fr             0.3fr           0.3fr;
@@ -118,10 +118,10 @@ $toolbarBackground: #3C4A59;
   min-width: 100%;
   display: grid;
   grid-template:
-      "api-logo         search            search   user_actions" auto
-      ".                search_detail     .              .           " auto
+      "api-logo         search           search_detail   user_actions" auto
+     // ".                search_detail     .              .           " auto
       "filter_details   filter_details    filter_details  filter_details" auto
-    / 0.5fr             1fr             0.4fr           0.3fr;
+    / 0.5fr             1fr             0.2fr           0.3fr;
   padding: 10px;
 }
 
@@ -130,10 +130,10 @@ $toolbarBackground: #3C4A59;
   min-width: 100%;
   display: grid;
   grid-template:
-      "api-logo         search            user_actions   account_info" auto
-      ".                search_detail     a              .           " auto
-      "filter_details   filter_details    filter_details  filter_details" auto
-    / 0.5fr             1fr             0.4fr           0.3fr;
+      "api-logo         search        user_actions      search_detail   account_info" auto
+     // ".                search_detail     a              .           " auto
+      "filter_details   filter_details    filter_details  filter_details        filter_details" auto
+    / 0.2fr             1fr             0.1fr           0.2fr         0.2fr;
   padding: 10px;
 }
 
@@ -216,7 +216,16 @@ $toolbarBackground: #3C4A59;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
+  margin-left: 5px;
 }
+
+.home_button
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 .account_icon_container {
   grid-area: account_info;
@@ -262,6 +271,8 @@ $toolbarBackground: #3C4A59;
   0 4px 4px rgba(0, 0, 0, 0.11),
   0 6px 8px rgba(0, 0, 0, 0.11),
   0 8px 16px rgba(0, 0, 0, 0.11);*/
+
+  background-color: #3f51b5;
 }
 
 /*@media screen and (max-width: 837px) {
@@ -372,7 +383,7 @@ $toolbarBackground: #3C4A59;
 }
 
 .desktop-width {
-  min-width: 80%;
+  min-width: 100%;
 }
 
 
@@ -482,7 +493,7 @@ cdk-virtual-scroll-viewport {
   margin-bottom: 10px;*/
   /*width: 100%;*/
   min-width: 100%;
-  background: #3f51b5;
+  background-color: #3f51b5;
   display: grid;
   place-items: center;
   width: 100%;
