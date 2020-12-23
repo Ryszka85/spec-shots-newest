@@ -113,7 +113,7 @@
       </div>
       <div class="img-cropper">
         <image-cropper #event [imageBase64]="img"
-                       [maintainAspectRatio]="($aspectRatioSubj | async) !== -1"
+                       [maintainAspectRatio]="maintainAspectRatio"
                        [cropper]="cropper"
                        (imageLoaded)="imageLoaded()"
                        (cropperReady)="foo($event)"
