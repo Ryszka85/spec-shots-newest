@@ -1,6 +1,91 @@
 <app-search-toolbar [filterable]="true"></app-search-toolbar>
 
-<div class="container">
+<div class="container"
+     fxLayoutAlign="center"
+     [ngStyle.md]="{'padding-top': '30px', 'margin-left': '22px', 'height': '820px', 'width': '97%'}"
+     [ngStyle.sm]="{'padding-top': '30px', 'margin-left': '20px', 'height': '650px', 'width': '97%'}"
+     [ngStyle.xs]="{'padding-top': '5px', 'margin-left': '5px', 'height': '500px', 'width': '97%'}"
+     [ngStyle.gt-lg]="{'padding-top': '40px', 'margin-left': '5px', 'height': '920px', 'width': '97%'}">
+  <mat-card style="background-color: #F2F2F2; border-radius: 15px;"
+            *ngIf="$selectedImage | async as data"
+            class="example-card shadow">
+    <mat-card-header>
+      <img class="shadow" mat-card-avatar [src]="data.user.profileImgPath" alt="">
+      <mat-card-title [ngStyle.xs]="{'font-size': '15px' }">{{data.name}}</mat-card-title>
+      <mat-card-subtitle>{{data.user.username}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="data.link" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button class="shadow" mat-button style="margin-right: 15px">
+        <mat-icon style="margin-right: 3px; margin-left: 3px; color: black">thumb_up</mat-icon>
+        <span style="margin-left: 3px; margin-right: 3px; color: black">{{data.liked}}</span>
+      </button>
+
+
+      <button style="background-color: #D7AB3E;" class="shadow" mat-button matTooltip="Click to open menu"
+              [matMenuTriggerFor]="menu"
+              aria-label="Example icon-button with a menu">
+        <!--    <mat-icon style="font-size: 30px">more_vert</mat-icon>-->
+        <mat-icon style="color: white">save_alt</mat-icon>
+        <span style="margin-left: 3px; margin-right: 3px; color: white">{{data.downloaded}}</span>
+      </button>
+
+      <mat-menu backdropClass="img-download-detail" #menu="matMenu">
+        <div *ngFor="let detail of data.imageDetails">
+          <button (click)="download(detail)" style="width: 700px; height: 100%" mat-menu-item>
+            <mat-icon>aspect_ratio</mat-icon>
+            <span style="display: inline-block; width: 15px"></span>
+            <span>{{detail.width + " x " + detail.height}}</span>
+            <!--          <span style="display: inline-block; width: 25px"></span>-->
+            <!--          <span>{{detail.contentType}}</span>-->
+            <span style="display: inline-block; width: 25px"></span>
+            <span>{{(detail.size / 1024).toFixed(1) + " kB"}}</span>
+          </button>
+        </div>
+        <mat-divider></mat-divider>
+        <button mat-menu-item [mat-menu-trigger-for]="cropImage">
+          <mat-icon>settings_applications</mat-icon>
+          Download options
+        </button>
+
+        <mat-menu #cropImage="matMenu" xPosition="before">
+          <button (click)="cropImageForDownload(data.imageDetails[0])" mat-menu-item>
+            <mat-icon>photo_size_select_large</mat-icon>
+            Crop image
+          </button>
+          <mat-divider></mat-divider>
+          <button (click)="getIndividualResolutionDownloadDialog(data.imageDetails[0])" mat-menu-item>
+            <mat-icon>transform</mat-icon>
+            Set individual dimensions
+          </button>
+        </mat-menu>
+      </mat-menu>
+    </mat-card-actions>
+
+    <!--<mat-card-content>
+
+    </mat-card-content>-->
+  </mat-card>
+</div>
+<div fxLayout="row" style="min-width: 100%; padding: 30px" *ngIf="$selectedImage | async as data">
+  <div fxLayoutGap="20px" *ngFor="let i of data.tags">
+    <a mat-button (click)="clickedTag(i.tag)" style="color: black;
+        color: black;
+        text-decoration: none;
+        border-radius: 20px;
+        margin-top: 2%;">
+      {{'# ' + i.tag }}
+    </a>
+  </div>
+</div>
+
+
+<!--<div class="container">
+
+
   <div *ngIf="$selectedImage | async as data" class="content">
     <div class="img">
       <img class="img-content"  [src]="data.link" alt="">
@@ -9,12 +94,13 @@
       <span class="data-name">{{data.name}}</span>
     </div>
   </div>
+
   <div class="download" *ngIf="$selectedImage | async as data">
     <div class="spacer" style="margin-bottom: 20px; background-color: #941B85">
       <div class="profile-detail">
         <div class="temp">
           <button mat-icon-button>
-            <!--        <mat-icon>account_circle</mat-icon>-->
+            &lt;!&ndash;        <mat-icon>account_circle</mat-icon>&ndash;&gt;
             <img class="shadow" width="60px" height="60px" style="border-radius: 100%;"
                  src="{{data.user.profileImgPath}}" alt="">
           </button>
@@ -25,7 +111,7 @@
 
       <div class="img-detail">
         <div class="img-name" style="display: flex; flex-direction: row; align-items: baseline; flex-wrap: wrap; max-width: 220px">
-          <!--<mat-icon  color="primary" style="font-size: 40px; margin-right: 5px">image</mat-icon>-->
+          &lt;!&ndash;<mat-icon  color="primary" style="font-size: 40px; margin-right: 5px">image</mat-icon>&ndash;&gt;
           <button style=" ;width: 50px; height: 50px; font-size: 18px; word-break: break-all; background-color: white" mat-fab>
             <mat-icon style="color: black" >image</mat-icon>
           </button>
@@ -57,7 +143,7 @@
                 style="color: white; width: 300px; height: 50px; background-color: #ef233c"
                 [matMenuTriggerFor]="menu"
                 aria-label="Example icon-button with a menu">
-          <!--    <mat-icon style="font-size: 30px">more_vert</mat-icon>-->
+          &lt;!&ndash;    <mat-icon style="font-size: 30px">more_vert</mat-icon>&ndash;&gt;
           Download
         </button>
 
@@ -67,8 +153,8 @@
               <mat-icon>aspect_ratio</mat-icon>
               <span style="display: inline-block; width: 15px"></span>
               <span>{{detail.width + " x " + detail.height}}</span>
-              <!--          <span style="display: inline-block; width: 25px"></span>-->
-              <!--          <span>{{detail.contentType}}</span>-->
+              &lt;!&ndash;          <span style="display: inline-block; width: 25px"></span>&ndash;&gt;
+              &lt;!&ndash;          <span>{{detail.contentType}}</span>&ndash;&gt;
               <span style="display: inline-block; width: 25px"></span>
               <span>{{(detail.size / 1024).toFixed(1) + " kB"}}</span>
             </button>
@@ -110,13 +196,13 @@
     </div>
     <span style="margin-top: 20px"></span>
   </div>
-</div>
+</div>-->
 
 <div class="related-images-container">
   <div class="header">
     <h2>Related images : </h2>
   </div>
-  <app-image-content [isProfile]="false"
-                     [data]="$relatedImages"></app-image-content>
+  <!--<app-image-content [isProfile]="false"
+                     [data]="$relatedImages"></app-image-content>-->
 </div>
 

@@ -95,7 +95,7 @@ import {SetResolutionDownloadDialogComponent} from './public/set-resolution-down
 import {RequestStatusState} from "./shared/app-state/states/request-status.state";
 import {NotFoundPageComponent} from './public/not-found-page/not-found-page.component';
 import {BootstrapPlaygroundComponent} from './public/bootstrap-playground/bootstrap-playground.component';
-import {FlexModule} from "@angular/flex-layout";
+import {ExtendedModule, FlexModule} from "@angular/flex-layout";
 import {ChangeEmailThirdPartyComponent} from './private/change-email-third-party/change-email-third-party.component';
 import {PassDataToCropperDialogState} from "./shared/app-state/states/pass-data-to-cropper-dialog.state";
 import { CropperDetailsBarComponent } from './public/cropper-details-bar/cropper-details-bar.component';
@@ -106,6 +106,8 @@ import { ImageItemComponent } from './public/image-item/image-item.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 import { ChangePasswordComponent } from './private/change-password/change-password.component';
+import {MatListModule} from '@angular/material/list';
+
 
 
 @NgModule({
@@ -143,6 +145,7 @@ import { ChangePasswordComponent } from './private/change-password/change-passwo
     BrowserModule,
     FileSaverModule,
     MatSidenavModule,
+    MatListModule,
     MatProgressSpinnerModule,
     MatCheckboxModule,
     MatBadgeModule,
@@ -208,7 +211,8 @@ import { ChangePasswordComponent } from './private/change-password/change-passwo
     NgxsRouterPluginModule.forRoot(),
     MatDatepickerModule,
     MatChipsModule,
-    FlexModule
+    FlexModule,
+    ExtendedModule
   ],
   exports: [
     MatAutocompleteModule

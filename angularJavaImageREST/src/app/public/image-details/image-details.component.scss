@@ -1,9 +1,9 @@
-@media screen and (min-width: 837px) {
+/*@media screen and (min-width: 837px) {
 .container {
   width: 100%;
   height: 100%;
-  /*display: grid;
-  grid-template-columns: 60%35%;*/
+  !*display: grid;
+  grid-template-columns: 60%35%;*!
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -17,11 +17,15 @@
     //width: 70%;
     margin-left: 7%;
   }
-}
+}*/
 
+
+.container {
+  width: 100%;
+  height: 100%;
 
   .container {
-    background-color: #95d5b2;
+    background-color: white;
   }
 
   .chip {
@@ -218,6 +222,29 @@
     display: flex;
     flex-direction: row;
   }
+}
+
+.example-header-image {
+  object-fit: cover;
+}
+
+@media screen and (min-width: 0px) and (max-width: 598px) {
+  .example-card {
+    max-width: 300px;
+    margin-top: 20px;
+    margin-left: 15px;
+    height: 430px;
+  }
+}
+
+.example-card {
+  max-width: 1200px;
+}
+
+.testus {
+  width: 100%;
+  height: 100%;
+
 }
 
 @media screen and (min-width: 837px) {
