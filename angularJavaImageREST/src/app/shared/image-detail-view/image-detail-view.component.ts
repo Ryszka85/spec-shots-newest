@@ -24,6 +24,9 @@ export class ImageDetailViewComponent implements OnInit {
 
   }
 
+  /*closeFullscreen() {
+    this.dialogRef.close();
+  }*/
   closeFullscreen() {
     this.dialogRef.close();
   }

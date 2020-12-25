@@ -2,6 +2,13 @@
   background: #eeeeee;
 }
 
+.download-details {
+  text-align: center;
+  .spec-shots {
+    vertical-align: center;
+  }
+}
+
 
 .example-container {
   width: 100vw;
@@ -172,6 +179,7 @@
       "close" 0.7fr
       "width" 0.3fr
       "height" 0.3fr
+      "ratio"
       "download-button" 0.3fr;
     place-items: center;
     gap: 15px;

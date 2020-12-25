@@ -2,9 +2,8 @@
 
 <mat-drawer-container class="example-container" [hasBackdrop]="isMobile">
   <mat-drawer class="example-sidenav"
-              mode="side" #drawer [opened]="!isMobile"
+              mode="over" #drawer [opened]="!isMobile"
               [disableClose]="isMobile">
-
     <div class="example-sidenav-content">
       <div class="details">
 
@@ -36,7 +35,7 @@
 
 
         <div class="ratio">
-          <mat-button-toggle-group *ngIf="!isMobile" class="toggle-group" #group="matButtonToggleGroup">
+          <mat-button-toggle-group  class="toggle-group" #group="matButtonToggleGroup">
             <mat-button-toggle (click)="$aspectRatioSubj.next(4 / 3)" value="4 / 3" aria-label="Text align left">
               4 / 3
             </mat-button-toggle>
