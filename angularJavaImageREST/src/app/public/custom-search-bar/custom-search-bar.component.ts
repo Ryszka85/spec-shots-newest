@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {Select, Store} from "@ngxs/store";
 import {SearchByTagState} from "../../shared/app-state/states/search-by-tag.state";
@@ -23,6 +23,8 @@ export class CustomSearchBarComponent implements OnInit {
   content = new FormControl({ scope: 'Tags', queryString: '' });
 
   contentTemp: SearchBarContent;
+
+  @Input() disableIcon = false;
 
   clickedFilterDetails = false;
   @Output() openCloseSearchOptions: EventEmitter<PressedSearchContent> = new EventEmitter<PressedSearchContent>();

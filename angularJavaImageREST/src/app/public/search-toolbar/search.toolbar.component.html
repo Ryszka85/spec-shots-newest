@@ -16,7 +16,9 @@
     <div class="center">
         <div class="center-wrapper"  style="background-color: white; height: 60px; padding: 3px; border-radius: 10px;"
              [ngClass]="[isMobileDevice ? 'mobile-width' : isTabletDevice ? 'tablet-width' : 'desktop-width']">
-          <app-custom-search-bar (changedValue)="closeFilterDetails($event)" (enterPressed)="search($event)"
+          <app-custom-search-bar [disableIcon]="disableSearchOptionsIcon"
+                                 (changedValue)="closeFilterDetails($event)"
+                                 (enterPressed)="search($event)"
                                  (openCloseSearchOptions)="closeFilterDetails($event)"></app-custom-search-bar>
         </div>
     </div>
