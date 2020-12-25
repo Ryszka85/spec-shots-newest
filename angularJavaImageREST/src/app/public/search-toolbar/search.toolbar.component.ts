@@ -44,6 +44,9 @@ import {MatCheckboxChange} from "@angular/material/checkbox";
 import {MediaObserver} from "@angular/flex-layout";
 import {DeviceDetectorService} from "ngx-device-detector";
 import {Device, DeviceObserverService} from "../../serviceV2/device-observer.service";
+import {FormControl} from "@angular/forms";
+import {SearchBarContent} from "../custom-search-bar-content/custom-search-bar-content.component";
+import {PressedSearchContent} from "../custom-search-bar/custom-search-bar.component";
 
 
 @Component({
@@ -55,6 +58,8 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
   // if variable filterable is set to true then
   // autocomplete image-request will be filtered with the applied values
   @Input('filterable') filterable: boolean;
+
+  queryContent: SearchBarContent;
 
   openCloseDetails: boolean = false;
   // searchOption can be set either to tags or to users
@@ -257,9 +262,7 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
     console.log("AHAHAHAHAH");
   }
 
-  closeFilterDetails(): void {
-    this.openCloseDetails = !this.openCloseDetails;
-  }
+
 
   public updateAll(checked: MatCheckboxChange, timeFilter: CheckBoxModel<number>): void {
     this.filterOptions
@@ -270,6 +273,16 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
 
   openSearchOptions($event: boolean) {
     console.log($event.valueOf());
+  }
+
+  contentPressed($event: any) {
+    console.log($event);
+  }
+
+  closeFilterDetails($event: PressedSearchContent) {
+    console.log($event.content.scope);
+    console.log($event);
+    this.openCloseDetails = $event.content.scope === 'Tags' && $event.clicked;
   }
 }
 

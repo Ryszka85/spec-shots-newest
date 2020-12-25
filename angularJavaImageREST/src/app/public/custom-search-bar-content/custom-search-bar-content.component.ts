@@ -48,6 +48,8 @@ export class CustomSearchBarContentComponent implements OnInit, OnDestroy,
 
   @Output() enterPressed: EventEmitter<SearchBarContent> = new EventEmitter<SearchBarContent>();
 
+  @Output() valueChanged: EventEmitter<SearchBarContent> = new EventEmitter<SearchBarContent>();
+
   searchTerm$ = new Subject<string>();
 
   /*this.searchTerm$
@@ -84,6 +86,8 @@ export class CustomSearchBarContentComponent implements OnInit, OnDestroy,
   @HostBinding() id = `custom-form-field-id-${CustomSearchBarContentComponent.nextId++}`;
   /*ngControl: NgControl | null;*/
 
+
+
   @Input()
   required: boolean;
 
@@ -117,7 +121,8 @@ export class CustomSearchBarContentComponent implements OnInit, OnDestroy,
         this.stateChanges.next();
       });
 
-    this.form.valueChanges.subscribe(value1 => this.onChange(value1));
+
+    this.form.valueChanges.subscribe(value1 => this.valueChanged.emit(value1));
 
 
 
@@ -135,6 +140,10 @@ export class CustomSearchBarContentComponent implements OnInit, OnDestroy,
       });
   }
 
+  @Output()
+  get val(): SearchBarContent {
+    return this.form.value;
+  }
 
   onContainerClick(event: MouseEvent): void {
   }
@@ -170,6 +179,8 @@ export class CustomSearchBarContentComponent implements OnInit, OnDestroy,
   get value() {
     return this.form.value;
   }
+
+
 
   ngOnDestroy(): void {
     this.focusMonitor.stopMonitoring(this.input);

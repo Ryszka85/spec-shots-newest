@@ -118,7 +118,7 @@ $toolbarBackground: #3C4A59;
   min-width: 100%;
   display: grid;
   grid-template:
-      "api-logo         search           search_detail   user_actions" auto
+      "api-logo         search           search   user_actions" auto
      // ".                search_detail     .              .           " auto
       "filter_details   filter_details    filter_details  filter_details" auto
     / 0.5fr             1fr             0.2fr           0.3fr;

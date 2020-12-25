@@ -2,11 +2,11 @@
   <mat-label>Search</mat-label>
   <a mat-icon-button
      matSuffix
-     (click)="openCloseSearchOptions.emit( (clickedFilterDetails = !clickedFilterDetails) )">
+     (click)="emitOpenOptions()">
     <mat-icon class="search-options-icon" style="color: black" >menu</mat-icon>
   </a>
-  <app-custom-search-bar-content (enterPressed)="enterPressed.emit($event.valueOf())" [required]="false"
-                                 [formControl]="formControl"
+  <app-custom-search-bar-content (valueChanged)="foo($event)" (enterPressed)="enterPressed.emit($event)" [required]="false"
+                                 [formControl]="content"
                                  placeholder="Search your desired entity"></app-custom-search-bar-content>
 </mat-form-field>
 
