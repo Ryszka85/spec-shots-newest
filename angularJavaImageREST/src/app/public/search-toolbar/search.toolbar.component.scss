@@ -130,7 +130,7 @@ $toolbarBackground: #3C4A59;
   min-width: 100%;
   display: grid;
   grid-template:
-      "api-logo         search        user_actions      search_detail   account_info" auto
+      "api-logo         search             search         user_actions          account_info" auto
      // ".                search_detail     a              .           " auto
       "filter_details   filter_details    filter_details  filter_details        filter_details" auto
     / 0.2fr             1fr             0.1fr           0.2fr         0.2fr;
@@ -239,7 +239,6 @@ $toolbarBackground: #3C4A59;
 
 .center-wrapper {
   grid-area: search;
-
 }
 
 .unregistered_actions {
@@ -384,6 +383,7 @@ $toolbarBackground: #3C4A59;
 
 .desktop-width {
   min-width: 100%;
+
 }
 
 

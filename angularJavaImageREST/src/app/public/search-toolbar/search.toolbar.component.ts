@@ -177,17 +177,18 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
         });
   }
 
-  search(selected: string): void {
+  search(selected): void {
     /*const filter: ImagesByTagNameWithFilterOpt;*/
 
     let filters = new Map();
     filters.set(FilterName.FILTER_BY_DATE_WEEK, this.weekFilter);
     filters.set(FilterName.FILTER_BY_DATE_MONTH, this.monthFilter);
     filters.set(FilterName.FILTER_BY_DATE_YEAR, this.yearFilter);
-    switch (this.searchOption) {
+
+    switch (selected.scope) {
       case 'Tags' :
         this.store.dispatch(new ImagesByTagsAction(
-          new ImagesByTagNameWithFilterOpt(this.filterOptions, selected)))
+          new ImagesByTagNameWithFilterOpt(this.filterOptions, selected.queryString)))
           .subscribe(value => {
             console.log(value);
             console.log("Search pressed..");
@@ -197,7 +198,7 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
       case 'Users':
         const userId = this.store
           .selectSnapshot(SearchByUsersState.getFetchedUsers)
-          .filter(user => user.username === selected)
+          .filter(user => user.username === selected.queryString)
           .map(filteredUser => filteredUser.userId);
         this.store.dispatch(
           new Navigate(['profile', {userId: userId}]));
@@ -265,6 +266,10 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
       .timeFilterOptions
       .filter(value => value.name != timeFilter.name)
       .forEach(value => value.checked = false);
+  }
+
+  openSearchOptions($event: boolean) {
+    console.log($event.valueOf());
   }
 }
 

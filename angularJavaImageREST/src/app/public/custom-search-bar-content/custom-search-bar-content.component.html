@@ -1,0 +1,37 @@
+<ng-container [formGroup]="form">
+  <mat-select #select class="select" formControlName="scope">
+    <mat-option value="Tags">Tags</mat-option>
+    <mat-option value="Users">Users</mat-option>
+  </mat-select>
+
+  <mat-divider class="divider" [vertical]="true"></mat-divider>
+  <input [placeholder]="placeholder"
+         (keyup.enter)="enterPressed.emit(value)"
+         (keyup)="searchTerm$.next($event.target.value)"
+         [matAutocomplete]="auto"
+         #element
+         matInput
+         type="text"
+         name="entity-search-bar"
+         class="search-bar"
+         formControlName="queryString">
+  <mat-autocomplete #auto="matAutocomplete">
+    <div class="user-search" *ngIf="value.scope === 'Users'">
+      <mat-option #matOption (click)="search(matOption.value)"
+                  *ngFor="let option of $users | async"
+                  [value]="option.username">
+        {{option.username}}
+      </mat-option>
+    </div>
+    <div class="tag-search" *ngIf="value.scope === 'Tags'">
+      <mat-option #matOption (click)="search(matOption.value)"
+                  *ngFor="let option of $tagOptions | async"
+                  [value]="option.value">
+        {{option.value}}
+      </mat-option>
+    </div>
+  </mat-autocomplete>
+
+
+
+</ng-container>

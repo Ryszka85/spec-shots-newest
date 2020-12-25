@@ -107,6 +107,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 import { ChangePasswordComponent } from './private/change-password/change-password.component';
 import {MatListModule} from '@angular/material/list';
+import { CustomSearchBarComponent } from './public/custom-search-bar/custom-search-bar.component';
+import { CustomSearchBarContentComponent } from './public/custom-search-bar-content/custom-search-bar-content.component';
 
 
 
@@ -139,7 +141,9 @@ import {MatListModule} from '@angular/material/list';
     ChangeEmailThirdPartyComponent,
     CropperDetailsBarComponent,
     ImageItemComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    CustomSearchBarComponent,
+    CustomSearchBarContentComponent
   ],
   imports: [
     BrowserModule,
