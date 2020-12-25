@@ -55,6 +55,9 @@ import {PressedSearchContent} from "../custom-search-bar/custom-search-bar.compo
   styleUrls: ['./search.toolbar.component.scss']
 })
 export class SearchToolbarComponent implements OnInit, OnDestroy {
+
+  disableSearchOptionsIcon = false;
+
   // if variable filterable is set to true then
   // autocomplete image-request will be filtered with the applied values
   @Input('filterable') filterable: boolean;
@@ -280,8 +283,7 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
   }
 
   closeFilterDetails($event: PressedSearchContent) {
-    console.log($event.content.scope);
-    console.log($event);
+    this.disableSearchOptionsIcon = $event.content.scope === 'Users';
     this.openCloseDetails = $event.content.scope === 'Tags' && $event.clicked;
   }
 }
