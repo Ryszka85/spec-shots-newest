@@ -17,7 +17,8 @@ export class ImageDetailViewComponent implements OnInit {
   panelOpenState: boolean;
 
 
-  constructor() { }
+  constructor(private dialogRef: MatDialogRef<ImageDetailViewComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: ImageModel) { }
 
   ngOnInit(): void {
 
@@ -26,4 +27,7 @@ export class ImageDetailViewComponent implements OnInit {
   /*closeFullscreen() {
     this.dialogRef.close();
   }*/
+  closeFullscreen() {
+    this.dialogRef.close();
+  }
 }
