@@ -22,6 +22,7 @@ import {CropImageState} from "../../shared/app-state/states/crop-image.state";
 import {ImageRequestService} from "../../serviceV2/image-request.service";
 import {DownloadCropperComponent} from "../download-cropper/download-cropper.component";
 import {SetResolutionDownloadDialogComponent} from "../set-resolution-download-dialog/set-resolution-download-dialog.component";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-image-details',
@@ -39,12 +40,17 @@ export class ImageDetailsComponent implements OnInit {
   private imageId: string;
 
 
+  testImg: any
+
+
   constructor(private store: Store,
               private route: ActivatedRoute,
               private downloadService: ImageDownloadService,
               private dialog: MatDialog,
               private service: ImageRequestService,
-              private router: Router) {
+              private router: Router,
+              private sanitizer: DomSanitizer) {
+    this.testImg = this.sanitizer.bypassSecurityTrustStyle(`url(${this.store.selectSnapshot(GetImageByIdState.getImageDetail).link})`);
   }
 
   ngOnInit(): void {
@@ -75,6 +81,19 @@ export class ImageDetailsComponent implements OnInit {
     this.store.dispatch(
       new ImagesByTagsAction(new ImagesByTagNameQueryImpl(tag))
     );
+  }
+
+  appendFileSizeName(index: number): string {
+    switch (index) {
+      case 0:
+        return 'Original ';
+      case 1:
+        return 'XLarge ';
+      case 2:
+        return 'Large ';
+      case 3:
+        return 'Small ';
+    }
   }
 
   cropImageForDownload(imageDetail: any) {

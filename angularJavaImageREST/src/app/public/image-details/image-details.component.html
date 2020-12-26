@@ -1,18 +1,23 @@
 <app-search-toolbar [filterable]="true"></app-search-toolbar>
 
-<div class="container"
-     fxLayoutAlign="center"
+<div *ngIf="$selectedImage | async as data" fxLayoutAlign.xs="center center"
+     fxLayout.lg="row" fxLayout.xs="column" fxLayout.sm="column" class="container" fxLayoutGap="30px"
+     fxLayoutAlign="center center" fxLayoutGap.lg="10px"
      [ngStyle.md]="{'padding-top': '30px', 'margin-left': '22px', 'height': '820px', 'width': '97%'}"
-     [ngStyle.sm]="{'padding-top': '30px', 'margin-left': '20px', 'height': '650px', 'width': '97%'}"
-     [ngStyle.xs]="{'padding-top': '5px', 'margin-left': '5px', 'height': '500px', 'width': '97%'}"
-     [ngStyle.gt-lg]="{'padding-top': '40px', 'margin-left': '5px', 'height': '920px', 'width': '97%'}">
-  <mat-card style="background-color: #F2F2F2; border-radius: 15px;"
-            *ngIf="$selectedImage | async as data"
-            class="example-card shadow">
+     [ngStyle.sm]="{'padding-top': '30px', 'margin-left': '20px', 'height': '1200px', 'width': '97%'}"
+     [ngStyle.xs]="{'padding-top': '5px', 'margin-left': '5px', 'height': '1200px', 'width': '100%'}"
+     [ngStyle.gt-lg]="{'padding-top': '40px', 'margin-left': '5px', 'height': '900px', 'width': '97%'}">
+  <mat-card class="example-card shadow color-and-radius">
     <mat-card-header>
       <img class="shadow" mat-card-avatar [src]="data.user.profileImgPath" alt="">
       <mat-card-title [ngStyle.xs]="{'font-size': '15px' }">{{data.name}}</mat-card-title>
       <mat-card-subtitle>{{data.user.username}}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="data.linkReference !== 'null'">
+        <a matTooltip="{{'Go to ' + data.linkReference}}"
+           [href]="data.linkReference" mat-icon-button>
+          <mat-icon>link</mat-icon>
+        </a>
+      </mat-card-subtitle>
     </mat-card-header>
     <img mat-card-image [src]="data.link" alt="Photo of a Shiba Inu">
     <mat-card-content>
@@ -25,7 +30,7 @@
       </button>
 
 
-      <button style="background-color: #D7AB3E;" class="shadow" mat-button matTooltip="Click to open menu"
+      <button style="background-color: #941B85;" class="shadow" mat-button matTooltip="Click to open menu"
               [matMenuTriggerFor]="menu"
               aria-label="Example icon-button with a menu">
         <!--    <mat-icon style="font-size: 30px">more_vert</mat-icon>-->
@@ -69,8 +74,48 @@
 
     </mat-card-content>-->
   </mat-card>
+
+  <mat-card [ngStyle.xs]="{'margin-left': '30px', 'width': '87%'}"
+            class="download-image color-and-radius shadow">
+    <mat-card-title>
+      <strong>SpecShots</strong> download options
+    </mat-card-title>
+    <mat-divider></mat-divider>
+
+    <mat-card-actions>
+      <mat-list #option>
+        <mat-list-item (click)="download(detail)" class="hoverable" *ngFor="let detail of data.imageDetails; index as i">
+          <mat-icon mat-list-icon>cloud_download</mat-icon>
+          <div mat-line>
+            <strong>{{appendFileSizeName(i)}}</strong> {{detail.width + " x " + detail.height}}
+          </div>
+          <div mat-line>
+            <span>Size : {{(detail.size / 1024).toFixed(1) + " kB"}}</span>
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+
+        <div mat-subheader>Individual download actions</div>
+
+        <mat-list-item class="hoverable" (click)="cropImageForDownload(data.imageDetails[0])">
+          <mat-icon mat-list-icon>photo_size_select_large</mat-icon>
+          <div mat-line>
+            Crop image
+          </div>
+        </mat-list-item>
+        <mat-list-item class="hoverable" (click)="getIndividualResolutionDownloadDialog(data.imageDetails[0])">
+          <mat-icon mat-list-icon>transform</mat-icon>
+          <div mat-line>
+            Set individual dimensions
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-actions>
+  </mat-card>
 </div>
-<div fxLayout="row" style="min-width: 100%; padding: 30px" *ngIf="$selectedImage | async as data">
+
+
+<!--<div fxLayout="row" style="min-width: 100%; padding: 30px; margin-top: 200px" *ngIf="$selectedImage | async as data">
   <div fxLayoutGap="20px" *ngFor="let i of data.tags">
     <a mat-button (click)="clickedTag(i.tag)" style="color: black;
         color: black;
@@ -80,7 +125,7 @@
       {{'# ' + i.tag }}
     </a>
   </div>
-</div>
+</div>-->
 
 
 <!--<div class="container">
@@ -198,7 +243,7 @@
   </div>
 </div>-->
 
-<div class="related-images-container">
+<div [ngStyle.xs]="{'margin-top': '50px'}" class="related-images-container">
   <div class="header">
     <h2>Related images : </h2>
   </div>
