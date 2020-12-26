@@ -12,6 +12,7 @@ export class UpdateUserService {
   private readonly ADD_USER_LIKE = environment.apiUrl + "user/set/likes/";
   private readonly CHANGE_USER_EMAIL = environment.apiUrl + "user/set/email/";
   private readonly CHANGE_USER_PASSWORD = environment.apiUrl + "user/set/password/";
+  private readonly DELETE_USER_ACCOUNT = environment.apiUrl + "user/set/deleteAccount/";
 
   constructor(private http: HttpClient) {
   }
@@ -24,6 +25,13 @@ export class UpdateUserService {
         oldPassword: changePassword.oldPassword,
         newPassword: changePassword.newPassword
       },
+      {observe: 'response'});
+  }
+
+  public deleteUserAccount( changePasswordRequest: { userId: string, password: string }  ): Observable<any> {
+    return this.http.post(
+      this.DELETE_USER_ACCOUNT,
+      changePasswordRequest,
       {observe: 'response'});
   }
 
@@ -40,7 +48,6 @@ export class UpdateUserService {
   }
 
   public changeUserEmail(user: BaseUserDetails): Observable<any> {
-    console.log(user)
     return this.http.post(
       this.CHANGE_USER_EMAIL,
       {

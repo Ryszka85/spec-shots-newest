@@ -75,8 +75,9 @@
                 mat-raised-button>Save changes
         </button>
       </div>
-      <div class="change-pswd">
-        <button (click)="changePassword()" color="warn" mat-raised-button>Change password</button>
+      <div fxLayoutAlign="end" fxLayoutGap="15px" class="change-pswd">
+        <button *ngIf="($thirdPartyLogin | async) === false" (click)="changePassword()" color="warn" mat-raised-button>Change password</button>
+        <button (click)="deleteUserAccount()" mat-raised-button color="warn">Delete account</button>
       </div>
     </div>
   </div>

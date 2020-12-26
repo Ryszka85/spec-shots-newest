@@ -25,6 +25,7 @@ import {SearchByUsersService} from "../../serviceV2/search-by-users.service";
 import IsLoggedIn = AuthenticationActions.IsLoggedIn;
 import {ChangePasswordComponent} from "../change-password/change-password.component";
 import {DeviceObserverService} from "../../serviceV2/device-observer.service";
+import {DeleteUserAccountDialogComponent} from "../delete-user-account-dialog/delete-user-account-dialog.component";
 
 @Component({
   selector: 'app-edit-profile',
@@ -35,6 +36,7 @@ export class EditProfileComponent implements OnInit {
   @Select(UserDetailsState.userDetails) $userDetails;
   @Select(LoginStateModel.profileImg) $profile;
   @Select(LoginStateModel.loggedUserId) $userId;
+  @Select(LoginStateModel.loginType) $thirdPartyLogin;
   firstNameControl = new FormControl();
   lastNameControl = new FormControl();
   emailControl = new FormControl();
@@ -217,10 +219,10 @@ export class EditProfileComponent implements OnInit {
     console.log(this.email.errors);
     this.store
       .dispatch(new SearchUsers(new BehaviorSubject(this.email.value)))
-      .pipe(map(value => {
+      .subscribe(value => {
         console.log("JFSDJSDJSDFJFJSDJDJDJ");
-
-      }));
+        console.log(value);
+      });
     if (this.emailControl.value !== this.loggedUser.email && this.email.errors === null) {
       this.store
         .selectSnapshot(SearchByUsersState.getFetchedUsers)
@@ -292,17 +294,36 @@ export class EditProfileComponent implements OnInit {
   changePassword(): void {
     const userDetails: BaseUserDetails =
       this.store.selectSnapshot(LoginStateModel.loggedInUser);
+    const thirdPartyLogin = this.store.selectSnapshot(LoginStateModel.loginType);
+    if (thirdPartyLogin === false) {
+      if (this.isMobile) {
+        this.dialog.open(ChangePasswordComponent, {
+          data: userDetails,
+          minWidth: '100vw'
+        });
+      } else {
+        this.dialog.open(ChangePasswordComponent, {
+          data: userDetails
+        });
+      }
+      console.log(userDetails);
+    }
+  }
+
+  deleteUserAccount() {
+    const userDetails: BaseUserDetails =
+      this.store.selectSnapshot(LoginStateModel.loggedInUser);
+    console.log(userDetails);
     if (this.isMobile) {
-      this.dialog.open(ChangePasswordComponent, {
+      this.dialog.open(DeleteUserAccountDialogComponent, {
         data: userDetails,
         minWidth: '100vw'
       });
     } else {
-      this.dialog.open(ChangePasswordComponent, {
+      this.dialog.open(DeleteUserAccountDialogComponent, {
         data: userDetails
       });
     }
-    console.log(userDetails);
   }
 }
 
