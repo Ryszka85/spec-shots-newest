@@ -109,6 +109,7 @@ import { ChangePasswordComponent } from './private/change-password/change-passwo
 import {MatListModule} from '@angular/material/list';
 import { CustomSearchBarComponent } from './public/custom-search-bar/custom-search-bar.component';
 import { CustomSearchBarContentComponent } from './public/custom-search-bar-content/custom-search-bar-content.component';
+import { DeleteUserAccountDialogComponent } from './private/delete-user-account-dialog/delete-user-account-dialog.component';
 import { TagViewComponent } from './public/tag-view/tag-view.component';
 
 
@@ -144,8 +145,7 @@ import { TagViewComponent } from './public/tag-view/tag-view.component';
     ImageItemComponent,
     ChangePasswordComponent,
     CustomSearchBarComponent,
-    CustomSearchBarContentComponent,
-    TagViewComponent
+    CustomSearchBarContentComponent
   ],
   imports: [
     BrowserModule,
