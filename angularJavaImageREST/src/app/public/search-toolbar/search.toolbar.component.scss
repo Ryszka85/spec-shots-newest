@@ -54,10 +54,10 @@ $toolbarBackground: #3C4A59;
   /*grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));*/
   /*grid-template-columns: 0.5fr 2fr 0.3fr 0.3fr;*/
   grid-template:
-      "api-logo         search           search          user_actions   " auto
-      ".              search_detail     .              .           " auto
-      "filter_details filter_details  filter_details  filter_details" auto
-    / 0.5fr             1.3fr             0.5fr           0.3fr;
+      "api-logo         search        user_actions   " auto
+      //".              search_detail     .              .           " auto
+      "filter_details filter_details  filter_details" auto
+    / 0.5fr             1fr                        0.3fr;
   padding: 10px;
 }
 
@@ -72,10 +72,10 @@ $toolbarBackground: #3C4A59;
   /*grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));*/
   /*grid-template-columns: 0.5fr 2fr 0.3fr 0.3fr;*/
   grid-template:
-      "api-logo         search           search          account_info" auto
-      ".              search_detail     .              .           " auto
-      "filter_details filter_details  filter_details  filter_details" auto
-    / 0.5fr             1.3fr             0.5fr           0.3fr;
+      "api-logo         search           account_info" auto
+      //".              search_detail     .              .           " auto
+      "filter_details   filter_details  filter_details" auto
+    / 0.3fr             1.5fr              0.3fr;
   padding: 10px;
 }
 
@@ -87,10 +87,10 @@ $toolbarBackground: #3C4A59;
   place-items: center;
   /*background-color: #3d405b;*/
   grid-template:
-      "api-logo         search           search         account_info" auto
-      ".              search_detail     .              .           " auto
-      "filter_details filter_details  filter_details  filter_details" auto
-    / 0.5fr             1.5fr             0.3fr           0.3fr;
+      "api-logo         search         account_info" auto
+     // ".              search_detail     .              .           " auto
+      "filter_details filter_details   filter_details" auto
+    / 0.1fr             1fr                 0.2fr;
   padding: 10px;
 }
 
@@ -130,10 +130,10 @@ $toolbarBackground: #3C4A59;
   min-width: 100%;
   display: grid;
   grid-template:
-      "api-logo         search             search         user_actions          account_info" auto
+      "api-logo         search         user_actions          account_info" auto
      // ".                search_detail     a              .           " auto
-      "filter_details   filter_details    filter_details  filter_details        filter_details" auto
-    / 0.2fr             1fr             0.1fr           0.2fr         0.2fr;
+      "filter_details   filter_details  filter_details        filter_details" auto
+    / 0.2fr             1fr                0.2fr         0.2fr;
   padding: 10px;
 }
 

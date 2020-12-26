@@ -17,6 +17,7 @@ import {CropAndDownloadResolverService} from "./serviceV2/crop-and-download-reso
 import {StartupComponent} from "./public/startup/startup.component";
 import {NotFoundPageComponent} from "./public/not-found-page/not-found-page.component";
 import {ImageCropperComponent} from "./private/image-cropper/image-cropper.component";
+import {TagViewComponent} from "./public/tag-view/tag-view.component";
 
 
 const routes: Routes = [
@@ -68,7 +69,12 @@ const routes: Routes = [
   {
     path: 'not-found',
     component: NotFoundPageComponent
-  }
+  },
+  {
+    path: 'tag-view',
+    component: TagViewComponent
+  },
+
 ];
 
 @NgModule({
