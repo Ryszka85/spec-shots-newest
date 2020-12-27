@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Select, Store} from "@ngxs/store";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SelectImageState} from "../../shared/app-state/states/select-image.state";
@@ -23,6 +23,8 @@ import {ImageRequestService} from "../../serviceV2/image-request.service";
 import {DownloadCropperComponent} from "../download-cropper/download-cropper.component";
 import {SetResolutionDownloadDialogComponent} from "../set-resolution-download-dialog/set-resolution-download-dialog.component";
 import {DomSanitizer} from "@angular/platform-browser";
+import {MatListItem} from "@angular/material/list";
+import {ImageFileDetails} from "../../shared/domain/imageModel/image-file-details";
 
 @Component({
   selector: 'app-image-details',
@@ -30,6 +32,11 @@ import {DomSanitizer} from "@angular/platform-browser";
   styleUrls: ['./image-details.component.scss']
 })
 export class ImageDetailsComponent implements OnInit {
+
+  @ViewChild('downloadItem') downloadItem: ElementRef;
+
+  clickedDownloadResolution: ImageFileDetails = {width: 0, height: 0, downloadLink: '', size: 0, contentType: ''};
+  toggle: boolean = false;
 
   // @Select(DownloadDetailsState.getFile) $selectedImage;
   @Select(RelatedImagesState.getRelatedImages) $relatedImages;
@@ -64,6 +71,7 @@ export class ImageDetailsComponent implements OnInit {
   }
 
   download(detail: any) {
+    console.log(detail);
     const imageId = this.store.selectSnapshot(GetImageByIdState.getImageDetail).imageId;
     console.log(detail);
     this.store
@@ -131,5 +139,10 @@ export class ImageDetailsComponent implements OnInit {
       height: '460px',
       panelClass: 'setIndividualResDialog'
     });
+  }
+
+  OpenDownloadBox(detail: ImageFileDetails) {
+    this.clickedDownloadResolution = this.clickedDownloadResolution.width === detail.width ? this.clickedDownloadResolution : detail;
+    this.toggle = this.clickedDownloadResolution.width === detail.width;
   }
 }
