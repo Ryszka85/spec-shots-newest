@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {MediaProcessorService} from "../../serviceV2/media-processor.service";
 import {Device, DeviceObserverService} from "../../serviceV2/device-observer.service";
 import {map} from "rxjs/operators";
+import {ActivatedRoute} from "@angular/router";
+import {parseArguments} from "@angular/cli/models/parser";
+import {MatDialog} from "@angular/material/dialog";
+import {VerificationDialogComponent} from "../verification-dialog/verification-dialog.component";
 
 @Component({
   selector: 'app-startup',
@@ -19,9 +23,18 @@ export class StartupComponent implements OnInit {
   public tablet: Device.TABLET;
   public mobile: Device.MOBILE;
   constructor(public media: MediaProcessorService,
-              public deviceObserverService: DeviceObserverService) { }
+              public deviceObserverService: DeviceObserverService,
+              private route: ActivatedRoute,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
+
+
+    this.route.paramMap
+      .subscribe(param => {
+        console.log(param.get('test'));
+        /*this.dialog.open(VerificationDialogComponent);*/
+      })
 
     /*this.deviceObserverService
       .getActiveDevice();*/

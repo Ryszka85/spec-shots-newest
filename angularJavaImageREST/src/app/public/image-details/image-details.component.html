@@ -84,17 +84,30 @@
 
     <mat-card-actions>
       <mat-list #option>
-        <mat-list-item (click)="download(detail)" class="hoverable" *ngFor="let detail of data.imageDetails; index as i">
+        <mat-list-item #downloadItem
+                       (click)="OpenDownloadBox(detail)"
+                       class="hoverable border-radius"
+                       *ngFor="let detail of data.imageDetails; index as i"
+                        [class.clicked-details]="detail.width === clickedDownloadResolution.width">
           <mat-icon mat-list-icon>cloud_download</mat-icon>
           <div mat-line>
-            <strong>{{appendFileSizeName(i)}}</strong> {{detail.width + " x " + detail.height}}
+          <strong>{{appendFileSizeName(i)}}</strong> {{detail.width + " x " + detail.height}}
           </div>
           <div mat-line>
             <span>Size : {{(detail.size / 1024).toFixed(1) + " kB"}}</span>
           </div>
         </mat-list-item>
+
         <mat-divider></mat-divider>
 
+        <mat-list-item *ngIf="toggle">
+          <button matLine
+                  (click)="download(clickedDownloadResolution)" style="font-size: 23px" color="primary" mat-line mat-raised-button>
+            Download
+          </button>
+        </mat-list-item>
+
+        <mat-divider></mat-divider>
         <div mat-subheader>Individual download actions</div>
 
         <mat-list-item class="hoverable" (click)="cropImageForDownload(data.imageDetails[0])">

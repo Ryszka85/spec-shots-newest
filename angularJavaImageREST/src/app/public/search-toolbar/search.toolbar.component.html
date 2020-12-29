@@ -51,7 +51,9 @@
 
 
   <div class="unregistered_actions" *ngIf="isDesktopDevice">
-    <button *ngIf="($isLoggedIn | async) == false" (click)="login()" mat-raised-button id="login" class="">
+    <button  *ngIf="($isLoggedIn | async) == false"
+            (click)="login()"
+            mat-raised-button id="login" class="">
       Login
     </button>
     <button *ngIf="($isLoggedIn | async) == false" (click)="signup()" mat-raised-button id="sign-up">Register</button>

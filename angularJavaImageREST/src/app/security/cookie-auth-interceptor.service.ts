@@ -10,6 +10,8 @@ import {UserAuthenticationService} from "../serviceV2/user-authentication.servic
 import {RequestMessageAction} from "../shared/app-state/actions/request-message.action";
 import {Router} from "@angular/router";
 import {DeviceDetectorService} from "ngx-device-detector";
+import {MatDialog} from "@angular/material/dialog";
+import {RenewExpiredAccountTokenComponent} from "../public/renew-expired-account-token/renew-expired-account-token.component";
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +19,13 @@ import {DeviceDetectorService} from "ngx-device-detector";
 export class CookieAuthInterceptorService implements HttpInterceptor{
 
   constructor(private store: Store, private router: Router,
-              private deviceService: DeviceDetectorService) { }
+              private deviceService: DeviceDetectorService,
+              private dialog: MatDialog) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    console.log("HUHOOHOHOH");
+
+    console.log(req.headers.get("tokenRefresh"));
     const isMobile = this.deviceService.isMobile() ? 1 : 0;
     const clonedReq = req.clone({withCredentials: true,
       headers: req.headers.set('isMobile', isMobile + ""  )});
@@ -43,7 +49,7 @@ export class CookieAuthInterceptorService implements HttpInterceptor{
             return throwError(error);
           } else if (error.url === UserAuthenticationService.USER_LOGIN ||
             error.url === UserAuthenticationService.GOOGLE_LOGIN) {
-            this.store.dispatch(new RequestMessageAction({ message: error.error }))
+            this.store.dispatch(new RequestMessageAction({message: error.error, status: error.status}));
           } else if (error.url.indexOf(UserAuthenticationService.USER_DETAILS) !== -1) {
             this.store.dispatch(new RequestMessageAction({ message: error.error }))
             /*this.router.navigate(['not-found']);*/
@@ -51,6 +57,30 @@ export class CookieAuthInterceptorService implements HttpInterceptor{
           } else if (error.url === 'http://localhost:8880/image-app/library/download/cropped/file/') {
             this.store.dispatch(new RequestMessageAction({message: 'Error while downloading.'}));
             return throwError(error);
+          } else if (error.url === 'http://localhost:8880/image-app/verify/show-validated-token/') {
+            console.log("OIDA???");
+            this.dialog.open(RenewExpiredAccountTokenComponent, {
+              width: '450px',
+              maxWidth: '450px',
+              minWidth: '280px',
+              height: '300px',
+              minHeight: '300px',
+              maxHeight: '300px',
+              data : {tokenError: true}, hasBackdrop: true
+            })
+            this.router.navigate(['/welcome'])
+          } else if (error.url === 'http://localhost:8880/image-app/auth/renew/accountToken') {
+            console.log('ASDASKASKAS');
+            console.log(error.error.message);
+            this.dialog.open(RenewExpiredAccountTokenComponent, {
+              width: '450px',
+              maxWidth: '450px',
+              minWidth: '280px',
+              height: '300px',
+              minHeight: '300px',
+              maxHeight: '300px',
+              data : {tokenError: true, message: error.error.message}
+            })
           }
           console.log(error.statusText);
           if (error.error !== null && error.error.message !== null) {

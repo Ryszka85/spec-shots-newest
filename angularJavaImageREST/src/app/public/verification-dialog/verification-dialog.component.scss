@@ -1,0 +1,31 @@
+.verification-container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template:
+    ".          .         close"
+    ".          title     ."
+    ".          img       ."
+    ".          home       ."
+   /0.25fr      0.5fr     0.25fr;
+}
+
+.close {
+  width: 100%;
+  height: 100%;
+  grid-area: close;
+}
+
+.home {
+  grid-area: home;
+}
+
+.title {
+  grid-area: title;
+}
+
+.img {
+  grid-area: img;
+  width: 100%;
+  height: 100%;
+}
