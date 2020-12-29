@@ -27,9 +27,16 @@
     </div>
     <mat-error *ngIf="width.value < 100 || height.value < 100">{{"Image is to small"}}</mat-error>
   </div>
-  <button (click)="downloadImage(width.value, height.value)" *ngIf="!width.errors || !height.errors" style="margin: 40px auto;font-size: 30px" mat-fab color="primary">
+  <button (click)="downloadImage(width.value, height.value)" *ngIf="isDownloading == false && (!width.errors || !height.errors)" style="margin: 40px auto;font-size: 30px" mat-fab color="primary">
         <mat-icon>download</mat-icon>
   </button>
+  <div *ngIf="isDownloading" class="spinner" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+  <div *ngIf="isDownloading" class="download-txt" fxLayout="column" fxLayoutAlign="center center">
+    <p style="text-align: center">Please wait</p>
+    <p style="text-align: center">Downloading image.....This can take a while</p>
+  </div>
 </div>
 
 

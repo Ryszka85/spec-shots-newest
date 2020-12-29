@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
   public emailFormField = new FormControl('');
   public passwordFormField = new FormControl('');
   public pressedLogin = false;
+  forgotPasswordPressed = false;
 
   @Select(RequestStatusState.getStatus) $requestStatus;
   @Select(RequestStatusState.getStatusCode) $requestStatusCode;
@@ -119,6 +120,10 @@ export class LoginComponent implements OnInit {
     this.dialog.open(RenewExpiredAccountTokenComponent, {
       data: {email: this.mail, password: this.pwd}
     });
+  }
+
+  forgotPassword() {
+    console.log("FOOOOOOOOOO");
   }
 }
 
