@@ -145,7 +145,9 @@ import { TagViewComponent } from './public/tag-view/tag-view.component';
     ImageItemComponent,
     ChangePasswordComponent,
     CustomSearchBarComponent,
-    CustomSearchBarContentComponent
+    CustomSearchBarContentComponent,
+    DeleteUserAccountDialogComponent,
+    TagViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -189,6 +191,7 @@ import { TagViewComponent } from './public/tag-view/tag-view.component';
     FormsModule,
     HttpClientModule,
     SocialLoginModule,
+
     NgxsModule.forRoot([
       PassDataToCropperDialogState,
       ImagesByTagState,
