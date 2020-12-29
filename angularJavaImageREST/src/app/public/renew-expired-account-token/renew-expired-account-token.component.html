@@ -1,0 +1,33 @@
+<div class="verification-container">
+  <div fxLayout="column" fxLayoutAlign="start end" class="close">
+    <button (click)="dialogRef.close()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center" class="title">
+    <h2 *ngIf="data.tokenError === false" style="text-align: center">Your account needs to be verified</h2>
+    <h2 *ngIf="data.tokenError === true" style="text-align: center">Invalid request</h2>
+  </div>
+
+  <a *ngIf="data.tokenError === true"
+     mat-button
+     (click)="dialogRef.close()"
+     routerLink="/welcome"
+     class="img"
+     fxLayout="column"
+     fxLayoutAlign="center center">
+    <img width="80px" height="80px" src="assets/error-3-128.png">
+  </a>
+
+  <a *ngIf="data.tokenError === undefined || data.tokenError === null || data.tokenError === false" mat-button (click)="renewToken()" class="img" fxLayout="column" fxLayoutAlign="center center">
+    <img width="80px" height="80px" src="assets/error-3-128.png">
+    <span>Receive email to verify account</span>
+  </a>
+
+  <!--<div fxLayout="column" fxLayoutAlign="center center" class="home">
+    <a fxLayout="column" fxLayoutAlign="center center"
+       style="color: #3f51b5;" routerLink="/welcome" mat-icon-button class="home_button">
+      <mat-icon style="font-size: 50px">home</mat-icon>
+    </a>
+  </div>-->
+</div>

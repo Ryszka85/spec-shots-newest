@@ -1,0 +1,22 @@
+<div class="verification-container">
+    <div fxLayout="column" fxLayoutAlign="start end" class="close">
+      <button (click)="dialogRef.close()" mat-icon-button>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  <div fxLayout="column" fxLayoutAlign="center center" class="title">
+    <h2 style="text-align: center">
+      {{data.text}} </h2>
+  </div>
+  <a routerLink="/welcome" mat-button (click)="dialogRef.close()" class="img" fxLayout="column" fxLayoutAlign="center center">
+    <img width="80px" height="80px" src="assets/check-mark-11-512.png">
+    <span>Click to continue</span>
+  </a>
+
+  <!--<div fxLayout="column" fxLayoutAlign="center center" class="home">
+    <a fxLayout="column" fxLayoutAlign="center center"
+       style="color: #3f51b5;" routerLink="/welcome" mat-icon-button class="home_button">
+      <mat-icon style="font-size: 50px">home</mat-icon>
+    </a>
+  </div>-->
+</div>

@@ -110,6 +110,12 @@ import {MatListModule} from '@angular/material/list';
 import { CustomSearchBarComponent } from './public/custom-search-bar/custom-search-bar.component';
 import { CustomSearchBarContentComponent } from './public/custom-search-bar-content/custom-search-bar-content.component';
 import { DeleteUserAccountDialogComponent } from './private/delete-user-account-dialog/delete-user-account-dialog.component';
+import { VerificationDialogComponent } from './public/verification-dialog/verification-dialog.component';
+import { VerificationDialogWrapperComponent } from './public/verification-dialog-wrapper/verification-dialog-wrapper.component';
+import { RenewExpiredAccountTokenComponent } from './public/renew-expired-account-token/renew-expired-account-token.component';
+import { RenewExpiredAccountTokenWrapperComponent } from './public/renew-expired-account-token-wrapper/renew-expired-account-token-wrapper.component';
+import { ExpiredTokenRefreshWrapperComponent } from './public/expired-token-refresh-wrapper/expired-token-refresh-wrapper.component';
+import { ExpiredTokenRefreshDialogComponent } from './public/expired-token-refresh-dialog/expired-token-refresh-dialog.component';
 
 
 
@@ -145,7 +151,13 @@ import { DeleteUserAccountDialogComponent } from './private/delete-user-account-
     ChangePasswordComponent,
     CustomSearchBarComponent,
     CustomSearchBarContentComponent,
-    DeleteUserAccountDialogComponent
+    DeleteUserAccountDialogComponent,
+    VerificationDialogComponent,
+    VerificationDialogWrapperComponent,
+    RenewExpiredAccountTokenComponent,
+    RenewExpiredAccountTokenWrapperComponent,
+    ExpiredTokenRefreshWrapperComponent,
+    ExpiredTokenRefreshDialogComponent
   ],
   imports: [
     BrowserModule,

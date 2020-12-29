@@ -229,6 +229,7 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
     ref.disableClose = true;
     this.dialog.open(LoginComponent,
       {width: this.isDesktopDevice ? '380px' : this.isMobileDevice ? '320' :  '300px',
+        height: '350px',
         panelClass: 'login-dialog'});
   }
 
