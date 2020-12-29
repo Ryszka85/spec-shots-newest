@@ -16,6 +16,8 @@ export class VerificationDialogWrapperComponent implements OnInit {
 
   ngOnInit(): void {
 
+
+    console.log("DUDDEEE");
     this.route.paramMap
       .subscribe(param => {
         if (param.get('type') === 'email') {

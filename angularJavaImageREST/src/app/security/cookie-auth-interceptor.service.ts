@@ -58,6 +58,7 @@ export class CookieAuthInterceptorService implements HttpInterceptor{
             this.store.dispatch(new RequestMessageAction({message: 'Error while downloading.'}));
             return throwError(error);
           } else if (error.url === 'http://localhost:8880/image-app/verify/show-validated-token/') {
+            console.log("OIDA???");
             this.dialog.open(RenewExpiredAccountTokenComponent, {
               width: '450px',
               maxWidth: '450px',
@@ -65,7 +66,20 @@ export class CookieAuthInterceptorService implements HttpInterceptor{
               height: '300px',
               minHeight: '300px',
               maxHeight: '300px',
-              data : {tokenError: true}
+              data : {tokenError: true}, hasBackdrop: true
+            })
+            this.router.navigate(['/welcome'])
+          } else if (error.url === 'http://localhost:8880/image-app/auth/renew/accountToken') {
+            console.log('ASDASKASKAS');
+            console.log(error.error.message);
+            this.dialog.open(RenewExpiredAccountTokenComponent, {
+              width: '450px',
+              maxWidth: '450px',
+              minWidth: '280px',
+              height: '300px',
+              minHeight: '300px',
+              maxHeight: '300px',
+              data : {tokenError: true, message: error.error.message}
             })
           }
           console.log(error.statusText);

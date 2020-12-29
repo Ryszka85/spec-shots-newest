@@ -127,4 +127,5 @@ export interface RenewAccountVerificationToken {
   email?: string;
   password?: string;
   tokenError?: boolean;
+  message?: string;
 }
