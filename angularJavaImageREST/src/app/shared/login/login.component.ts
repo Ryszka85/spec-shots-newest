@@ -3,7 +3,7 @@ import {FormBuilder, FormControl} from "@angular/forms";
 import {Select, Store} from "@ngxs/store";
 import {AuthenticationActions} from "../app-state/actions/authentication-action";
 import {GoogleUserLogin, UserLoginModel} from "../domain/userModel/UserLoginModel";
-import {MatDialogRef} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {UserAuthenticationService} from "../../serviceV2/user-authentication.service";
 import {Navigate} from "@ngxs/router-plugin";
 import {Location} from "@angular/common";
@@ -13,6 +13,8 @@ import {GoogleLoginProvider, SocialAuthService} from "angularx-social-login";
 import {ActivatedRoute} from "@angular/router";
 import {RequestStatusState} from "../app-state/states/request-status.state";
 import {RequestMessageAction} from "../app-state/actions/request-message.action";
+import {VerificationDialogComponent} from "../../public/verification-dialog/verification-dialog.component";
+import {RenewExpiredAccountTokenComponent} from "../../public/renew-expired-account-token/renew-expired-account-token.component";
 
 @Component({
   selector: 'app-login',
@@ -23,15 +25,19 @@ export class LoginComponent implements OnInit {
   public formGroup;
   public emailFormField = new FormControl('');
   public passwordFormField = new FormControl('');
+  public pressedLogin = false;
+  forgotPasswordPressed = false;
 
   @Select(RequestStatusState.getStatus) $requestStatus;
+  @Select(RequestStatusState.getStatusCode) $requestStatusCode;
 
   constructor(private formBuilder: FormBuilder,
               private store: Store,
               private dialogRef: MatDialogRef<LoginComponent>,
               private authService: UserAuthenticationService,
               private location: Location,
-              private googleAuthService: SocialAuthService) {
+              private googleAuthService: SocialAuthService,
+              private dialog: MatDialog) {
 
     this.formGroup = this.formBuilder.group({
       email: this.emailFormField,
@@ -41,11 +47,30 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(new RequestMessageAction(null))
+
+    this.$requestStatusCode.subscribe(value => {
+      if (value !== undefined && value === 423 && this.mail.length > 0 && this.pwd.length > 0) {
+        this.dialog.open(RenewExpiredAccountTokenComponent, {
+          data: {email: this.mail, password: this.pwd}
+        });
+      }
+    })
+
+  }
+
+  get mail(): string {
+    return this.formGroup.get('email').value;
+  }
+
+  get pwd(): string {
+    return this.formGroup.get('password').value;
   }
 
   public login(): void {
+    this.pressedLogin = !this.pressedLogin;
     const email = this.formGroup.get('email').value
     const password = this.formGroup.get('password').value;
+    console.log("HALLLOOOO");
     this.store
       .dispatch(
         new AuthenticationActions.LoginAction(
@@ -53,13 +78,18 @@ export class LoginComponent implements OnInit {
             email,
             password
           )
-        )).subscribe(value =>
+        )).subscribe(value => {
+      console.log("HHHHHHHHHHHHHHHHHHHHHH66666");
+      console.log(this.store.selectSnapshot(RequestStatusState.getStatusCode));
       this.authService.isLoggedIn()
         .subscribe(value1 => {
           console.log(value1);
           this.store.dispatch(new LoggedUserDetails(value1.body.userId));
           this.close();
-        }));
+        })
+    }, error => {
+      console.log("HHHHHHHHHHHHHHHHHHHHHH666668899");
+    });
   }
 
   googleLogin(): void {
@@ -86,4 +116,21 @@ export class LoginComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  openRenewDialog() {
+    this.dialog.open(RenewExpiredAccountTokenComponent, {
+      data: {email: this.mail, password: this.pwd}
+    });
+  }
+
+  forgotPassword() {
+    console.log("FOOOOOOOOOO");
+  }
+}
+
+
+export interface RenewAccountVerificationToken {
+  email?: string;
+  password?: string;
+  tokenError?: boolean;
+  message?: string;
 }

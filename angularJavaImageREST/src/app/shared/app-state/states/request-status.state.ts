@@ -17,6 +17,12 @@ export class RequestStatusState {
   }
 
 
+  @Selector()
+  static getStatusCode(state: RequestStatus): number {
+    return state.status;
+  }
+
+
   @Action(RequestMessageAction)
   getRequestStatus(ctx: StateContext<RequestStatus>, action: RequestMessageAction) {
     let state = ctx.getState();
