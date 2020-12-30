@@ -18,6 +18,7 @@ export class SetResolutionDownloadDialogComponent implements OnInit {
   public heightInputField: FormControl;
   public widthFocus: boolean = false;
   public heightFocus: boolean = false;
+  public isDownloading = false;
   @Select(GetImageByIdState.getFileDetails) $selectedImage;
 
   constructor(private dialogRef: MatDialogRef<SetResolutionDownloadDialogComponent>,
@@ -80,6 +81,7 @@ export class SetResolutionDownloadDialogComponent implements OnInit {
   }
 
   public downloadImage(width: any, height: any): void {
+    this.isDownloading = true;
     this.downloadService
       .downloadIndividualImage(
         {
@@ -88,7 +90,10 @@ export class SetResolutionDownloadDialogComponent implements OnInit {
           height: height
         },
         false)
-      .subscribe(value => console.log(value))
+      .subscribe(value => console.log(value),
+          error => this.isDownloading = false,
+        () => this.isDownloading = false
+      );
   }
 }
 

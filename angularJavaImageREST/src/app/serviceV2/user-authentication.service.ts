@@ -8,6 +8,7 @@ import {Select, Store} from "@ngxs/store";
 import {SignupState} from "../shared/app-state/states/signup.state";
 import {AuthenticationActions} from "../shared/app-state/actions/authentication-action";
 import {environment} from "../../environments/environment";
+import {ValidateTokenRequestUrl} from "../shared/domain/Validate-Token-Request-Url";
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +20,46 @@ export class UserAuthenticationService {
   private readonly AUTH_STATUS = environment.apiUrl + "auth/identify/user";
   public static readonly USER_DETAILS = environment.apiUrl + "user/details/";
   public static readonly GOOGLE_LOGIN = environment.apiUrl + "users/oauth/login";
+  public static readonly RENEW_TOKEN = environment.apiUrl + "auth/renew/accountToken";
+  public static readonly VERIFY_TOKEN_REQUEST = environment.apiUrl + 'verify/show-validated-token/';
+  public static readonly RESET_PASSWORD = environment.apiUrl + 'reset/password/request-token';
+  public static readonly RESET_PASSWORD_VALIDATE_TOKEN_ID = environment.apiUrl + 'reset/password/validate-tokenId/';
 
   constructor(private http: HttpClient) {
 
   }
 
+
+
+  public validatePasswordTokenId(req: { tokenId: string }): Observable<{tokenId: string; userId: string}> {
+    return this.http.post<{tokenId: string; userId: string}>
+    (UserAuthenticationService.RESET_PASSWORD_VALIDATE_TOKEN_ID,
+      {tokenId: req.tokenId},
+      {observe: 'body'});
+  }
+
+  public requestResetPasswordToken(req: { email: string }): Observable<any> {
+    return this.http.post<any>
+    (UserAuthenticationService.RESET_PASSWORD,
+      req,
+      {observe: 'body'});
+  }
+
+  public validateRequestTokenUrl(req: ValidateTokenRequestUrl): Observable<{ status: boolean; alreadyProcessed: boolean}> {
+    return this.http.post<{ status: boolean; alreadyProcessed: boolean}>
+    (UserAuthenticationService.VERIFY_TOKEN_REQUEST,
+      req,
+      {responseType: "json"});
+  }
+
+
+  public renewToken(userLoginModel: IUserLoginModel): Observable<any> {
+    console.log('who pressed me ?');
+    console.log(userLoginModel);
+    return this.http.post<{email: string, password: string}>(UserAuthenticationService.RENEW_TOKEN,
+      userLoginModel,
+      {observe: 'response', responseType: 'json'});
+  }
 
   public getUserDetails(userId: string): Observable<BaseUserDetails> {
     return this.http.get<BaseUserDetails>
@@ -37,6 +73,7 @@ export class UserAuthenticationService {
   }
 
   public login(userLoginModel: IUserLoginModel, loginMethod: string): Observable<any> {
+    console.log('who pressed me ?');
     const URL = loginMethod === "GOOGLE" ? UserAuthenticationService.GOOGLE_LOGIN : UserAuthenticationService.USER_LOGIN;
     console.log(userLoginModel);
     return this.http.post<any>(URL, userLoginModel, {observe: 'response'});

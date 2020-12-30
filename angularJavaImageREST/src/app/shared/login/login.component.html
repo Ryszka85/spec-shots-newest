@@ -15,7 +15,7 @@
       </mat-form-field>
     </p>
     <p>
-      <mat-form-field [style.width.px]=330>
+      <mat-form-field *ngIf="forgotPasswordPressed === false" [style.width.px]=330>
         <mat-label>Password</mat-label>
         <input [style.fontSize.px]="15" type="password"
                matInput [formControl]="passwordFormField">
@@ -32,16 +32,31 @@
   </mat-dialog-content>
   <div class="container">
     <mat-dialog-actions>
-      <div style="display: flex; flex-direction: row; align-content: space-evenly">
-        <button id="loginBtn" (click)="login()" mat-raised-button color="primary">Login</button>
-        <button (click)="close()" mat-raised-button color="warn">Close</button>
-        <button (click)="googleLogin()" mat-icon-button>
-          <img src="../../../assets/btn_google_signin_dark_normal_web.png" alt="FOO">
+      <div fxLayout="column" fxLayoutAlign="start">
+        <div class="btn-grp1" fxLayout="row" fxLayoutAlign="start">
+          <button *ngIf="forgotPasswordPressed === false" fxLayoutAlign="start center" id="loginBtn" (click)="login()"
+                  mat-raised-button color="primary">Login
+          </button>
+          <button *ngIf="forgotPasswordPressed === true" fxLayoutAlign="start center" (click)="forgotPassword()"
+                  mat-raised-button color="primary">Reset Password
+          </button>
+          <button (click)="close()" mat-raised-button color="warn">Close</button>
+          <button *ngIf="forgotPasswordPressed === false" (click)="googleLogin()" mat-icon-button>
+            <img src="../../../assets/btn_google_signin_dark_normal_web.png" alt="FOO">
+          </button>
+        </div>
+        <div style="margin-top: 10px" class="btn2" fxLayout="row" fxLayoutAlign="start">
+          <button fxLayoutAlign="start" (click)="openRenewDialog()" style="background-color: white" mat-raised-button
+                  *ngIf="($requestStatusCode | async) === 423 && pressedLogin === true && forgotPasswordPressed === false">
+            <img src="assets/padlock-5-64.png" width="40px" height="40px" alt="">
+            Your account needs to be verified
+          </button>
+        </div>
+        <button *ngIf="forgotPasswordPressed == false" mat-icon-button (click)="forgotPasswordPressed = true">
+          <mat-icon> vpn_key</mat-icon>
+          Forgot password?
         </button>
       </div>
-      <mat-error style="margin-top: 10px; display: flex; justify-content: flex-start" *ngIf="$requestStatus | async as status">
-        {{ status.message }}
-      </mat-error>
     </mat-dialog-actions>
   </div>
 </div>

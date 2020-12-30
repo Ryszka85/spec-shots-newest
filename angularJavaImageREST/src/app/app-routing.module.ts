@@ -17,6 +17,12 @@ import {CropAndDownloadResolverService} from "./serviceV2/crop-and-download-reso
 import {StartupComponent} from "./public/startup/startup.component";
 import {NotFoundPageComponent} from "./public/not-found-page/not-found-page.component";
 import {ImageCropperComponent} from "./private/image-cropper/image-cropper.component";
+import {VerificationDialogComponent} from "./public/verification-dialog/verification-dialog.component";
+import {VerificationDialogWrapperComponent} from "./public/verification-dialog-wrapper/verification-dialog-wrapper.component";
+import {ExpiredTokenRefreshWrapperComponent} from "./public/expired-token-refresh-wrapper/expired-token-refresh-wrapper.component";
+import {VerifyGuardGuard} from "./verify-guard.guard";
+import {PasswordResetTokenWrapperComponent} from "./private/password-reset-token-wrapper/password-reset-token-wrapper.component";
+import {PaswordResetGuard} from "./public/pasword-reset.guard";
 
 
 const routes: Routes = [
@@ -40,6 +46,10 @@ const routes: Routes = [
   },
   {
     path: 'welcome',
+    component: StartupComponent
+  },
+  {
+    path: 'welcome:test',
     component: StartupComponent
   },
   {
@@ -68,6 +78,29 @@ const routes: Routes = [
   {
     path: 'not-found',
     component: NotFoundPageComponent
+  },
+  {
+    path: 'verify',
+    component: VerificationDialogWrapperComponent,
+    canActivate: [VerifyGuardGuard]
+  },
+  {
+    path: 'verify:id',
+    component: VerificationDialogWrapperComponent,
+    canActivate: [VerifyGuardGuard]
+  },
+  {
+    path: 'renew-password/:id',
+    component: PasswordResetTokenWrapperComponent,
+    canActivate: [PaswordResetGuard]
+  },
+  {
+    path: 'expired-token-refresh',
+    component: ExpiredTokenRefreshWrapperComponent
+  },
+  {
+    path: 'expired-token-refresh/:valid',
+    component: PasswordResetTokenWrapperComponent,
   }
 ];
 

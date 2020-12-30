@@ -77,6 +77,7 @@ export class LoginStateModel {
     return this.authService.login(action.userLoginModel, loginType)
       .pipe(
         tap(response => {
+          console.log('who triggered me??');
           const status = response.status === 200;
           const userId = response.headers.get("UserId");
           const state = ctx.getState();
