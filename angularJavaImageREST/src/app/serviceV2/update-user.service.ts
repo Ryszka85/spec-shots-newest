@@ -12,10 +12,24 @@ export class UpdateUserService {
   private readonly ADD_USER_LIKE = environment.apiUrl + "user/set/likes/";
   private readonly CHANGE_USER_EMAIL = environment.apiUrl + "user/set/email/";
   private readonly CHANGE_USER_PASSWORD = environment.apiUrl + "user/set/password/";
+  private readonly CHANGE_USER_PASSWORD_FROM_TOKEN = environment.apiUrl + "reset/password/from-redirect/";
   private readonly DELETE_USER_ACCOUNT = environment.apiUrl + "user/set/deleteAccount/";
 
   constructor(private http: HttpClient) {
   }
+
+
+  public changeUserPasswordByToken(userId: string, password: string, tokenId: string ): Observable<any> {
+    return this.http.post(
+      this.CHANGE_USER_PASSWORD_FROM_TOKEN,
+      {
+        userId: userId,
+        password: password,
+        tokenId: tokenId
+      },
+      {observe: 'response'});
+  }
+
 
   public changeUserPassword(userId: string, changePassword: { oldPassword: string, newPassword: string } ): Observable<any> {
     return this.http.post(

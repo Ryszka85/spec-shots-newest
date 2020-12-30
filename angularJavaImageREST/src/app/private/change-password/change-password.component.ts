@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {BaseUserDetails} from "../../shared/domain/userModel/user-details.model";
 import {ImageCropperComponent} from "../image-cropper/image-cropper.component";
 import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
@@ -9,6 +9,7 @@ import {SearchByTagState} from "../../shared/app-state/states/search-by-tag.stat
 import {Observable} from "rxjs";
 import {SearchViewModel} from "../../public/search-toolbar/search-view.model";
 import {ValidPasswordTokenState} from "../../shared/app-state/states/ValidPasswordToken.state";
+import {VerificationDialogComponent} from "../../public/verification-dialog/verification-dialog.component";
 
 @Component({
   selector: 'app-change-password',
@@ -29,11 +30,15 @@ export class ChangePasswordComponent implements OnInit {
     errorMsg: string
   } = { status: false, errorMsg: ''};
 
+  errorMsgFromToken: string = null;
+  showSpinner = false;
+
   constructor(@Inject(MAT_DIALOG_DATA) public userDetails: BaseUserDetails,
               private dialogRef: MatDialogRef<ChangePasswordComponent>,
               private fb: FormBuilder,
               private userService: UpdateUserService,
-              private store: Store) { }
+              private store: Store,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.initFormFields();
@@ -106,10 +111,7 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   changePassword(): void {
-    const userId = this.userDetails === null ?
-      this.store.selectSnapshot(ValidPasswordTokenState.getUserId) :
-      this.userDetails.userId;
-    this.userService.changeUserPassword(userId,
+    this.userService.changeUserPassword(this.userDetails.userId,
       {
         oldPassword: this.oldPwd,
         newPassword: this.newPwd
@@ -124,7 +126,34 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   resetPwd() {
-
+    this.errorMsgFromToken = null;
+    this.showSpinner = true;
+    this.userService
+      .changeUserPasswordByToken(
+        this.store.selectSnapshot(ValidPasswordTokenState.getUserId),
+        this.newPwd,
+        this.store.selectSnapshot(ValidPasswordTokenState.getTokenId))
+      .subscribe(value => {
+          console.log(value.status);
+          this.showSpinner = false;
+          this.errorMsgFromToken = null;
+          if (value.status === 200) {
+            this.dialogRef.close();
+            this.dialog.open(VerificationDialogComponent, {
+              width: '450px',
+              maxWidth: '450px',
+              minWidth: '280px',
+              height: '300px',
+              minHeight: '300px',
+              maxHeight: '300px',
+              data: {text: 'Password has been changed successfully'}
+            });
+          }
+        },
+          error => {
+            this.showSpinner = false;
+            this.errorMsgFromToken = error.message;
+          });
   }
 }
 
