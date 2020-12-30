@@ -13,8 +13,19 @@ export namespace UserDetailsActions {
     constructor(public userId: string) { }
   }
 
+  export class ValidResetPasswordTokenResponse {
+    static readonly type = '[User Action] Reset Password';
+    constructor(public tokenId: string) {}
+  }
+
+
   export class SearchUsers {
     static readonly type = '[User Action] Get user profiles';
     constructor(public searchTerm: Observable<string>) {}
   }
+}
+
+export interface ValidResetPasswordToken {
+  tokenId: string;
+  userId: string;
 }

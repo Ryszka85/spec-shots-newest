@@ -4,6 +4,11 @@ import {BaseUserDetails} from "../../shared/domain/userModel/user-details.model"
 import {ImageCropperComponent} from "../image-cropper/image-cropper.component";
 import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 import {UpdateUserService} from "../../serviceV2/update-user.service";
+import {Select, Store} from "@ngxs/store";
+import {SearchByTagState} from "../../shared/app-state/states/search-by-tag.state";
+import {Observable} from "rxjs";
+import {SearchViewModel} from "../../public/search-toolbar/search-view.model";
+import {ValidPasswordTokenState} from "../../shared/app-state/states/ValidPasswordToken.state";
 
 @Component({
   selector: 'app-change-password',
@@ -27,10 +32,12 @@ export class ChangePasswordComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public userDetails: BaseUserDetails,
               private dialogRef: MatDialogRef<ChangePasswordComponent>,
               private fb: FormBuilder,
-              private userService: UpdateUserService) { }
+              private userService: UpdateUserService,
+              private store: Store) { }
 
   ngOnInit(): void {
     this.initFormFields();
+    console.log(this.userDetails);
 
   }
 
@@ -99,7 +106,10 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   changePassword(): void {
-    this.userService.changeUserPassword(this.userDetails.userId,
+    const userId = this.userDetails === null ?
+      this.store.selectSnapshot(ValidPasswordTokenState.getUserId) :
+      this.userDetails.userId;
+    this.userService.changeUserPassword(userId,
       {
         oldPassword: this.oldPwd,
         newPassword: this.newPwd
@@ -111,6 +121,10 @@ export class ChangePasswordComponent implements OnInit {
 
   closeDialog(): void {
     this.dialogRef.close();
+  }
+
+  resetPwd() {
+
   }
 }
 

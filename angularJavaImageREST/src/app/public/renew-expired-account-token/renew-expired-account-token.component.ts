@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog
 import {RenewAccountVerificationToken} from "../../shared/login/login.component";
 import {UserAuthenticationService} from "../../serviceV2/user-authentication.service";
 import {VerificationDialogComponent} from "../verification-dialog/verification-dialog.component";
+import {ShowEmailWasSentDialog} from "../../shared/util/ShowEmailWasSentDialog";
 
 @Component({
   selector: 'app-renew-expired-account-token',
@@ -25,13 +26,7 @@ export class RenewExpiredAccountTokenComponent implements OnInit {
     this.authService
       .renewToken(
         {email: this.data.email, password: this.data.password}
-      ).subscribe(value => {
-      console.log(value);
-      if (value.status === 200) {
-        this.dialog.open(VerificationDialogComponent, {
-          data: {text: 'Email was sent successfully!'}
-        });
-      }
-    });
+      ).subscribe(value =>
+      new ShowEmailWasSentDialog(this.dialog, value));
   }
 }

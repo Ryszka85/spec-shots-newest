@@ -116,6 +116,8 @@ import { RenewExpiredAccountTokenComponent } from './public/renew-expired-accoun
 import { RenewExpiredAccountTokenWrapperComponent } from './public/renew-expired-account-token-wrapper/renew-expired-account-token-wrapper.component';
 import { ExpiredTokenRefreshWrapperComponent } from './public/expired-token-refresh-wrapper/expired-token-refresh-wrapper.component';
 import { ExpiredTokenRefreshDialogComponent } from './public/expired-token-refresh-dialog/expired-token-refresh-dialog.component';
+import { PasswordResetTokenWrapperComponent } from './private/password-reset-token-wrapper/password-reset-token-wrapper.component';
+import {ValidPasswordTokenState} from "./shared/app-state/states/ValidPasswordToken.state";
 
 
 
@@ -157,7 +159,8 @@ import { ExpiredTokenRefreshDialogComponent } from './public/expired-token-refre
     RenewExpiredAccountTokenComponent,
     RenewExpiredAccountTokenWrapperComponent,
     ExpiredTokenRefreshWrapperComponent,
-    ExpiredTokenRefreshDialogComponent
+    ExpiredTokenRefreshDialogComponent,
+    PasswordResetTokenWrapperComponent
   ],
   imports: [
     BrowserModule,
@@ -220,6 +223,7 @@ import { ExpiredTokenRefreshDialogComponent } from './public/expired-token-refre
       UpdateUserProfileImageState,
       DeleteImageState,
       CropImageState,
+      ValidPasswordTokenState,
       GetBase64ForDownloadCropperState,
       PrepareCroppedForDownloadState,
       RequestStatusState
