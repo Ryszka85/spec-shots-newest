@@ -15,6 +15,7 @@ import {RequestStatusState} from "../app-state/states/request-status.state";
 import {RequestMessageAction} from "../app-state/actions/request-message.action";
 import {VerificationDialogComponent} from "../../public/verification-dialog/verification-dialog.component";
 import {RenewExpiredAccountTokenComponent} from "../../public/renew-expired-account-token/renew-expired-account-token.component";
+import {ShowEmailWasSentDialog} from "../util/ShowEmailWasSentDialog";
 
 @Component({
   selector: 'app-login',
@@ -123,7 +124,9 @@ export class LoginComponent implements OnInit {
   }
 
   forgotPassword() {
-    console.log("FOOOOOOOOOO");
+    this.authService
+      .requestResetPasswordToken({email: this.mail})
+      .subscribe(value => new ShowEmailWasSentDialog(this.dialog, value));
   }
 }
 

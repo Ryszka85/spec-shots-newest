@@ -16,6 +16,7 @@ export interface ImageModel {
   liked?: number;
   imageDetails?: ImageFileDetails[];
   uploadDate?: Date;
+  mobileImgPath?: string;
 }
 
 export interface ImageViewModel {

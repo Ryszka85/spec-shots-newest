@@ -52,7 +52,7 @@
             Your account needs to be verified
           </button>
         </div>
-        <button mat-icon-button (click)="forgotPasswordPressed = true">
+        <button *ngIf="forgotPasswordPressed == false" mat-icon-button (click)="forgotPasswordPressed = true">
           <mat-icon> vpn_key</mat-icon>
           Forgot password?
         </button>
