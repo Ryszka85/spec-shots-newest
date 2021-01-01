@@ -22,9 +22,27 @@ export class UserAuthenticationService {
   public static readonly GOOGLE_LOGIN = environment.apiUrl + "users/oauth/login";
   public static readonly RENEW_TOKEN = environment.apiUrl + "auth/renew/accountToken";
   public static readonly VERIFY_TOKEN_REQUEST = environment.apiUrl + 'verify/show-validated-token/';
+  public static readonly RESET_PASSWORD = environment.apiUrl + 'reset/password/request-token';
+  public static readonly RESET_PASSWORD_VALIDATE_TOKEN_ID = environment.apiUrl + 'reset/password/validate-tokenId/';
 
   constructor(private http: HttpClient) {
 
+  }
+
+
+
+  public validatePasswordTokenId(req: { tokenId: string }): Observable<{tokenId: string; userId: string}> {
+    return this.http.post<{tokenId: string; userId: string}>
+    (UserAuthenticationService.RESET_PASSWORD_VALIDATE_TOKEN_ID,
+      {tokenId: req.tokenId},
+      {observe: 'body'});
+  }
+
+  public requestResetPasswordToken(req: { email: string }): Observable<any> {
+    return this.http.post<any>
+    (UserAuthenticationService.RESET_PASSWORD,
+      req,
+      {observe: 'body'});
   }
 
   public validateRequestTokenUrl(req: ValidateTokenRequestUrl): Observable<{ status: boolean; alreadyProcessed: boolean}> {

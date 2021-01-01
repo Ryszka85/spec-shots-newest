@@ -26,7 +26,8 @@ export class CookieAuthInterceptorService implements HttpInterceptor{
     console.log("HUHOOHOHOH");
 
     console.log(req.headers.get("tokenRefresh"));
-    const isMobile = this.deviceService.isMobile() ? 1 : 0;
+    const isMobile = this.deviceService.isMobile() || this.deviceService.isTablet() ? 1 : 0;
+    console.log(isMobile);
     const clonedReq = req.clone({withCredentials: true,
       headers: req.headers.set('isMobile', isMobile + ""  )});
     return next.handle(clonedReq).pipe(
@@ -81,6 +82,34 @@ export class CookieAuthInterceptorService implements HttpInterceptor{
               maxHeight: '300px',
               data : {tokenError: true, message: error.error.message}
             })
+          } else if (error.url === 'http://localhost:8880/image-app/reset/password/from-redirect/') {
+            this.store
+              .dispatch(new RequestMessageAction({message: error.error.message, status: error.status}));
+            this.dialog.open(RenewExpiredAccountTokenComponent, {
+              width: '450px',
+              maxWidth: '450px',
+              minWidth: '280px',
+              height: '300px',
+              minHeight: '300px',
+              maxHeight: '300px',
+              data : {tokenError: true, message: error.error.message}
+            })
+            return throwError(error.error);
+          } else if(error.url === 'http://localhost:8880/image-app/reset/password/validate-tokenId/') {
+            this.router.navigate(['/welcome']);
+            console.log("token id error");
+            this.store
+              .dispatch(new RequestMessageAction({message: error.error.message, status: error.status}));
+            this.dialog.open(RenewExpiredAccountTokenComponent, {
+              width: '450px',
+              maxWidth: '450px',
+              minWidth: '280px',
+              height: '300px',
+              minHeight: '300px',
+              maxHeight: '300px',
+              data : {tokenError: true, message: error.error.message}
+            })
+            return throwError(error.error);
           }
           console.log(error.statusText);
           if (error.error !== null && error.error.message !== null) {

@@ -49,9 +49,9 @@
                                aria-label="Text align justify">
               Original
             </mat-button-toggle>
-            <mat-button-toggle (click)="$aspectRatioSubj.next(-1)" value="free" aria-label="Text align justify">
+            <!--<mat-button-toggle  (click)="$aspectRatioSubj.next(0)" value="free" aria-label="Text align justify">
               Free
-            </mat-button-toggle>
+            </mat-button-toggle>-->
           </mat-button-toggle-group>
         </div>
 
@@ -116,8 +116,10 @@
                        [cropper]="cropper"
                        (imageLoaded)="imageLoaded()"
                        (cropperReady)="foo($event)"
+                       [alignImage]="'center'"
                        [aspectRatio]="$aspectRatioSubj | async"
-                       (imageCropped)="imageCropped($event)">
+                       (imageCropped)="imageCropped($event)"
+                       class="cropper">
         </image-cropper>
 
       </div>

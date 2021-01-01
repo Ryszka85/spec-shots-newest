@@ -50,7 +50,8 @@ export class GetImageByIdState {
           user: req.user,
           downloaded: req.downloaded,
           liked: req.liked,
-          imageDetails: req.imageDetails
+          imageDetails: req.imageDetails,
+          mobileImgPath: req.mobileImgPath
         };
         ctx.setState(newState)
         return newState;

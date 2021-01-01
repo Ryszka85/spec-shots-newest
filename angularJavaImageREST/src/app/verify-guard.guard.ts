@@ -33,6 +33,7 @@ export class VerifyGuardGuard implements CanActivate {
       return this.authService
         .validateRequestTokenUrl({tokenId: tokenId})
         .pipe(map(value => {
+          console.log("Ich wars");
           console.log(value);
           console.log(value.status);
           this.router.navigate(['/welcome']);

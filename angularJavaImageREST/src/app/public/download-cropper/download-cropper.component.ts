@@ -45,6 +45,12 @@ export class DownloadCropperComponent implements OnInit {
   $aspectRatioSubj: Subject<number>;
   downloadError = false;
 
+  maintainTest = true;
+
+  showAspectRatio: number;
+
+  aspectRatio: number;
+
   public widthChanged: number;
   public croppedWidth: boolean = false;
   public croppedHeight: boolean = false;
@@ -52,6 +58,8 @@ export class DownloadCropperComponent implements OnInit {
   @Select(GetBase64ForDownloadCropperState.getBase64) $base64;
   @Select(GetImageByIdState.getRatioAsString) $ratio;
   @Select(GetImageByIdState.getFileDetails) $details;
+
+  @Select(GetImageByIdState.getImageDetail) $detail;
   public loaded: number = 0;
   cropper = {
     x1: 0,
@@ -86,7 +94,7 @@ export class DownloadCropperComponent implements OnInit {
 
     this.$aspectRatioSubj = new Subject<number>();
     this.$aspectRatioSubj.subscribe(value => {
-      this.maintainAspectRatio = value !== -1;
+      this.maintainAspectRatio = value !== 0;
     })
     const imageFileDetails = this.store.selectSnapshot(GetImageByIdState.getFileDetails);
     this.extractImageIdFromRequest(imageFileDetails);
@@ -136,10 +144,7 @@ export class DownloadCropperComponent implements OnInit {
       this.heightInputField.setValue(heightWithFactor.toFixed(0));
       this.wasCropped = false;
     }
-    /*if (this.loaded == 0) {
-      this.diffRatio = imageFileDetails.width / width;
-      this.diffRatio.toFixed(2);
-    }*/
+
     // this.croppedWidth.next($event.cropperPosition.x2 - $event.cropperPosition.x1);
     // this.croppedHeight.next($event.cropperPosition.y2 - $event.cropperPosition.y1)
     this.loaded++;
@@ -150,16 +155,25 @@ export class DownloadCropperComponent implements OnInit {
 
   }
 
+  setAspectRatio(aspectRatio: number) {
+    console.log(this.maintainAspectRatio);
+    console.log(this.showAspectRatio);
+    this.maintainTest = aspectRatio !== 0;
+    this.showAspectRatio = aspectRatio;
+    console.log(this.maintainAspectRatio);
+    console.log(this.showAspectRatio);
+  }
+
   public imageLoaded(): void {
     setTimeout(() => {
       const imageFileDetails = this.store.selectSnapshot(GetImageByIdState.getFileDetails);
       const width = imageFileDetails.width;
-      this.cropper = {
+      /*this.cropper = {
         x1: 0,
         y1: 0,
         x2: width,
         y2: imageFileDetails.height
-      };
+      };*/
       this.showSpinner = false;
     });
   }
@@ -212,10 +226,16 @@ export class DownloadCropperComponent implements OnInit {
   }
 
   foo($event: Dimensions) {
+    console.log($event);
     const imageFileDetails = this.store.selectSnapshot(GetImageByIdState.getFileDetails);
     this.diffRatio = imageFileDetails.width / $event.width;
     this.$aspectRatioSubj.next(imageFileDetails.width / imageFileDetails.height);
+    this.aspectRatio = imageFileDetails.width / imageFileDetails.height;
+    this.showAspectRatio = imageFileDetails.width / imageFileDetails.height;
+    this.maintainAspectRatio = true;
     this.diffRatio.toFixed(2);
+    /*this.maintainAspectRatio = false;
+    this.$aspectRatioSubj.next(0);*/
   }
 
   getAspectRatio(width: number, height: number): string {

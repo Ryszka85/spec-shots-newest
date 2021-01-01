@@ -22,6 +22,8 @@ import {VerificationDialogComponent} from "./public/verification-dialog/verifica
 import {VerificationDialogWrapperComponent} from "./public/verification-dialog-wrapper/verification-dialog-wrapper.component";
 import {ExpiredTokenRefreshWrapperComponent} from "./public/expired-token-refresh-wrapper/expired-token-refresh-wrapper.component";
 import {VerifyGuardGuard} from "./verify-guard.guard";
+import {PasswordResetTokenWrapperComponent} from "./private/password-reset-token-wrapper/password-reset-token-wrapper.component";
+import {PaswordResetGuard} from "./public/pasword-reset.guard";
 
 
 const routes: Routes = [
@@ -93,13 +95,18 @@ const routes: Routes = [
     canActivate: [VerifyGuardGuard]
   },
   {
+    path: 'renew-password/:id',
+    component: PasswordResetTokenWrapperComponent,
+    canActivate: [PaswordResetGuard]
+  },
+  {
     path: 'expired-token-refresh',
     component: ExpiredTokenRefreshWrapperComponent
   },
   {
-    path: 'expired-token-refresh:valid',
-    component: ExpiredTokenRefreshWrapperComponent
-  },
+    path: 'expired-token-refresh/:valid',
+    component: PasswordResetTokenWrapperComponent,
+  }
 ];
 
 @NgModule({

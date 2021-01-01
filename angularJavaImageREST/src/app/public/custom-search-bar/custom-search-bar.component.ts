@@ -31,6 +31,8 @@ export class CustomSearchBarComponent implements OnInit {
 
   @Output() enterPressed: EventEmitter<SearchBarContent> = new EventEmitter<SearchBarContent>();
 
+  @Output() clickPressed: EventEmitter<SearchBarContent> = new EventEmitter<SearchBarContent>();
+
   @Output() changedValue: EventEmitter<PressedSearchContent> = new EventEmitter<PressedSearchContent>();
 
   constructor(private store: Store) { }
