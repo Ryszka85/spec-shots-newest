@@ -186,6 +186,7 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
   }
 
   search(selected): void {
+    console.log(selected);
     /*const filter: ImagesByTagNameWithFilterOpt;*/
 
     let filters = new Map();

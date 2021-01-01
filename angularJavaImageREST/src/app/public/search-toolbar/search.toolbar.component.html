@@ -19,6 +19,7 @@
           <app-custom-search-bar [disableIcon]="disableSearchOptionsIcon"
                                  (changedValue)="closeFilterDetails($event)"
                                  (enterPressed)="search($event)"
+                                 (clickPressed)="search($event)"
                                  (openCloseSearchOptions)="closeFilterDetails($event)"></app-custom-search-bar>
         </div>
     </div>

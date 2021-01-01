@@ -48,6 +48,8 @@ export class CustomSearchBarContentComponent implements OnInit, OnDestroy,
 
   @Output() enterPressed: EventEmitter<SearchBarContent> = new EventEmitter<SearchBarContent>();
 
+  @Output() clickPressed: EventEmitter<SearchBarContent> = new EventEmitter<SearchBarContent>();
+
   @Output() valueChanged: EventEmitter<SearchBarContent> = new EventEmitter<SearchBarContent>();
 
   searchTerm$ = new Subject<string>();
@@ -120,6 +122,8 @@ export class CustomSearchBarContentComponent implements OnInit, OnDestroy,
         this.focused = !!focused;
         this.stateChanges.next();
       });
+
+    this.clickPressed.subscribe(val => console.log(val))
 
 
     this.form.valueChanges.subscribe(value1 => this.valueChanged.emit(value1));

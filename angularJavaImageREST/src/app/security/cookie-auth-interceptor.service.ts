@@ -26,7 +26,7 @@ export class CookieAuthInterceptorService implements HttpInterceptor{
     console.log("HUHOOHOHOH");
 
     console.log(req.headers.get("tokenRefresh"));
-    const isMobile = this.deviceService.isMobile() ? 1 : 0;
+    const isMobile = this.deviceService.isMobile() || this.deviceService.isTablet() ? 1 : 0;
     console.log(isMobile);
     const clonedReq = req.clone({withCredentials: true,
       headers: req.headers.set('isMobile', isMobile + ""  )});
