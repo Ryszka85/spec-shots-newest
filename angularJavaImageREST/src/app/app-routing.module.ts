@@ -17,6 +17,7 @@ import {CropAndDownloadResolverService} from "./serviceV2/crop-and-download-reso
 import {StartupComponent} from "./public/startup/startup.component";
 import {NotFoundPageComponent} from "./public/not-found-page/not-found-page.component";
 import {ImageCropperComponent} from "./private/image-cropper/image-cropper.component";
+import {TagViewComponent} from "./public/tag-view/tag-view.component";
 import {VerificationDialogComponent} from "./public/verification-dialog/verification-dialog.component";
 import {VerificationDialogWrapperComponent} from "./public/verification-dialog-wrapper/verification-dialog-wrapper.component";
 import {ExpiredTokenRefreshWrapperComponent} from "./public/expired-token-refresh-wrapper/expired-token-refresh-wrapper.component";
@@ -78,6 +79,10 @@ const routes: Routes = [
   {
     path: 'not-found',
     component: NotFoundPageComponent
+  },
+  {
+    path: 'tag-view',
+    component: TagViewComponent
   },
   {
     path: 'verify',

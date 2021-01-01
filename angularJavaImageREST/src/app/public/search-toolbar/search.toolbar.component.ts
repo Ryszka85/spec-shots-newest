@@ -151,7 +151,7 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
           this.isMobileDevice = true;
           this.isDesktopDevice = false;
           this.isTabletDevice = false;
-        } else if (value1.mqAlias === 'sm') {
+        } else if (value1.mqAlias === 'sm' || value1.mqAlias === 'md') {
           this.isMobileDevice = false;
           this.isDesktopDevice = false;
           this.isTabletDevice = true;

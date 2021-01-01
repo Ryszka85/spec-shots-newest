@@ -5,6 +5,7 @@ $primarBlue: #3d405b;
 
 $beige: #f4f1de;
 
+
 .white_color {
   color: white;
 }
@@ -14,14 +15,6 @@ $beige: #f4f1de;
   position: relative;
 }
 
-
-.btn {
-  background-color: #EFD6C5;
-  /*margin-top: 420px;*/
-  /*margin-bottom: 70px;*/
-}
-
-
 #img-logo {
 
 }
@@ -30,6 +23,8 @@ $beige: #f4f1de;
   color: white;
   background-color: red;
   border-radius: 50px;
+  text-align: center;
+  height: 30px;
   /*border-color: white;*/
 }
 
@@ -44,7 +39,7 @@ $beige: #f4f1de;
   /*width: 400px;
   height: 400px;*/
   position: absolute;
-  top: -7rem;
+  top: -9rem;
 
   /*right: 35%;*/
   /*margin-bottom: 30px;*/
@@ -104,7 +99,7 @@ $beige: #f4f1de;
   /*padding: 30px;*/
   padding-top:200px;
   padding-bottom:100px;
-  min-width: 100vw;
+  width: 100%;
   text-align: center;
   /*font-size: 25px;*/
   color: white;
@@ -119,14 +114,26 @@ html, body{
   height:100%;
 }
 
-@media(min-width:468px){
+@media(min-width:768px){
   .container-1{
-    padding-left: 270px;
-    padding-right: 270px;
-    display:flex;
-    justify-content: space-around;
-    flex-direction: row;
+    max-width: 1320px;
+    position: relative;
+    display: grid;
+    grid-gap: 24px;
+    grid-template-columns: repeat(3, auto);
+    position: relative;
   }
+}
+
+.container-1{
+  position: relative;
+  display: grid;
+  justify-content: center;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 16px;
+
 }
 
 .container-1 div{
@@ -140,32 +147,10 @@ html, body{
   font-size: 25px;
 }
 
-
-.box-1{
-  flex: 0 1 auto;
-  order:1;
-}
-
-.box-2{
-  flex: 0 1 auto;
-  order:2;
-}
-
-.box-3{
-  flex: 0 1 auto;
-  order: 3;
-}
-
-@media screen and (max-width: 768px){
-  .container-1{
-    flex-direction: column;
-  }
-
   #top h2 {
     font-size: 30px;
     line-height:20%
   }
-}
 
 footer{
   background-color: $primary;

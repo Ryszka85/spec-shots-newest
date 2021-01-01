@@ -110,6 +110,7 @@ import {MatListModule} from '@angular/material/list';
 import { CustomSearchBarComponent } from './public/custom-search-bar/custom-search-bar.component';
 import { CustomSearchBarContentComponent } from './public/custom-search-bar-content/custom-search-bar-content.component';
 import { DeleteUserAccountDialogComponent } from './private/delete-user-account-dialog/delete-user-account-dialog.component';
+import { TagViewComponent } from './public/tag-view/tag-view.component';
 import { VerificationDialogComponent } from './public/verification-dialog/verification-dialog.component';
 import { VerificationDialogWrapperComponent } from './public/verification-dialog-wrapper/verification-dialog-wrapper.component';
 import { RenewExpiredAccountTokenComponent } from './public/renew-expired-account-token/renew-expired-account-token.component';
@@ -153,6 +154,8 @@ import {ValidPasswordTokenState} from "./shared/app-state/states/ValidPasswordTo
     ChangePasswordComponent,
     CustomSearchBarComponent,
     CustomSearchBarContentComponent,
+    DeleteUserAccountDialogComponent,
+    TagViewComponent,
     DeleteUserAccountDialogComponent,
     VerificationDialogComponent,
     VerificationDialogWrapperComponent,
