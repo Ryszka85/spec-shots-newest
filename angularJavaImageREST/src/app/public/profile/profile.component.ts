@@ -47,6 +47,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   @Select(RequestStatusState.getStatus) $requestStatus;
   $imgs = new Observable<ImageModel[]>();
   $likeds = new Observable<ImageModel[]>();
+  likes: ImageModel[] = [];
   requestError: boolean = false;
   errorMessage: string;
   downloadLink: any;
@@ -64,6 +65,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    this.likes = this.store.selectSnapshot(UserDetailsState.getUserLikes);
+
+    this.$userLikes.subscribe(console.log)
 
 
     this.$userImages
@@ -124,6 +129,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
 
+  }
+
+  getLikes(): ImageModel[] {
+    console.log(this.$userLikes);
+    return this.store.selectSnapshot(UserDetailsState.getUserLikes);
   }
 
   imageWasLiked($event: MatTabChangeEvent): void {

@@ -11,7 +11,7 @@ export const environment = {
   tabletGalleryWidth: 300, tabletGalleryHeight: 300 / 1.0869,
   mobileGalleryWidth: 135, mobileGalleryHeight: 135 / 1.0869,
   desktopDownloadWidth: 1200, desktopDownloadHeight: 670,
-  tabletDownloadWidth: 350, tabletDownloadHeight: 350 / 1.0869,
+  tabletDownloadWidth: 450, tabletDownloadHeight: 450 / 1.0869,
   mobileDownloadWidth: 200, mobileDownloadHeight: 200 / 1.0869
 };
 

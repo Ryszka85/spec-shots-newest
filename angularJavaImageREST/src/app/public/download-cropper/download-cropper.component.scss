@@ -51,19 +51,27 @@
 
 
 @media screen and (min-width: 1200px) {
+
+
   .img-cropper {
     max-width: 1200px;
     max-height: 1100px;
+    width: 98%;
+    /*min-width: 98%;
+    min-height: 100%;*/
   }
 }
 
-.mat-drawer-content {
-
-}
-
 @media screen and (min-width: 1200px) {
+  .cropper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5%;
+  }
   .example-sidenav {
-    width: 0.5fr;
+    /*width: 0.5fr;*/
   }
   .icon {
     margin-top: 40px;
@@ -89,8 +97,8 @@
 
 
   .details {
-    width: 100%;
-    padding: 20px;
+    width: 80%;
+    /*padding: 20px;*/
     display: grid;
     grid-template:
       "icon" 1fr
@@ -106,12 +114,12 @@
   }
 
   .width {
-    width: 100%;
+    width: 90%;
     font-size: 18px;
   }
 
   .height {
-    width: 100%;
+    width: 90%;
     font-size: 18px;
   }
 }
@@ -124,7 +132,6 @@
     grid-template:
       "details" auto
      / auto;
-    background-color: white;
     border: none;
     box-shadow: 1.3px 12px 30px rgba(0, 0, 0, 0.12),
     2.5px 10px 20px rgba(0, 0, 0, 0.10),

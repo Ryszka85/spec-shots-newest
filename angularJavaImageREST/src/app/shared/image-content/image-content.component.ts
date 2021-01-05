@@ -35,6 +35,7 @@ import {LoggedUserDetailsState} from "../app-state/states/logged-user-details.st
 export class ImageContentComponent implements OnInit {
 
   @Input('data') models: Observable<ImageModel[]>;
+  @Input('dataArray') models2: ImageModel[];
   @Input('isProfile') isProfile: boolean;
 
 

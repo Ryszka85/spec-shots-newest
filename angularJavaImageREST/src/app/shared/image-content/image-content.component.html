@@ -1,7 +1,8 @@
 <mat-grid-list class="img-list" [cols]="device === 'sm' || device === 'md' ? 2 : device === 'xs' ? 1 : 4"
                [rowHeight]="10"
                [gutterSize]="20+'px'" >
-  <mat-grid-tile class="grid-tile" [rowspan]="item.rows" *ngFor="let imgItem of (models | async); index as i; trackBy: track" >
+  <mat-grid-tile class="grid-tile" [rowspan]="item.rows"
+                 *ngFor="let imgItem of ((models | async) ? (models | async) : models); index as i; trackBy: track" >
       <app-image-item class="img-item" #item [image]="imgItem"
                       [rowHeight]="10"
                       [gutterSize]="20">
