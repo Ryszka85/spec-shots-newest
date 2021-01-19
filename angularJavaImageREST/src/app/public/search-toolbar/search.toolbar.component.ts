@@ -229,8 +229,8 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
     const ref = new MatDialogConfig();
     ref.disableClose = true;
     this.dialog.open(LoginComponent,
-      {width: this.isDesktopDevice ? '380px' : this.isMobileDevice ? '320' :  '300px',
-        height: '350px',
+      {width: this.isDesktopDevice ? '450px' : this.isMobileDevice ? '320' :  '300px',
+        height: '630px',
         panelClass: 'login-dialog'});
   }
 

@@ -1,0 +1,14 @@
+<div class="arrow_box" fxLayout="column" fxLayoutAlign="center center">
+  <div class="tooltip-header color">{{text}}</div>
+
+
+  <div fxLayoutAlign="start center" class="tooltip-action" fxLayout="row">
+    <button (click)="sendEmail()" mat-icon-button>
+      <mat-icon class="color">mail</mat-icon>
+    </button>
+    <span class="action-text color">Did not receive email</span>
+  </div>
+    <button (click)="closeToolTip()" style="color: white" mat-stroked-button>
+      Cancel
+    </button>
+</div>
