@@ -219,9 +219,10 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
     const ref = new MatDialogConfig();
     this.dialog.open(SignupComponent,
       {
-        width: '660px',
+        width: '500px',
         disableClose: true,
-        autoFocus: false
+        autoFocus: false,
+        panelClass: 'registration-dialog',
       });
   }
 
