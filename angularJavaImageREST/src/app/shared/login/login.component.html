@@ -25,7 +25,7 @@
 <div (click)="isOpen = false" class="content"
      [formGroup]="formGroup"
      fxLayout="column"
-     fxLayoutAlign="center space-evenly">
+     fxLayoutAlign="center space-evenly" fxLayoutGap="20px">
   <!--  <div class="icon" >-->
   <!--    <mat-icon style="font-size: 60px">account_box</mat-icon>-->
   <!--    -->
@@ -96,17 +96,14 @@
     <!--<button class="shadow" (click)="close()" mat-raised-button color="warn">Close</button>-->
 
     <button *ngIf="forgotPasswordPressed === false" (click)="googleLogin()" mat-icon-button>
-      <img src="../../../assets/btn_google_signin_dark_normal_web.png" alt="FOO">
+      <img style="margin-top: 15px" src="../../../assets/btn_google_signin_dark_normal_web.png" alt="FOO">
     </button>
     <!--<button fxLayoutAlign="start" (click)="openRenewDialog()" style="background-color: white" mat-raised-button
             *ngIf="($requestStatusCode | async) === 423 && pressedLogin === true && forgotPasswordPressed === false">
       <img src="assets/padlock-5-64.png" width="40px" height="40px" alt="">
       Your account needs to be verified
     </button>-->
-    <button *ngIf="forgotPasswordPressed == false" mat-icon-button (click)="forgotPasswordPressed = true;">
-      <!--<mat-icon> vpn_key</mat-icon>-->
-      Forgot password?
-    </button>
+
     <!--<mat-dialog-actions>
       <div>
 
@@ -130,6 +127,18 @@
       <strong>Wrong credentials provided</strong>
     </mat-error>
   </div>
+</div>
+
+<div class="footer" style="margin-top: 30px" fxLayout="row" fxLayoutAlign="space-around center">
+  <div class="forogt-box" fxFlex="80">
+    <button *ngIf="forgotPasswordPressed == false" mat-icon-button (click)="forgotPasswordPressed = true;">
+      Forgot password?
+    </button>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center" style="font-family: 'agave Nerd Font', sans-serif; color: white">
+      <span><strong>SpecShots</strong></span>
+    <span class="small-txt"> &#169;2020</span>
+    </div>
 </div>
 
 
