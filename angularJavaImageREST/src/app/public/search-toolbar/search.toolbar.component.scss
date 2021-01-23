@@ -71,7 +71,7 @@ $toolbarBackground: #3C4A59;
   /*grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));*/
   /*grid-template-columns: 0.5fr 2fr 0.3fr 0.3fr;*/
   grid-template:
-      "api-logo         search           account_info" auto
+      "api-logo         search          account_info" auto
       //".              search_detail     .              .           " auto
       "filter_details   filter_details  filter_details" auto
     / 0.3fr             1.5fr              0.3fr;
@@ -122,7 +122,7 @@ $toolbarBackground: #3C4A59;
   padding: 10px;
 }
 
-.container {
+.logged-container {
   text-align: center;
   display: grid;
   grid-template:
@@ -374,7 +374,7 @@ $toolbarBackground: #3C4A59;
 }
 
 .tablet-width {
-  min-width: 30%;
+  min-width: 100%;
 }
 
 .desktop-width {
