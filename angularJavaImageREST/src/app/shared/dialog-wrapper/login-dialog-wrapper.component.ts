@@ -22,7 +22,7 @@ export class LoginDialogWrapperComponent implements OnInit {
     this.dialog.open(LoginComponent,
       {
         width: '750px',
-        height: '400px',
+        height: '600px',
         disableClose: true,
         autoFocus: false
       });

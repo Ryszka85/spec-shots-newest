@@ -136,7 +136,7 @@ export class ImageDetailsComponent implements OnInit {
     console.log(imageDetail);
     this.dialog.open(SetResolutionDownloadDialogComponent, {
       width: '450px',
-      height: '460px',
+      /*height: '460px',*/
       panelClass: 'setIndividualResDialog'
     });
   }
