@@ -95,7 +95,7 @@
     </button>
     <!--<button class="shadow" (click)="close()" mat-raised-button color="warn">Close</button>-->
 
-    <button *ngIf="forgotPasswordPressed === false" (click)="googleLogin()" mat-icon-button>
+    <button class="full-width-button" *ngIf="forgotPasswordPressed === false" (click)="googleLogin()" mat-button>
       <img style="margin-top: 15px" src="../../../assets/btn_google_signin_dark_normal_web.png" alt="FOO">
     </button>
     <!--<button fxLayoutAlign="start" (click)="openRenewDialog()" style="background-color: white" mat-raised-button
@@ -131,7 +131,7 @@
 
 <div class="footer" style="margin-top: 30px" fxLayout="row" fxLayoutAlign="space-around center">
   <div class="forogt-box" fxFlex="80">
-    <button *ngIf="forgotPasswordPressed == false" mat-icon-button (click)="forgotPasswordPressed = true;">
+    <button *ngIf="forgotPasswordPressed == false" mat-button (click)="forgotPasswordPressed = true;">
       Forgot password?
     </button>
   </div>

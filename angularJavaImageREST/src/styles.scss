@@ -67,8 +67,9 @@ $mat-theming-primary: mat-palette($mat-yellow, 800);
   /*background-color: #f4f1de;*/
 }
 
-.setIndividualResDialog {
+.setIndividualResDialog .mat-dialog-container {
   padding: 0;
+  margin: 0 0;
 }
 
 ::ng-deep .mat-checkbox-frame {
