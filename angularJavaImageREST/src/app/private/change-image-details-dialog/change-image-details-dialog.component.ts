@@ -55,6 +55,8 @@ export class ChangeImageDetailsDialogComponent implements OnInit {
     this.$selectedImage.subscribe(val => console.log(val.public))
     this.isPublic = new FormControl(this.selectedImage.isPublic);
 
+    console.log(this.store.selectSnapshot(SelectImageState.getSelectedImage));
+
     this.formGroup = this.formBuilder
       .group({urlReference: this.urlReference, tempPublic: this.selectedImage.linkReference})
 

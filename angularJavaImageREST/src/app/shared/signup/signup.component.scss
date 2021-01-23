@@ -8,8 +8,57 @@
 //  align-items: center;
 //}
 
+
+.logo-container2 {
+  margin: 0 auto;
+  margin-top: 30px;
+  background-color: #941B85;
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.registration {
+  width: 100%;
+  padding: 20px;
+}
+
+.registration-container {
+  margin-top: 15px;
+}
+
+
+
+.white-color {
+ color: white;
+}
+
+.header {
+  font-size: 20px;
+  padding: 20px;
+  background-color: #941B85;
+}
+
+.mat-form-field {
+  width: 100%;
+  /*margin-right: 10px;*/
+}
+
+.small-txt {
+  font-size: 13px;
+}
+
 .profile-icon {
   position: relative;
+}
+
+.footer {
+  font-size: 15px;
+  padding: 10px;
+  background-color: #F7B801;
+
 }
 
 .icon {

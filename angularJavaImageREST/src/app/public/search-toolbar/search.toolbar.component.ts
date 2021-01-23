@@ -219,9 +219,10 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
     const ref = new MatDialogConfig();
     this.dialog.open(SignupComponent,
       {
-        width: '660px',
+        width: '500px',
         disableClose: true,
-        autoFocus: false
+        autoFocus: false,
+        panelClass: 'registration-dialog',
       });
   }
 
@@ -229,8 +230,7 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
     const ref = new MatDialogConfig();
     ref.disableClose = true;
     this.dialog.open(LoginComponent,
-      {width: this.isDesktopDevice ? '380px' : this.isMobileDevice ? '320' :  '300px',
-        height: '350px',
+      {width: this.isDesktopDevice ? '450px' : this.isMobileDevice ? '320' :  '400px',
         panelClass: 'login-dialog'});
   }
 

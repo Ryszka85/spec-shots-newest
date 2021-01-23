@@ -30,7 +30,7 @@
 @media screen and (max-width: 1198px) {
   .container {
     display: grid;
-    height: 280px;
+    height: 100%;
     grid-template-columns: 100%;
     place-items: center;
   }
@@ -99,6 +99,9 @@
   .mat-tab-group {
     margin-top: 35%;
     overflow: hidden !important;
+    height: 100%;
+    margin-right: 13px;
+    padding: 10px;
   }
   .template {
     margin-left: 10px;
@@ -106,7 +109,7 @@
 
 
   .gallery-content {
-    margin-left: 10px;
+    /*margin-left: 10px;*/
 
   }
 }

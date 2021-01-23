@@ -119,6 +119,10 @@ import { ExpiredTokenRefreshWrapperComponent } from './public/expired-token-refr
 import { ExpiredTokenRefreshDialogComponent } from './public/expired-token-refresh-dialog/expired-token-refresh-dialog.component';
 import { PasswordResetTokenWrapperComponent } from './private/password-reset-token-wrapper/password-reset-token-wrapper.component';
 import {ValidPasswordTokenState} from "./shared/app-state/states/ValidPasswordToken.state";
+import {OverlayModule} from '@angular/cdk/overlay';
+import {A11yModule} from "@angular/cdk/a11y";
+import { VerifyTooltipDirective } from './public/verify-tooltip.directive';
+import { VerifyTooltipComponent } from './public/verify-tooltip/verify-tooltip.component';
 
 
 
@@ -163,10 +167,13 @@ import {ValidPasswordTokenState} from "./shared/app-state/states/ValidPasswordTo
     RenewExpiredAccountTokenWrapperComponent,
     ExpiredTokenRefreshWrapperComponent,
     ExpiredTokenRefreshDialogComponent,
-    PasswordResetTokenWrapperComponent
+    PasswordResetTokenWrapperComponent,
+    VerifyTooltipDirective,
+    VerifyTooltipComponent
   ],
   imports: [
     BrowserModule,
+    OverlayModule,
     FileSaverModule,
     MatSidenavModule,
     MatListModule,
@@ -237,7 +244,8 @@ import {ValidPasswordTokenState} from "./shared/app-state/states/ValidPasswordTo
     MatDatepickerModule,
     MatChipsModule,
     FlexModule,
-    ExtendedModule
+    ExtendedModule,
+    A11yModule
   ],
   exports: [
     MatAutocompleteModule
@@ -266,7 +274,8 @@ import {ValidPasswordTokenState} from "./shared/app-state/states/ValidPasswordTo
       } as SocialAuthServiceConfig,
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule {
 }

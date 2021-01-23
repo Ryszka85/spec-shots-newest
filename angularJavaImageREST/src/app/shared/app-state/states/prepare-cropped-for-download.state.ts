@@ -2,8 +2,8 @@ import {Action, Selector, State, StateContext} from "@ngxs/store";
 import {CroppedDownloadRequest} from "../../domain/http/req/CroppedDownloadRequest";
 import {Injectable} from "@angular/core";
 import {ImageDownloadService} from "../../../serviceV2/image-download.service";
-import {SetCroppedOffsetValues} from "../actions/image.action";
-import {Observable, of} from "rxjs";
+import {AssignCropperPosToImageUpload, SetCroppedOffsetValues} from "../actions/image.action";
+import {BehaviorSubject, Observable, of} from "rxjs";
 import {ImageRequestService} from "../../../serviceV2/image-request.service";
 import {flatMap, map, mergeMap, switchMap, tap} from "rxjs/operators";
 
@@ -19,6 +19,21 @@ export class PrepareCroppedForDownloadState {
   @Selector()
   public static getCroppedValues(state: CroppedDownloadRequest): CroppedDownloadRequest {
     return state;
+  }
+
+
+  @Action(AssignCropperPosToImageUpload)
+  public prepareCropperValuesForUpload(
+    ctx: StateContext<CroppedDownloadRequest>,
+    action: AssignCropperPosToImageUpload): Observable<CroppedDownloadRequest> {
+    ctx.patchState({
+      ...ctx.getState(),
+      offsetX: action.offsetX,
+      offsetY: action.offsetY,
+      subImageWidth: action.subImageWidth,
+      subImageHeight: action.subImageHeight
+    });
+    return new BehaviorSubject(ctx.getState());
   }
 
 
