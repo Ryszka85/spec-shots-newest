@@ -87,7 +87,7 @@
                 style="color: white;font-size: 50px">account_circle
       </mat-icon>
 
-      <img *ngIf="($profileImage | async)"
+      <img *ngIf="($profileImage | async)" #element appImageError
            class="img shadow"
            [src]="$profileImage | async">
       <mat-menu #menu="matMenu">

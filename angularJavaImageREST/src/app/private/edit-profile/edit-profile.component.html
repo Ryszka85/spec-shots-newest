@@ -4,7 +4,7 @@
     <div class="top_left_filler"></div>
     <div class="profile-icon">
       <mat-icon *ngIf="!($profile | async)" id="icon" style="font-size: 200px; color: grey">account_circle</mat-icon>
-      <img *ngIf="$profile | async" class="profile-img" [src]="$profile | async">
+      <img *ngIf="$profile | async" class="profile-img" [src]="$profile | async" appImageError>
       <label id="select-profile">
         <input class="input-fontSize-desktop" (change)="handleFileInput($event.target.files)" style="display: none"
                type="file">

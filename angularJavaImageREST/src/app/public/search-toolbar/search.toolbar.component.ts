@@ -288,6 +288,11 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
     this.disableSearchOptionsIcon = $event.content.scope === 'Users';
     this.openCloseDetails = $event.content.scope === 'Tags' && $event.clicked;
   }
+
+  swapImage(target: HTMLImageElement) {
+    console.log(target.width);
+    target.src = 'https://via.placeholder.com/177x150.png?text=missing%20img';
+  }
 }
 
 

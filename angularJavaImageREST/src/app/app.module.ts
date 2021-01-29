@@ -123,6 +123,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import {A11yModule} from "@angular/cdk/a11y";
 import { VerifyTooltipDirective } from './public/verify-tooltip.directive';
 import { VerifyTooltipComponent } from './public/verify-tooltip/verify-tooltip.component';
+import { ImageErrorDirective } from './public/image-error.directive';
 
 
 
@@ -169,7 +170,8 @@ import { VerifyTooltipComponent } from './public/verify-tooltip/verify-tooltip.c
     ExpiredTokenRefreshDialogComponent,
     PasswordResetTokenWrapperComponent,
     VerifyTooltipDirective,
-    VerifyTooltipComponent
+    VerifyTooltipComponent,
+    ImageErrorDirective
   ],
   imports: [
     BrowserModule,

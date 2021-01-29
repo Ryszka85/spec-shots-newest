@@ -71,6 +71,8 @@ export class ImageContentComponent implements OnInit {
   imageViewModel: ImageViewModel[];
   device: string = '';
 
+  @Select(LoginStateModel.isLoggedIn) $isLoggedIn;
+
   constructor(private store: Store,
               public imgReqService: ImageRequestService,
               private router: Router,
@@ -206,12 +208,23 @@ export class ImageContentComponent implements OnInit {
 
   changeImageDetails(item: ImageModel): void {
     if (this.isProfile && this.editable) {
-      this.store.dispatch(new SelectImage(item))
+      const param: ChangeImageDetailsModel = {model: item, isOwner: true};
+      this.store.dispatch(new SelectImage(item));
+      this.dialog.open(ChangeImageDetailsDialogComponent,
+        {
+          width: '780px',
+          data: param,
+          panelClass: 'change-img-details'
+        }
+      );
+    } else {
+      const param: ChangeImageDetailsModel = {model: item, isOwner: false};
+      this.store.dispatch(new SelectImage(item));
       this.dialog.open(ChangeImageDetailsDialogComponent,
         {
           width: '780px',
           height: '780px',
-          data: item,
+          data: param,
           panelClass: 'change-img-details'
         }
       );
@@ -275,3 +288,10 @@ import {ImageDownloadService} from "../../serviceV2/image-download.service";
 import {ChangeImageDetailsDialogComponent} from "../../private/change-image-details-dialog/change-image-details-dialog.component";
 import {FileSaverService} from "ngx-filesaver";
 import {DeviceObserverService} from "../../serviceV2/device-observer.service";
+
+
+
+export interface ChangeImageDetailsModel {
+  model: ImageModel
+  isOwner: boolean;
+}
