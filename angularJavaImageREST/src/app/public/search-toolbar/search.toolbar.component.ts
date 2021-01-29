@@ -105,7 +105,7 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
       {name: 'Last 365 Days', checked: false, value: 365},
       {name: 'All', checked: true, disabled: false, value: -1}
     ],
-    mostDownloads: { name: 'Most downloaded', checked: false },
+    mostDownloads: { name: 'Most downloads', checked: false },
     mostLiked: { name: 'Most liked', checked: false }
   };
 
