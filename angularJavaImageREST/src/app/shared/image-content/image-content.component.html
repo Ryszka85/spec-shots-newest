@@ -11,7 +11,7 @@
 
       <div (click)="fooTest()" class="item-container">
           <button mat-icon-button *ngIf="imgItem.user.profileImgPath" class="account-btn profile-icon" (click)="navigateToUser(imgItem)">
-            <img class="shadow3 user-profile-img" id="img-profile" [src]="imgItem.user.profileImgPath" alt="">
+            <img class="shadow3 user-profile-img" id="img-profile" appImageError [src]="imgItem.user.profileImgPath" alt="">
           </button>
         <span class="user-name" id="user-txt">{{ imgItem.user.email.substr(0, imgItem.user.email.indexOf('@')) }}</span>
 
@@ -51,15 +51,24 @@
           </a>
         </div>
 
-        <div *ngIf="editable && isProfile" class="img-settings">
-          <a mat-icon-button>
+        <div class="img-settings">
+          <a *ngIf="editable && isProfile" mat-icon-button>
             <mat-icon class="setting-icon icon white-icon mobile-icon"
                       matTooltip="Open settings menu"
                       (click)="changeImageDetails(imgItem)"
                       *ngIf="imgItem.isPublic">settings
             </mat-icon>
           </a>
+          <a *ngIf="isProfile && !($isLoggedIn | async)" mat-icon-button>
+            <mat-icon
+              class="setting-icon icon white-icon mobile-icon"
+              matTooltip="Open settings menu"
+              (click)="changeImageDetails(imgItem)"
+              *ngIf="imgItem.isPublic">info
+            </mat-icon>
+          </a>
         </div>
+
 
         <div class="likes-box">
           <div class="likes">
