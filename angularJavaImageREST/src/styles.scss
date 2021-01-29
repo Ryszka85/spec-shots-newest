@@ -108,9 +108,11 @@ $mat-theming-primary: mat-palette($mat-yellow, 800);
 }
 
 
-
-.change-img-details .mat-dialog-container {
-
+@media screen and (max-width: 600px) {
+  .change-img-details .mat-dialog-container {
+    height: 100vh;
+    width: 100vw;
+  }
 }
 
 html, body { height: 100%; }

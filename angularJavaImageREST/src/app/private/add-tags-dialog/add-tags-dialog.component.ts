@@ -17,7 +17,7 @@ import {ImageRequestService} from "../../serviceV2/image-request.service";
 import {LoggedUserDetailsState} from "../../shared/app-state/states/logged-user-details.state";
 import {Navigate} from "@ngxs/router-plugin";
 import {AuthenticationActions} from "../../shared/app-state/actions/authentication-action";
-import {ImagesByUserIDAction} from "../../shared/app-state/actions/image.action";
+import {ImagesByUserIDAction, SelectImage} from "../../shared/app-state/actions/image.action";
 import {LoginStateModel} from "../../shared/app-state/states/login.state.model";
 import {UserDetailsActions} from "../../shared/app-state/actions/user-details.action";
 
@@ -110,8 +110,16 @@ export class AddTagsDialogComponent implements OnInit {
       }
     ).subscribe(value => {
       // this.store.dispatch(new Navigate(['profile', {userId: userId}]))
-      this.store.dispatch(new UserDetailsActions.GetUserDetails(userId));
-      this.dialogRef.close();
+      this.store
+        .dispatch(new UserDetailsActions.GetUserDetails(userId))
+        .pipe(
+          map(value1 =>   value1.UserDetails.images))
+        .subscribe(value2 => {
+          this.store.dispatch(
+            new SelectImage(
+              value2.filter(image => image.imageId === selectedImage)[0]))
+            .subscribe(value1 => this.dialogRef.close());
+        });
       // this.store
       //   .dispatch(new ImagesByUserIDAction(userId))
       //   .subscribe(value1 => {

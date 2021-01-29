@@ -1,15 +1,25 @@
 .container {
-  background: transparent;
+  background: transparent
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    width: 100%;
+  }
 }
 
 
 .add-tags {
-  margin-bottom: 150px;
+  /*margin-bottom: 150px;*/
 }
 
 #del_btn {
   background-color: #F65767;
   color: white;
+}
+
+.tags {
+  margin-top: 20px;
 }
 
 #access-type {
@@ -101,5 +111,6 @@
 .img-content {
   max-width: 380px;
   max-height: 400px;
+  object-fit: cover;
 }
 

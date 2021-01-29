@@ -22,7 +22,7 @@
         account_circle
       </mat-icon>
       <!--      <img *ngIf="($logged | async) as loggedUser" class="profile-img" [src]="loggedUser.profileImgPath">-->
-      <img *ngIf="($profileImg | async) as src" class="profile-img" [src]="src">
+      <img appImageError *ngIf="($profileImg | async) as src" class="profile-img" [src]="src">
 <!--      <img class="profile-img" [src]="userDetails.userProfile.profileImgPath">-->
     </div>
     <div class="title">

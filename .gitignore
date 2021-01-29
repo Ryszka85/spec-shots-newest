@@ -1,2 +1,4 @@
 /angularJavaImageREST/node_modules/
-.idea
+/.idea/
+/angularJavaImageREST/dist/
+/angularJavaImageREST/e2e/
