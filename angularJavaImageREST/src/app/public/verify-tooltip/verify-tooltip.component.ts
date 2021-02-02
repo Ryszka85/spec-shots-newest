@@ -27,7 +27,7 @@ export class VerifyTooltipComponent implements OnInit {
               private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.close.emit(false)
+    this.close.emit(false);
   }
 
   closeToolTip() {
@@ -48,8 +48,8 @@ export class VerifyTooltipComponent implements OnInit {
         'Check your inbox',
         {
           duration: 3000,
-          horizontalPosition: "center",
-          verticalPosition: "top"
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
         }
       );
       /*var showEmailWasSentDialog = new ShowEmailWasSentDialog(this.dialog, value);*/

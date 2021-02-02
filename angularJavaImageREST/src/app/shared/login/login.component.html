@@ -1,9 +1,13 @@
-<div class="header-container shadow" fxLayout="row" fxLayoutAlign="space-between center">
+<div class="header-container shadow"
+     fxLayout="row"
+     fxLayoutAlign="space-between center">
   <div class="header">
     <strong>Login</strong>
   </div>
   <mat-divider></mat-divider>
-  <div class="logo-container" fxLayout="row" fxLayoutAlign="space-evenly center">
+  <div class="logo-container"
+       fxLayout="row"
+       fxLayoutAlign="space-evenly center">
     <a (click)="close()" mat-icon-button class="home_button">
       <!--<img width="40px" height="40px" style="margin-top: 0px"  src="assets/Specshots-Logo.png">-->
       <mat-icon style="color: white">close</mat-icon>
@@ -76,7 +80,8 @@
 
       <ng-template cdkConnectedOverlay
                    [cdkConnectedOverlayOrigin]="trigger"
-                   [cdkConnectedOverlayOpen]="(isOpen || ($requestStatusCode | async) === 423) && forgotPasswordPressed === false">
+                   [cdkConnectedOverlayOpen]="(isOpen || ($requestStatusCode | async) === 423) &&
+                    forgotPasswordPressed === false">
         <app-verify-tooltip (close)="closeToolTipFunc($event)" [email]="mail" [password]="pwd"
                             text="Verify your account!"></app-verify-tooltip>
       </ng-template>

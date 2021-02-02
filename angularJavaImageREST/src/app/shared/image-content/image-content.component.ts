@@ -212,6 +212,7 @@ export class ImageContentComponent implements OnInit {
       this.store.dispatch(new SelectImage(item));
       this.dialog.open(ChangeImageDetailsDialogComponent,
         {
+          maxHeight: '800px',
           width: '780px',
           data: param,
           panelClass: 'change-img-details'

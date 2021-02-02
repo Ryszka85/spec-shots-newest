@@ -6,6 +6,7 @@ import {Store} from "@ngxs/store";
 import {ImageRequestService} from "./image-request.service";
 import {CropAndDownload, GetImageByImageId} from "../shared/app-state/actions/image.action";
 import {map} from "rxjs/operators";
+import {LoadingImageService} from "../public/loading-image.service";
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,9 @@ export class CropAndDownloadResolverService implements Resolve<CropAndDownloadSt
         let blob = new Blob([byteArray],{type:'application/octet-binary'});
         let reader = new FileReader();
         reader.onload = (evt: any) => {
-           this.store
+          this.store
             .dispatch(new CropAndDownload(evt.target.result))
+            .subscribe(value => {});
         };
         // this.dialog.open(DownloadCropperComponent,{
         //   data: { img: evt.target.result,
