@@ -10,11 +10,27 @@
 //  background-color: white !important;;
 //}
 
+@import '~@angular/cdk/overlay-prebuilt.css';
 @import '~@angular/material/theming';
 
 @include mat-core();
 
+::ng-deep mat-progress-bar progress mat-primary {
+  height: 18px;
+}
 
+::ng-deep .mat-progress-bar-fill::after {
+  background-color: yellow;
+  height: 60px;
+}
+
+::ng-deep .mat-progress-bar-buffer {
+  background: yellow;
+}
+
+::ng-deep .mat-progress-bar {
+  border-radius: 2px;
+}
 
 
 
@@ -33,6 +49,14 @@ $mat-theming-primary: mat-palette($mat-yellow, 800);
   color: black;
 }*/
 
+
+.registration-dialog .mat-dialog-container{
+  padding: 0;
+  margin: 0 0;
+}
+
+
+
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
   border-color:red;
 }
@@ -49,6 +73,8 @@ $mat-theming-primary: mat-palette($mat-yellow, 800);
   /*max-width: 100vw !important;
   width: 100vw !important;
   min-width: 100vw !im;*/
+  padding: 0;
+  margin: 0 0;
 
 }
 
@@ -56,8 +82,9 @@ $mat-theming-primary: mat-palette($mat-yellow, 800);
   /*background-color: #f4f1de;*/
 }
 
-.setIndividualResDialog {
+.setIndividualResDialog .mat-dialog-container {
   padding: 0;
+  margin: 0 0;
 }
 
 ::ng-deep .mat-checkbox-frame {
@@ -96,9 +123,11 @@ $mat-theming-primary: mat-palette($mat-yellow, 800);
 }
 
 
-
-.change-img-details .mat-dialog-container {
-
+@media screen and (max-width: 600px) {
+  .change-img-details .mat-dialog-container {
+    height: 100vh;
+    width: 100vw;
+  }
 }
 
 html, body { height: 100%; }

@@ -47,6 +47,7 @@ export class ImageCropperComponent implements OnInit {
   };
 
   resizedFactor = 0;
+  invertResizeFactor = 0;
   canvasRotation: any;
 
   disable = false;
@@ -107,6 +108,7 @@ export class ImageCropperComponent implements OnInit {
 
 
   imageLoaded() {
+    console.log("imageLoaded()");
   }
 
 
@@ -116,6 +118,8 @@ export class ImageCropperComponent implements OnInit {
 
 
   getDimensionFromCropper($event: Dimensions) {
+    console.log($event.height);
+    console.log($event.width);
     this.cropperObj.imgViewHeight = $event.height;
     this.cropperObj.imgViewWidth = $event.width;
 
@@ -123,6 +127,7 @@ export class ImageCropperComponent implements OnInit {
     this.cropperObj.staticHeight = this.getStaticCropperWidthByViewAndDevice() / this.getRatioByView();
     this.resizedFactor = this.$event.imgDimensions.width / $event.width;
     this.cropperObj.resizeFactor = this.$event.imgDimensions.width / $event.width;
+    this.cropperObj.inverseResizeFactor = $event.width / this.$event.imgDimensions.width;
 
     this.cropperObj.resizeWidth = this.getDesktopWidthByView();
     this.cropperObj.resizeHeight = this.getDesktopHeightByView();
@@ -189,6 +194,7 @@ export interface CropperObject {
   imgViewHeight?: number;
   isPortraitFormat?: boolean;
   resizeFactor?: number;
+  inverseResizeFactor?: number;
   originalWidth?: number;
   originalHeight?: number;
   rotate?: boolean;

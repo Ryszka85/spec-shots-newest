@@ -6,8 +6,12 @@
      (click)="emitOpenOptions()">
     <mat-icon class="search-options-icon" style="color: black" >menu</mat-icon>
   </a>
-  <app-custom-search-bar-content (valueChanged)="foo($event)" (enterPressed)="enterPressed.emit($event)" [required]="false"
+  <app-custom-search-bar-content #component (valueChanged)="foo($event)"
+                                 (enterPressed)="enterPressed.emit($event)"
+                                 (clickPressed)="clickPressed.emit($event)"
+                                 [required]="false"
                                  [formControl]="content"
                                  placeholder="Search your desired entity"></app-custom-search-bar-content>
+
 </mat-form-field>
 

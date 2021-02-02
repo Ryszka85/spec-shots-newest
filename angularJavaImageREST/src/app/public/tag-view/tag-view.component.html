@@ -1,0 +1,309 @@
+<app-search-toolbar></app-search-toolbar>
+
+<section id="main-content">
+ <div class="container">
+  <div class="description-container">
+    <h1>Topics</h1>
+    <p>Explore the world through topics of beautiful photos free to use under the Specshots License.</p>
+  </div>
+
+   <div class="grid-row">
+    <mat-card class="card-body" *ngFor="let tag of tags">
+      <img mat-card-image src="assets/UnsplashPlaceholder.jpg" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <div class="flex-card-content">
+          <div class="flex-card-content-text">
+            <mat-card-title>{{tag.tag}}</mat-card-title>
+            <mat-card-subtitle>By Specshots</mat-card-subtitle>
+          </div>
+          <div class="flex-card-content-thumbnail">
+            <div mat-card-avatar class="example-header-image"></div>
+          </div>
+        </div>
+        <p>
+          Exploring our complicated relationship with technology — from the phone's we are glued to morning until night,
+          to the prized cameras we've got displayed around the house.
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button (click)="showTagImages(tag)" mat-button><strong>EXPLORE</strong></button>
+      </mat-card-actions>
+    </mat-card>
+
+    <!--<mat-card class="card-body">
+      <img mat-card-image src="assets/UnsplashPlaceholder.jpg" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <div class="flex-card-content">
+          <div class="flex-card-content-text">
+            <mat-card-title>Humans</mat-card-title>
+            <mat-card-subtitle>By Specshots</mat-card-subtitle>
+          </div>
+          <div class="flex-card-content-thumbnail">
+            <div mat-card-avatar class="example-header-image"></div>
+          </div>
+        </div>
+        <p>
+          Humanity can be fascinating at times. The diversity in appereance and skills makes humans interesting.
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+
+      <mat-card class="card-body">
+        <img mat-card-image src="assets/UnsplashPlaceholder.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <div class="flex-card-content">
+            <div class="flex-card-content-text">
+              <mat-card-title>Food</mat-card-title>
+              <mat-card-subtitle>By Specshots</mat-card-subtitle>
+            </div>
+            <div class="flex-card-content-thumbnail">
+              <div mat-card-avatar class="example-header-image"></div>
+            </div>
+          </div>
+          <p>
+            From street food to homemade cooking. People love to share their favorite types of food or
+            want to show off their abilities in making food.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+
+     <mat-card class="card-body">
+       <img mat-card-image src="assets/UnsplashPlaceholder.jpg" alt="Photo of a Shiba Inu">
+       <mat-card-content>
+         <div class="flex-card-content">
+           <div class="flex-card-content-text">
+             <mat-card-title>Gadgets</mat-card-title>
+             <mat-card-subtitle>By Specshots</mat-card-subtitle>
+           </div>
+           <div class="flex-card-content-thumbnail">
+             <div mat-card-avatar class="example-header-image"></div>
+           </div>
+         </div>
+         <p>
+           Gadgets are useful devices to make certain situations more convenient. Show off your gadgets or how
+           you tinker gadgets regardless of how useful they are.
+         </p>
+       </mat-card-content>
+       <mat-card-actions>
+         <button mat-button>LIKE</button>
+         <button mat-button>SHARE</button>
+       </mat-card-actions>
+     </mat-card>
+
+     <mat-card class="card-body">
+       <img mat-card-image src="assets/UnsplashPlaceholder.jpg" alt="Photo of a Shiba Inu">
+       <mat-card-content>
+         <div class="flex-card-content">
+           <div class="flex-card-content-text">
+             <mat-card-title>Hardware</mat-card-title>
+             <mat-card-subtitle>By Specshots</mat-card-subtitle>
+           </div>
+           <div class="flex-card-content-thumbnail">
+             <div mat-card-avatar class="example-header-image"></div>
+           </div>
+         </div>
+         <p>
+           Found some old, intersting or new hardware ? Feel free to share it here.
+         </p>
+       </mat-card-content>
+       <mat-card-actions>
+         <button mat-button>LIKE</button>
+         <button mat-button>SHARE</button>
+       </mat-card-actions>
+     </mat-card>
+
+     <mat-card class="card-body">
+       <img mat-card-image src="assets/UnsplashPlaceholder.jpg" alt="Photo of a Shiba Inu">
+       <mat-card-content>
+         <div class="flex-card-content">
+           <div class="flex-card-content-text">
+             <mat-card-title>Fashion</mat-card-title>
+             <mat-card-subtitle>By Specshots</mat-card-subtitle>
+           </div>
+           <div class="flex-card-content-thumbnail">
+             <div mat-card-avatar class="example-header-image"></div>
+           </div>
+         </div>
+         <p>
+          Discover the latest fashion trends or share your own style of fashion here.
+         </p>
+       </mat-card-content>
+       <mat-card-actions>
+         <button mat-button>LIKE</button>
+         <button mat-button>SHARE</button>
+       </mat-card-actions>
+     </mat-card>
+
+     <mat-card class="card-body">
+       <img mat-card-image src="assets/UnsplashPlaceholder.jpg" alt="Photo of a Shiba Inu">
+       <mat-card-content>
+         <div class="flex-card-content">
+           <div class="flex-card-content-text">
+             <mat-card-title>Movies</mat-card-title>
+             <mat-card-subtitle>By Specshots</mat-card-subtitle>
+           </div>
+           <div class="flex-card-content-thumbnail">
+             <div mat-card-avatar class="example-header-image"></div>
+           </div>
+         </div>
+         <p>
+           Show off your favorite movie scene via a picture or share how passionate you feel about
+           movies, actors or directors.
+         </p>
+       </mat-card-content>
+       <mat-card-actions>
+         <button mat-button>LIKE</button>
+         <button mat-button>SHARE</button>
+       </mat-card-actions>
+     </mat-card>
+
+     <mat-card class="card-body">
+       <img mat-card-image src="assets/UnsplashPlaceholder.jpg" alt="Photo of a Shiba Inu">
+       <mat-card-content>
+         <div class="flex-card-content">
+           <div class="flex-card-content-text">
+             <mat-card-title>Architecture</mat-card-title>
+             <mat-card-subtitle>By Specshots</mat-card-subtitle>
+           </div>
+           <div class="flex-card-content-thumbnail">
+             <div mat-card-avatar class="example-header-image"></div>
+           </div>
+         </div>
+         <p>
+           Explore exteriors from around the world —
+           from brutalist buildings to minimalist structures that will give you
+           a new appreciation for the art of architecture.
+         </p>
+       </mat-card-content>
+       <mat-card-actions>
+         <button mat-button>LIKE</button>
+         <button mat-button>SHARE</button>
+       </mat-card-actions>
+     </mat-card>
+
+     <mat-card class="card-body">
+       <img mat-card-image src="assets/UnsplashPlaceholder.jpg" alt="Photo of a Shiba Inu">
+       <mat-card-content>
+         <div class="flex-card-content">
+           <div class="flex-card-content-text">
+             <mat-card-title>Buildings</mat-card-title>
+             <mat-card-subtitle>By Specshots</mat-card-subtitle>
+           </div>
+           <div class="flex-card-content-thumbnail">
+             <div mat-card-avatar class="example-header-image"></div>
+           </div>
+         </div>
+         <p>
+           Have you seen buildings you find fasicinating ? Or are you building your own house or room ?
+           Feel free to share it here.
+         </p>
+       </mat-card-content>
+       <mat-card-actions>
+         <button mat-button>LIKE</button>
+         <button mat-button>SHARE</button>
+       </mat-card-actions>
+     </mat-card>
+
+     <mat-card class="card-body">
+       <img mat-card-image src="assets/UnsplashPlaceholder.jpg" alt="Photo of a Shiba Inu">
+       <mat-card-content>
+         <div class="flex-card-content">
+           <div class="flex-card-content-text">
+             <mat-card-title>Experimental</mat-card-title>
+             <mat-card-subtitle>By Specshots</mat-card-subtitle>
+           </div>
+           <div class="flex-card-content-thumbnail">
+             <div mat-card-avatar class="example-header-image"></div>
+           </div>
+         </div>
+         <p>
+           Experimenting is trying out ideas without knowing the outcome. Trying new things out is a good thing.
+           Show off your most intersting, strange or even not successful attempts of your experiments here.
+         </p>
+       </mat-card-content>
+       <mat-card-actions>
+         <button mat-button>LIKE</button>
+         <button mat-button>SHARE</button>
+       </mat-card-actions>
+     </mat-card>
+
+     <mat-card class="card-body">
+       <img mat-card-image src="assets/UnsplashPlaceholder.jpg" alt="Photo of a Shiba Inu">
+       <mat-card-content>
+         <div class="flex-card-content">
+           <div class="flex-card-content-text">
+             <mat-card-title>Flowers</mat-card-title>
+             <mat-card-subtitle>By Specshots</mat-card-subtitle>
+           </div>
+           <div class="flex-card-content-thumbnail">
+             <div mat-card-avatar class="example-header-image"></div>
+           </div>
+         </div>
+         <p>
+           Explore photography of flowers or other types of plants people found
+           in the world or have in their garden.
+         </p>
+       </mat-card-content>
+       <mat-card-actions>
+         <button mat-button>LIKE</button>
+         <button mat-button>SHARE</button>
+       </mat-card-actions>
+     </mat-card>
+
+     <mat-card class="card-body">
+       <img mat-card-image src="assets/UnsplashPlaceholder.jpg" alt="Photo of a Shiba Inu">
+       <mat-card-content>
+         <div class="flex-card-content">
+           <div class="flex-card-content-text">
+             <mat-card-title>Nature</mat-card-title>
+             <mat-card-subtitle>By Specshots</mat-card-subtitle>
+           </div>
+           <div class="flex-card-content-thumbnail">
+             <div mat-card-avatar class="example-header-image"></div>
+           </div>
+         </div>
+         <p>
+           Do you appreciate the gifts of nature? Share your discoveries of plants and other things mother nature
+           has to offer here.
+         </p>
+       </mat-card-content>
+       <mat-card-actions>
+         <button mat-button>LIKE</button>
+         <button mat-button>SHARE</button>
+       </mat-card-actions>
+     </mat-card>
+
+     <mat-card class="card-body">
+       <img mat-card-image src="assets/UnsplashPlaceholder.jpg" alt="Photo of a Shiba Inu">
+       <mat-card-content>
+         <div class="flex-card-content">
+           <div class="flex-card-content-text">
+             <mat-card-title>Landscape</mat-card-title>
+             <mat-card-subtitle>By Specshots</mat-card-subtitle>
+           </div>
+           <div class="flex-card-content-thumbnail">
+             <div mat-card-avatar class="example-header-image"></div>
+           </div>
+         </div>
+         <p>
+           Do you love the beautiful scenery of landscapes ? Explore this tag to find the most fascinating of locations people
+           have discovered.
+         </p>
+       </mat-card-content>
+       <mat-card-actions>
+         <button mat-button>LIKE</button>
+         <button mat-button>SHARE</button>
+       </mat-card-actions>
+     </mat-card>-->
+    </div>
+  </div>
+</section>
+

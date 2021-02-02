@@ -88,4 +88,11 @@ export class SetCroppedOffsetValues {
               public subImageWidth: number,public subImageHeight: number) { }
 }
 
+export class AssignCropperPosToImageUpload {
+  static readonly type = '[ImageAPI] Set cropped image values';
+  constructor(public imgId: string,
+              public offsetX: number, public offsetY: number,
+              public subImageWidth: number,public subImageHeight: number) { }
+}
+
 

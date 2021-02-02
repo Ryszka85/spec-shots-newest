@@ -17,14 +17,14 @@
          formControlName="queryString">
   <mat-autocomplete #auto="matAutocomplete">
     <div class="user-search" *ngIf="value.scope === 'Users'">
-      <mat-option #matOption (click)="search(matOption.value)"
+      <mat-option #matOption (click)="clickPressed.emit({queryString: option.username, scope: 'Users'})"
                   *ngFor="let option of $users | async"
                   [value]="option.username">
         {{option.username}}
       </mat-option>
     </div>
     <div class="tag-search" *ngIf="value.scope === 'Tags'">
-      <mat-option #matOption (click)="search(matOption.value)"
+      <mat-option #matOption (click)="clickPressed.emit({queryString: option.value, scope: 'Tags'})"
                   *ngFor="let option of $tagOptions | async"
                   [value]="option.value">
         {{option.value}}

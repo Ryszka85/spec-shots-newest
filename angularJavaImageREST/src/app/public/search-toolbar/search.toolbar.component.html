@@ -1,8 +1,5 @@
-<div class="primary-color"  [ngClass]="[isMobileDevice && ($isLoggedIn | async) == true ? 'mobile-logged-container' :
-                  isMobileDevice ? 'mobile-container' :
-                  isDesktopDevice  && ($isLoggedIn | async) == true ? 'container' :
-                   isDesktopDevice ?  'container-not-logged':
-                   ($isLoggedIn | async) == true ? 'tablet-logged-container' : 'tablet-container']">
+<div class="primary-color"  [ngClass]="[($isLoggedIn | async) == true ?
+'logged-container' : 'container-not-logged']">
   <div *ngIf="isDesktopDevice || isTabletDevice || isMobileDevice" class="left">
     <a routerLink="/welcome" mat-icon-button class="home_button">
       <img width="60px" height="60px" style="margin-top: 0px"  src="assets/Specshots-Logo.png">
@@ -13,15 +10,16 @@
     </a>
   </div>
   <div  fxLayoutAlign="center" fxFlexAlign="center">
-    <div class="center">
+  <!--  <div class="center"> -->
         <div class="center-wrapper"  style="background-color: white; height: 60px; padding: 3px; border-radius: 10px;"
              [ngClass]="[isMobileDevice ? 'mobile-width' : isTabletDevice ? 'tablet-width' : 'desktop-width']">
           <app-custom-search-bar [disableIcon]="disableSearchOptionsIcon"
                                  (changedValue)="closeFilterDetails($event)"
                                  (enterPressed)="search($event)"
+                                 (clickPressed)="search($event)"
                                  (openCloseSearchOptions)="closeFilterDetails($event)"></app-custom-search-bar>
         </div>
-    </div>
+   <!-- </div> -->
   </div>
 
   <!--<div *ngIf="($isLoggedIn | async) == false" class="auth-container">
@@ -58,13 +56,6 @@
     </button>
     <button *ngIf="($isLoggedIn | async) == false" (click)="signup()" mat-raised-button id="sign-up">Register</button>
     <!--<button *ngIf="($isLoggedIn | async) == true" class="shadow" (click)="navigateUploadImage()" mat-flat-button>Submit a picture</button>-->
-    <button *ngIf="($isLoggedIn | async) == true"
-            (click)="navigateUploadImage()"
-            mat-icon-button>
-      <mat-icon matTooltip="Add your spectacular shot to your gallery."
-                matTooltipPosition="below"
-                style="color: white; font-size: 40px">add_a_photo</mat-icon>
-    </button>
   </div>
 
   <!--<div *ngIf="($isLoggedIn | async) == true" class="submit_image">
@@ -74,6 +65,13 @@
 
   <div class="account_icon_container" *ngIf="($isLoggedIn | async) == true">
     <!--<button class="shadow" (click)="navigateUploadImage()" mat-flat-button>Submit a picture</button>-->
+    <button *ngIf="($isLoggedIn | async) == true && (isDesktopDevice)"
+            (click)="navigateUploadImage()"
+            mat-icon-button>
+      <mat-icon matTooltip="Add your spectacular shot to your gallery."
+                matTooltipPosition="below"
+                style="color: white; font-size: 40px">add_a_photo</mat-icon>
+    </button>
     <div class="msg" >
       <span class="welcome_msg"
             style="color: white; margin-left: 10%; font-size: 15px"
@@ -86,7 +84,7 @@
                 style="color: white;font-size: 50px">account_circle
       </mat-icon>
 
-      <img *ngIf="($profileImage | async)"
+      <img *ngIf="($profileImage | async)" #element appImageError
            class="img shadow"
            [src]="$profileImage | async">
       <mat-menu #menu="matMenu">
@@ -112,7 +110,7 @@
   </div>
 
 
-  <div style="width: 33%"></div>
+  <!-- <div style="width: 33%"></div> -->
   <!--<div *ngIf="filterable && searchOption !== 'Users'" class="open-filter-details">
 
 
@@ -120,10 +118,14 @@
       <mat-icon style="color: white">expand_more</mat-icon>
       <span style="color: white;">Search details </span>
     </button>
-  </div>-->
+  </div>
+</div>-->
+
+
 </div>
+
 <div class="container filterDetails" *ngIf="filterable && openCloseDetails">
-  <div *ngIf="searchOption === 'Tags'" class="center2" style="padding: 10px; display: flex; justify-content: center">
+  <div *ngIf="searchOption === 'Tags'" class="center2" style="padding-top: 10px; padding-bottom: 10px;display: flex; justify-content: center">
     <section id="id_Section">
       <ul class="align_ul" style="list-style-type: none;">
         <li style="color: white; font-size: 18px; margin-bottom: 10px"><strong>Filter : </strong></li>
@@ -154,4 +156,3 @@
     </section>
   </div>
 </div>
-

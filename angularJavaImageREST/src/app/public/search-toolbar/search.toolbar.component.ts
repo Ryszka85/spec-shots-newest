@@ -105,7 +105,7 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
       {name: 'Last 365 Days', checked: false, value: 365},
       {name: 'All', checked: true, disabled: false, value: -1}
     ],
-    mostDownloads: { name: 'Most downloaded', checked: false },
+    mostDownloads: { name: 'Most downloads', checked: false },
     mostLiked: { name: 'Most liked', checked: false }
   };
 
@@ -151,7 +151,7 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
           this.isMobileDevice = true;
           this.isDesktopDevice = false;
           this.isTabletDevice = false;
-        } else if (value1.mqAlias === 'sm') {
+        } else if (value1.mqAlias === 'sm' || value1.mqAlias === 'md') {
           this.isMobileDevice = false;
           this.isDesktopDevice = false;
           this.isTabletDevice = true;
@@ -186,6 +186,7 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
   }
 
   search(selected): void {
+    console.log(selected);
     /*const filter: ImagesByTagNameWithFilterOpt;*/
 
     let filters = new Map();
@@ -218,9 +219,10 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
     const ref = new MatDialogConfig();
     this.dialog.open(SignupComponent,
       {
-        width: '660px',
+        width: '500px',
         disableClose: true,
-        autoFocus: false
+        autoFocus: false,
+        panelClass: 'registration-dialog',
       });
   }
 
@@ -228,8 +230,7 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
     const ref = new MatDialogConfig();
     ref.disableClose = true;
     this.dialog.open(LoginComponent,
-      {width: this.isDesktopDevice ? '380px' : this.isMobileDevice ? '320' :  '300px',
-        height: '350px',
+      {width: this.isDesktopDevice ? '450px' : this.isMobileDevice ? '320' :  '400px',
         panelClass: 'login-dialog'});
   }
 
@@ -286,6 +287,11 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
   closeFilterDetails($event: PressedSearchContent) {
     this.disableSearchOptionsIcon = $event.content.scope === 'Users';
     this.openCloseDetails = $event.content.scope === 'Tags' && $event.clicked;
+  }
+
+  swapImage(target: HTMLImageElement) {
+    console.log(target.width);
+    target.src = 'https://via.placeholder.com/177x150.png?text=missing%20img';
   }
 }
 

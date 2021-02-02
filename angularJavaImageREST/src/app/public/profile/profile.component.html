@@ -18,11 +18,11 @@
 <!--      </button>-->
 
       <mat-icon class="profile-img" *ngIf="!($profileImg | async)"
-                style="font-size: 165px; color: lightgray; margin-right: 5px">
+                style="font-size: 140px; color: lightgray;">
         account_circle
       </mat-icon>
       <!--      <img *ngIf="($logged | async) as loggedUser" class="profile-img" [src]="loggedUser.profileImgPath">-->
-      <img *ngIf="($profileImg | async) as src" class="profile-img" [src]="src">
+      <img appImageError *ngIf="($profileImg | async) as src" class="profile-img" [src]="src">
 <!--      <img class="profile-img" [src]="userDetails.userProfile.profileImgPath">-->
     </div>
     <div class="title">
@@ -67,8 +67,8 @@
 <!--          Edit profile-->
 <!--        </button>-->
 <!--      </div>-->
-      <div *ngIf="editableProfile | async" class="edit">
-        <button routerLink="/edit-profile" style="" mat-icon-button>
+      <div  *ngIf="editableProfile | async" class="edit">
+        <button class="button-position"  routerLink="/edit-profile" mat-icon-button>
           <mat-icon>edit</mat-icon>
           Edit profile
         </button>
@@ -86,18 +86,22 @@
     </ng-template>
 <!--    <app-image-content [isProfile]="true"-->
 <!--                       [data]="$imgs"></app-image-content>-->
-    <app-image-content class="gallery-content" [isProfile]="true"
-                       [data]="$userImages"></app-image-content>
+    <ng-template matTabContent>
+      <app-image-content class="gallery-content" [isProfile]="true"
+                         [data]="$userImages"></app-image-content>
+    </ng-template>
   </mat-tab>
   <mat-tab label="Likes">
     <ng-template mat-tab-label>
       <mat-icon class="example-tab-icon">thumb_up</mat-icon>
       Likes
     </ng-template>
-<!--    <app-image-content [isProfile]="false"-->
-<!--                       [data]="$likeds"></app-image-content>-->
-    <app-image-content [isProfile]="false"
-                       [data]="$userLikes"></app-image-content>
+    <ng-template matTabContent>
+      <app-image-content class="gallery-content" [isProfile]="false"
+                         [data]="$userLikes"></app-image-content>
+    </ng-template>
+    <div>
+    </div>
   </mat-tab>
 <!--  <mat-tab *ngIf="(editableProfile | async) || (userDetails.isOwner)" label="Third">-->
 <!--    <ng-template mat-tab-label>-->
@@ -105,10 +109,10 @@
 <!--      Private-->
 <!--    </ng-template>-->
 <!--  </mat-tab>-->
-  <mat-tab *ngIf="editableProfile | async" label="Third">
+  <!--<mat-tab *ngIf="editableProfile | async" label="Third">
     <ng-template mat-tab-label>
       <mat-icon class="example-tab-icon">lock</mat-icon>
       Private
     </ng-template>
-  </mat-tab>
+  </mat-tab>-->
 </mat-tab-group>

@@ -22,6 +22,8 @@ export interface PressedSearchContent {
 export class CustomSearchBarComponent implements OnInit {
   content = new FormControl({ scope: 'Tags', queryString: '' });
 
+  isOpen = false;
+
   contentTemp: SearchBarContent;
 
   @Input() disableIcon = false;
@@ -30,6 +32,8 @@ export class CustomSearchBarComponent implements OnInit {
   @Output() openCloseSearchOptions: EventEmitter<PressedSearchContent> = new EventEmitter<PressedSearchContent>();
 
   @Output() enterPressed: EventEmitter<SearchBarContent> = new EventEmitter<SearchBarContent>();
+
+  @Output() clickPressed: EventEmitter<SearchBarContent> = new EventEmitter<SearchBarContent>();
 
   @Output() changedValue: EventEmitter<PressedSearchContent> = new EventEmitter<PressedSearchContent>();
 
@@ -44,6 +48,7 @@ export class CustomSearchBarComponent implements OnInit {
   }
 
   emitOpenOptions() {
+    this.isOpen = !this.isOpen;
     this.clickedFilterDetails = !this.clickedFilterDetails;
     this.openCloseSearchOptions.emit({content: this.contentTemp, clicked: this.clickedFilterDetails});
   }

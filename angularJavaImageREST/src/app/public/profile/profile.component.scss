@@ -25,12 +25,23 @@
 }
 
 
+.button-position  {
+  display: flex;
+}
+
+@media screen and (max-width: 1198px) {
+  .button-position  {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 
 
 @media screen and (max-width: 1198px) {
   .container {
     display: grid;
-    height: 280px;
+    height: 100%;
     grid-template-columns: 100%;
     place-items: center;
   }
@@ -45,6 +56,8 @@
     align-items: center;
     row-gap: 10px;
   }
+
+
 }
 @media screen and (max-width: 1198px) {
   .title {
@@ -52,6 +65,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
   }
 }
 
@@ -74,12 +88,13 @@
 @media screen and (min-width: 1200px) {
   .mat-tab-group {
     padding: 80px;
+    padding-top: 20px;
   }
 }
 
 @media screen and (min-width: 600px) and (max-width: 1198px) {
   .mat-tab-group {
-    margin-top: 12%;
+    margin-top: 1%;
 
     overflow: hidden !important;
     padding: 30px;
@@ -99,6 +114,9 @@
   .mat-tab-group {
     margin-top: 35%;
     overflow: hidden !important;
+    height: 100%;
+    margin-right: 13px;
+    padding: 10px;
   }
   .template {
     margin-left: 10px;
@@ -106,7 +124,7 @@
 
 
   .gallery-content {
-    margin-left: 10px;
+    /*margin-left: 10px;*/
 
   }
 }
@@ -129,6 +147,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 10px;
 }
 
 

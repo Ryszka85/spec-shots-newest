@@ -1,7 +1,8 @@
 <mat-grid-list class="img-list" [cols]="device === 'sm' || device === 'md' ? 2 : device === 'xs' ? 1 : 4"
                [rowHeight]="10"
                [gutterSize]="20+'px'" >
-  <mat-grid-tile class="grid-tile" [rowspan]="item.rows" *ngFor="let imgItem of (models | async); index as i; trackBy: track" >
+  <mat-grid-tile class="grid-tile" [rowspan]="item.rows"
+                 *ngFor="let imgItem of ((models | async) ? (models | async) : models); index as i; trackBy: track" >
       <app-image-item class="img-item" #item [image]="imgItem"
                       [rowHeight]="10"
                       [gutterSize]="20">
@@ -10,9 +11,12 @@
 
       <div (click)="fooTest()" class="item-container">
           <button mat-icon-button *ngIf="imgItem.user.profileImgPath" class="account-btn profile-icon" (click)="navigateToUser(imgItem)">
-            <img class="shadow3 user-profile-img" id="img-profile" [src]="imgItem.user.profileImgPath" alt="">
+            <img class="shadow3 user-profile-img" id="img-profile" appImageError [src]="imgItem.user.profileImgPath" alt="">
           </button>
-        <span class="user-name" id="user-txt">{{ imgItem.user.email.substr(0, imgItem.user.email.indexOf('@')) }}</span>
+        <a (click)="navigateToUser(imgItem)"
+           class="user-name"
+           style="cursor: pointer"
+           id="user-txt">{{ imgItem.user.email.substr(0, imgItem.user.email.indexOf('@')) }}</a>
 
           <a class="img-download"
              matTooltip="Click to download this image"
@@ -42,23 +46,29 @@
 
         <div *ngIf="!imgItem.user.profileImgPath" class="profile-icon">
           <button class="btn" mat-icon-button>
-            <mat-icon style="font-size: 70px; color: white">account_circle</mat-icon>
+            <mat-icon style="font-size: 30px; color: white">account_circle</mat-icon>
           </button>
-          <a mat-button *ngIf="!imgItem.user.profileImgPath" class="header"
-             (click)="navigateToUser(imgItem)">
-            {{ imgItem.user.email.substr(0, imgItem.user.email.indexOf('@')) }}
-          </a>
+
         </div>
 
-        <div *ngIf="editable && isProfile" class="img-settings">
-          <a mat-icon-button>
+        <div class="img-settings">
+          <a *ngIf="editable && isProfile" mat-icon-button>
             <mat-icon class="setting-icon icon white-icon mobile-icon"
                       matTooltip="Open settings menu"
                       (click)="changeImageDetails(imgItem)"
                       *ngIf="imgItem.isPublic">settings
             </mat-icon>
           </a>
+          <a *ngIf="isProfile && !($isLoggedIn | async)" mat-icon-button>
+            <mat-icon
+              class="setting-icon icon white-icon mobile-icon"
+              matTooltip="Open settings menu"
+              (click)="changeImageDetails(imgItem)"
+              *ngIf="imgItem.isPublic">info
+            </mat-icon>
+          </a>
         </div>
+
 
         <div class="likes-box">
           <div class="likes">
@@ -81,43 +91,6 @@
         <img class="expand-icon"
              src="assets/link-5-512.png" alt="">
         </a>
-
-        <!--<div class="actions">
-          <button matTooltip="Click to open menu"
-                  style="color: white;"
-                  mat-icon-button
-                  [matMenuTriggerFor]="menu"
-                  aria-label="Example icon-button with a menu">
-            <mat-icon class="action_icon icon white-icon mobile-icon" style="">more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button *ngIf="editable && isProfile"
-                    (click)="showAddTagsDialog(imgItem)"
-                    mat-menu-item>
-              <mat-icon>edit</mat-icon>
-              <span>Add tags</span>
-            </button>
-            &lt;!&ndash;<button (click)="showFullscreenImage(imgItem)" mat-menu-item>
-              <mat-icon>fullscreen</mat-icon>
-              <span>Fullscreen</span>
-            </button>&ndash;&gt;
-            &lt;!&ndash;<a mat-menu-item (click)="download(imgItem)">
-              <mat-icon>save_alt</mat-icon>
-              <span>Download image</span>
-            </a>&ndash;&gt;
-            <a matTooltip="Go to {{imgItem.linkReference}}"
-               mat-menu-item
-               [href]="imgItem.linkReference">
-              <mat-icon>public</mat-icon>
-              <span>Go to source</span>
-            </a>
-          </mat-menu>
-        </div>-->
-        <!--<a *ngIf="imgItem.linkReference !== 'null'" class="link-reference" matTooltip="Go to {{imgItem.linkReference}}"
-           mat-menu-item
-           [href]="imgItem.linkReference">
-          <mat-icon style="color: white">public</mat-icon>
-        </a>-->
       </div>
   </mat-grid-tile>
 </mat-grid-list>

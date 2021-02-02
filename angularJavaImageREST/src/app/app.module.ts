@@ -110,6 +110,7 @@ import {MatListModule} from '@angular/material/list';
 import { CustomSearchBarComponent } from './public/custom-search-bar/custom-search-bar.component';
 import { CustomSearchBarContentComponent } from './public/custom-search-bar-content/custom-search-bar-content.component';
 import { DeleteUserAccountDialogComponent } from './private/delete-user-account-dialog/delete-user-account-dialog.component';
+import { TagViewComponent } from './public/tag-view/tag-view.component';
 import { VerificationDialogComponent } from './public/verification-dialog/verification-dialog.component';
 import { VerificationDialogWrapperComponent } from './public/verification-dialog-wrapper/verification-dialog-wrapper.component';
 import { RenewExpiredAccountTokenComponent } from './public/renew-expired-account-token/renew-expired-account-token.component';
@@ -118,6 +119,14 @@ import { ExpiredTokenRefreshWrapperComponent } from './public/expired-token-refr
 import { ExpiredTokenRefreshDialogComponent } from './public/expired-token-refresh-dialog/expired-token-refresh-dialog.component';
 import { PasswordResetTokenWrapperComponent } from './private/password-reset-token-wrapper/password-reset-token-wrapper.component';
 import {ValidPasswordTokenState} from "./shared/app-state/states/ValidPasswordToken.state";
+import {OverlayModule} from '@angular/cdk/overlay';
+import {A11yModule} from "@angular/cdk/a11y";
+import { VerifyTooltipDirective } from './public/verify-tooltip.directive';
+import { VerifyTooltipComponent } from './public/verify-tooltip/verify-tooltip.component';
+import { ImageErrorDirective } from './public/image-error.directive';
+import { LoadingDialogDirective } from './public/loading-dialog.directive';
+import { LoadingComponent } from './public/loading/loading.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 
@@ -154,16 +163,24 @@ import {ValidPasswordTokenState} from "./shared/app-state/states/ValidPasswordTo
     CustomSearchBarComponent,
     CustomSearchBarContentComponent,
     DeleteUserAccountDialogComponent,
+    TagViewComponent,
+    DeleteUserAccountDialogComponent,
     VerificationDialogComponent,
     VerificationDialogWrapperComponent,
     RenewExpiredAccountTokenComponent,
     RenewExpiredAccountTokenWrapperComponent,
     ExpiredTokenRefreshWrapperComponent,
     ExpiredTokenRefreshDialogComponent,
-    PasswordResetTokenWrapperComponent
+    PasswordResetTokenWrapperComponent,
+    VerifyTooltipDirective,
+    VerifyTooltipComponent,
+    ImageErrorDirective,
+    LoadingDialogDirective,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
+    OverlayModule,
     FileSaverModule,
     MatSidenavModule,
     MatListModule,
@@ -188,6 +205,7 @@ import {ValidPasswordTokenState} from "./shared/app-state/states/ValidPasswordTo
     MatSelectModule,
     MatNativeDateModule,
     MatDialogModule,
+    MatProgressBarModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ScrollingModule,
@@ -234,7 +252,8 @@ import {ValidPasswordTokenState} from "./shared/app-state/states/ValidPasswordTo
     MatDatepickerModule,
     MatChipsModule,
     FlexModule,
-    ExtendedModule
+    ExtendedModule,
+    A11yModule
   ],
   exports: [
     MatAutocompleteModule
@@ -263,7 +282,8 @@ import {ValidPasswordTokenState} from "./shared/app-state/states/ValidPasswordTo
       } as SocialAuthServiceConfig,
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule {
 }

@@ -16,10 +16,15 @@ export class TagRequestService {
               private searchReqService: SearchRequestService<TagModel>) { }
   //178.112.217.30
   private readonly SEARCH_URL: string = environment.apiUrl + "query/searchByTag/";
+  private readonly GET_TAGS: string = environment.apiUrl + 'tags/';
   private static readonly REQUEST_DELAY: number = 2000;
 
   public searchByTagName(searchTerm$: Observable<string>): Observable<TagModel[]> {
     return this.searchReqService.search(searchTerm$, this.SEARCH_URL)
+  }
+
+  public getAllTags(): Observable<TagModel[]> {
+    return this.http.get<TagModel[]>(this.GET_TAGS);
   }
 
 }

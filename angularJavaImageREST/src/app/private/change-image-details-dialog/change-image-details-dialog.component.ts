@@ -16,6 +16,10 @@ import {Router} from "@angular/router";
 import {Navigate} from "@ngxs/router-plugin";
 import {UserDetailsActions} from "../../shared/app-state/actions/user-details.action";
 import {AddTagsDialogComponent} from "../add-tags-dialog/add-tags-dialog.component";
+import {LoginStateModel} from "../../shared/app-state/states/login.state.model";
+import {ChangeImageDetailsModel} from "../../shared/image-content/image-content.component";
+import {ThemePalette} from "@angular/material/core";
+import {MediaObserver} from "@angular/flex-layout";
 
 @Component({
   selector: 'app-change-image-details-dialog',
@@ -34,26 +38,45 @@ export class ChangeImageDetailsDialogComponent implements OnInit {
   public finishedDeleting = null;
   public pressedDelete = false;
 
+  isMobile = '';
+
+  @Select(LoginStateModel.isLoggedIn) $isLoggedIn;
+  public isMobileDevice: boolean;
+
 
   constructor(private store: Store,
               private imageService: ImageRequestService,
-              @Inject(MAT_DIALOG_DATA) public data: ImageModel,
+              @Inject(MAT_DIALOG_DATA) public data: ChangeImageDetailsModel,
               private formBuilder: FormBuilder,
               private snackBar: MatSnackBar,
               private dialogRef: MatDialogRef<ChangeImageDetailsDialogComponent>,
               private updateImgService: UpdateImageDetailsService,
               private deleteImageService: DeleteImageService,
               private router: Router,
-              private dialog: MatDialog,) {
+              private dialog: MatDialog,
+              private media: MediaObserver) {
   }
 
   ngOnInit(): void {
+
+    this.media.asObservable().subscribe(value => {
+      console.log(value);
+      value.filter(value1 => {
+        console.log(value1.mqAlias);
+        if (value1.mqAlias === 'xs') {
+          this.isMobileDevice = true;
+        }
+      });
+    });
+
     this.selectedImage = this.store.selectSnapshot(SelectImageState.getSelectedImage);
     const formState = this.selectedImage.linkReference === 'null' ?
       "" : this.selectedImage.linkReference;
     this.urlReference = new FormControl(formState, [urlValidator(formState)]);
     this.$selectedImage.subscribe(val => console.log(val.public))
     this.isPublic = new FormControl(this.selectedImage.isPublic);
+
+    console.log(this.store.selectSnapshot(SelectImageState.getSelectedImage));
 
     this.formGroup = this.formBuilder
       .group({urlReference: this.urlReference, tempPublic: this.selectedImage.linkReference})
@@ -147,6 +170,11 @@ export class ChangeImageDetailsDialogComponent implements OnInit {
 
   }
 
+  generateChipColor(): ThemePalette {
+    const colors: Array<ThemePalette> = ['primary', 'accent'];
+    return colors[Math.round(Math.random())];
+  }
+
   addTags(item: ImageModel) {
     const ref = new MatDialogConfig();
     // ref.disableClose = true;
@@ -154,11 +182,14 @@ export class ChangeImageDetailsDialogComponent implements OnInit {
     this.dialog.open(AddTagsDialogComponent,
       {
         width: '500px',
-        height: '750px',
         data: item,
         panelClass: 'add-tag-dialog'
       }
-    );
+    ).afterClosed()
+      .subscribe(value => {
+        console.log("ADDED TAG");
+        /*this.store.dispatch(new SelectImage(item));*/
+    });
   }
 }
 
@@ -177,3 +208,4 @@ export function urlValidator(value: string): ValidatorFn {
         null;
   };
 }
+
