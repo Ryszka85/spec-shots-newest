@@ -19,6 +19,7 @@ import {ImageDownloadService} from "../../serviceV2/image-download.service";
 import {resolveProvidersRequiringFactory} from "@angular/compiler-cli/src/ngtsc/annotations/src/util";
 import {DeviceDetectorService} from "ngx-device-detector";
 import {Device, DeviceObserverService} from "../../serviceV2/device-observer.service";
+import {LoadingImageService} from "../loading-image.service";
 
 @Component({
   selector: 'app-download-cropper',
@@ -80,7 +81,8 @@ export class DownloadCropperComponent implements OnInit {
               private dialog: MatDialog,
               private service: ImageRequestService,
               private downloadService: ImageDownloadService,
-              public deviceObserverService: DeviceObserverService) {
+              public deviceObserverService: DeviceObserverService,
+              private loadingService: LoadingImageService) {
   }
 
   ngOnInit(): void {
@@ -234,6 +236,7 @@ export class DownloadCropperComponent implements OnInit {
     this.showAspectRatio = imageFileDetails.width / imageFileDetails.height;
     this.maintainAspectRatio = true;
     this.diffRatio.toFixed(2);
+    this.loadingService.isLoading$.next(false)
     /*this.maintainAspectRatio = false;
     this.$aspectRatioSubj.next(0);*/
   }

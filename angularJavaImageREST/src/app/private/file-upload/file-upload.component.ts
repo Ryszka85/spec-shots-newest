@@ -134,64 +134,76 @@ export class FileUploadComponent implements OnInit {
   }
 
   onSelect($event: NgxDropzoneChangeEvent): void {
-    this.isValidating = true;
-    const typeIndex = $event.addedFiles[0].name.lastIndexOf('.');
-    const type = $event.addedFiles[0].name.substr(typeIndex + 1);
-    console.log(type);
-    if ((type === 'jpg' || type === 'png' || type === 'jfif')) {
-      let request = new FormData();
-      request.append('file', $event.addedFiles[0]);
+    if (this.files.length === 0) {
+      this.isValidating = true;
+      const typeIndex = $event.addedFiles[0].name.lastIndexOf('.');
+      const type = $event.addedFiles[0].name.substr(typeIndex + 1);
+      console.log(type);
+      if ((type === 'jpg' || type === 'png' || type === 'jfif')) {
+        let request = new FormData();
+        request.append('file', $event.addedFiles[0]);
 
 
-      this.uploadService.validateImage($event.addedFiles[0])
-        .subscribe(value => {
-          const message = value.message;
-          console.log(value.status);
-          if (value.status === 200) {
-            this.originalFileDimensions.width = value.width;
-            this.originalFileDimensions.height = value.height;
-            this.files.push(...$event.addedFiles);
-            this.isValidToUpload = true;
-            this.isLinear = true;
-            this.uploadSuccess = true;
-            this.isValidating = false;
+        this.uploadService.validateImage($event.addedFiles[0])
+          .subscribe(value => {
+            const message = value.message;
+            console.log(value.status);
+            if (value.status === 200) {
+              this.originalFileDimensions.width = value.width;
+              this.originalFileDimensions.height = value.height;
+              this.files.push(...$event.addedFiles);
+              this.isValidToUpload = true;
+              this.isLinear = true;
+              this.uploadSuccess = true;
+              this.isValidating = false;
 
-            // getting uploaded file and passing it to crop image
-            const reader = new FileReader();
-            reader.onload = (e: any) => {
-              const base64Temp = e.target.result;
-              this.croppedGalleryImage = base64Temp;
-              this.croppedDownloadViewImage = base64Temp;
-              this.store.dispatch(new AsignBase64ToOriginalImage(base64Temp));
-              this.store.dispatch(new CropDownloadViewImage(this.croppedGalleryImage));
-              this.store.dispatch(new CropGalleryViewImage(this.croppedDownloadViewImage))
-                .subscribe(value => {
-                  // open imageCropper dialog(component) to let user decide
-                  // which part of th uploaded image should be displayed
-                  // this.dialog.open(ImageCropperComponent,{
-                  //   data: e.target.result,
-                  //   height: '1200px',
-                  //   width: '1400px'
-                  // })
-                });
-            };
-            reader.readAsDataURL($event.addedFiles[0]);
-          } else {
-            this.onRemove($event.addedFiles[0]);
-            this.isValidToUpload = false;
-            this.isValidating = false;
-            console.log(this.isValidToUpload)
-            this.snackBar.open(
-              message,
-              "Validation was unsuccessful",
-              {
-                duration: 3000,
-                horizontalPosition: "center",
-                verticalPosition: "top"
-              }
-            );
-          }
-        })
+              // getting uploaded file and passing it to crop image
+              const reader = new FileReader();
+              reader.onload = (e: any) => {
+                const base64Temp = e.target.result;
+                this.croppedGalleryImage = base64Temp;
+                this.croppedDownloadViewImage = base64Temp;
+                this.store.dispatch(new AsignBase64ToOriginalImage(base64Temp));
+                this.store.dispatch(new CropDownloadViewImage(this.croppedGalleryImage));
+                this.store.dispatch(new CropGalleryViewImage(this.croppedDownloadViewImage))
+                  .subscribe(value => {
+                    // open imageCropper dialog(component) to let user decide
+                    // which part of th uploaded image should be displayed
+                    // this.dialog.open(ImageCropperComponent,{
+                    //   data: e.target.result,
+                    //   height: '1200px',
+                    //   width: '1400px'
+                    // })
+                  });
+              };
+              reader.readAsDataURL($event.addedFiles[0]);
+            } else {
+              this.onRemove($event.addedFiles[0]);
+              this.isValidToUpload = false;
+              this.isValidating = false;
+              console.log(this.isValidToUpload)
+              this.snackBar.open(
+                message,
+                "",
+                {
+                  duration: 3000,
+                  horizontalPosition: "center",
+                  verticalPosition: "top"
+                }
+              );
+            }
+          });
+      }
+    } else {
+      this.snackBar.open(
+        'You can upload only one file at the time!\n I',
+        "Validation was unsuccessful",
+        {
+          duration: 3000,
+          horizontalPosition: "center",
+          verticalPosition: "top"
+        }
+      );
     }
 
   }

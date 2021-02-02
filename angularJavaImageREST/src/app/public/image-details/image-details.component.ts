@@ -23,8 +23,10 @@ import {ImageRequestService} from "../../serviceV2/image-request.service";
 import {DownloadCropperComponent} from "../download-cropper/download-cropper.component";
 import {SetResolutionDownloadDialogComponent} from "../set-resolution-download-dialog/set-resolution-download-dialog.component";
 import {DomSanitizer} from "@angular/platform-browser";
-import {MatListItem} from "@angular/material/list";
+import {MatList, MatListItem} from "@angular/material/list";
 import {ImageFileDetails} from "../../shared/domain/imageModel/image-file-details";
+import {LoadingImageService} from "../loading-image.service";
+import {Renderer} from "@angular/compiler-cli/ngcc/src/rendering/renderer";
 
 @Component({
   selector: 'app-image-details',
@@ -34,6 +36,10 @@ import {ImageFileDetails} from "../../shared/domain/imageModel/image-file-detail
 export class ImageDetailsComponent implements OnInit {
 
   @ViewChild('downloadItem') downloadItem: ElementRef;
+
+  details: DetailsViewModel[] = [];
+
+  selectedIndex: number;
 
   clickedDownloadResolution: ImageFileDetails = {width: 0, height: 0, downloadLink: '', size: 0, contentType: ''};
   toggle: boolean = false;
@@ -46,8 +52,11 @@ export class ImageDetailsComponent implements OnInit {
   formattedDetails = new Subject<string[]>();
   private imageId: string;
 
+  isDownloading$: Subject<boolean> = new Subject<boolean>();
 
-  testImg: any
+
+  testImg: any;
+  isLoading$: Subject<boolean> = new Subject<boolean>();
 
 
   constructor(private store: Store,
@@ -56,11 +65,17 @@ export class ImageDetailsComponent implements OnInit {
               private dialog: MatDialog,
               private service: ImageRequestService,
               private router: Router,
-              private sanitizer: DomSanitizer) {
+              private sanitizer: DomSanitizer,
+              public loadingService: LoadingImageService,
+              private elRef: ElementRef) {
     this.testImg = this.sanitizer.bypassSecurityTrustStyle(`url(${this.store.selectSnapshot(GetImageByIdState.getImageDetail).link})`);
   }
 
   ngOnInit(): void {
+
+    this.details = this.aha(this.store.selectSnapshot(GetImageByIdState.getImageDetail).imageDetails);
+    this.isDownloading$.next(false);
+
     this.route
       .paramMap
       .subscribe(param => {
@@ -70,7 +85,9 @@ export class ImageDetailsComponent implements OnInit {
       });
   }
 
+
   download(detail: any) {
+    this.details[this.selectedIndex].isLoading = true;
     console.log(detail);
     const imageId = this.store.selectSnapshot(GetImageByIdState.getImageDetail).imageId;
     console.log(detail);
@@ -81,6 +98,7 @@ export class ImageDetailsComponent implements OnInit {
         window.location.href = value1.downloadDetails.downloadLink;
         this.store
           .dispatch(new GetImageByImageId(this.imageId));
+        this.details[this.selectedIndex].isLoading = false;
       });
     // window.location.href = detail.downloadLink;
   }
@@ -132,6 +150,21 @@ export class ImageDetailsComponent implements OnInit {
     //   })
   }
 
+  aha(det: ImageFileDetails[]): DetailsViewModel[] {
+    this.details = [];
+    det.map(value => {
+      return {
+        width: value.width,
+        height: value.height,
+        size: value.size,
+        isLoading: false,
+        contentType: value.contentType,
+        downloadLink: value.downloadLink
+      };
+    }).forEach(value => this.details.push(value));
+    return this.details;
+  }
+
   getIndividualResolutionDownloadDialog(imageDetail: any) {
     console.log(imageDetail);
     this.dialog.open(SetResolutionDownloadDialogComponent, {
@@ -141,8 +174,21 @@ export class ImageDetailsComponent implements OnInit {
     });
   }
 
-  OpenDownloadBox(detail: ImageFileDetails) {
+  OpenDownloadBox(detail: DetailsViewModel, selectedIndex: number) {
     this.clickedDownloadResolution = this.clickedDownloadResolution.width === detail.width ? this.clickedDownloadResolution : detail;
     this.toggle = this.clickedDownloadResolution.width === detail.width;
+    this.selectedIndex = selectedIndex;
   }
+
+
 }
+
+export interface DetailsViewModel {
+  width: number;
+  height: number;
+  size: number;
+  contentType: string;
+  downloadLink: string;
+  isLoading: boolean;
+}
+

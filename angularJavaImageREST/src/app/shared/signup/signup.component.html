@@ -20,8 +20,8 @@
 </div>
 
 <div fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="start stretch"
-                    class="registration profile-icon"
-                    [formGroup]="formGroup">
+     class="registration profile-icon"
+     [formGroup]="formGroup">
   <div fxLayoutGap="10px" class="registration-container" fxLayout="row" fxLayoutAlign="space-between center">
     <mat-form-field appearance="outline">
       <mat-label>Firstname</mat-label>
@@ -38,106 +38,51 @@
     </mat-form-field>
   </div>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Email</mat-label>
-      <input name="email" type="email" ngModel [email]="true"
-             [style.fontSize.px]="15"
-             matInput [formControl]="emailFormField"
-             pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
-      <mat-error>Invalid email</mat-error>
-    </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input name="email" type="email" ngModel [email]="true"
+           [style.fontSize.px]="15"
+           matInput [formControl]="emailFormField"
+           pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
+    <mat-error>Invalid email</mat-error>
+  </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Password</mat-label>
-      <input (ngModelChange)="checkPasswords()"
-             [style.fontSize.px]="15" type="password"
-             matInput [formControl]="passwordFormField">
-      <mat-error>Invalid password</mat-error>
-    </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input (ngModelChange)="checkPasswords()"
+           [style.fontSize.px]="15" type="password"
+           matInput [formControl]="passwordFormField">
+    <mat-error>Invalid password</mat-error>
+  </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Confirm password</mat-label>
-      <input (ngModelChange)="checkPasswords()"
-             [style.fontSize.px]="15" type="password"
-             matInput [formControl]="confirmPwdFormField">
-      <mat-error>Invalid password</mat-error>
-    </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Confirm password</mat-label>
+    <input (ngModelChange)="checkPasswords()"
+           [style.fontSize.px]="15" type="password"
+           matInput [formControl]="confirmPwdFormField">
+    <mat-error>Invalid password</mat-error>
+  </mat-form-field>
 
-    <button [disabled]="!formGroup.valid || invalid" (click)="register()" mat-raised-button color="primary">Register</button>
+  <button message="Verifying registration please wait...."
+          [disabled]="!formGroup.valid || invalid"
+          (click)="register()"
+          mat-raised-button
+          color="primary">Register
+  </button>
 
-    <br>
-    <mat-error style="margin-top: 10px" *ngIf="$requestStatus | async as status">
-      {{status.message}}
-    </mat-error>
-
-
-
-
-  <!--  <div class="icon" >-->
-  <!--    <mat-icon style="font-size: 60px">account_box</mat-icon>-->
-  <!--    -->
-  <!--  </div>-->
-  <!--<mat-grid-list gutterSize="10px" cols="2" rowHeight="290px">
-    <mat-grid-tile>
-      <div  class="container2">
-        <mat-form-field [style.width.px]=300>
-          <mat-label>Firstname</mat-label>
-          <input [formControl]="firstNameFormField" [style.fontSize.px]="15"
-                 matInput>
-          <mat-error>Firstname is required</mat-error>
-        </mat-form-field>
-        <mat-form-field [style.width.px]=300>
-          <mat-label>Lastname</mat-label>
-          <input [style.fontSize.px]="15"
-                 matInput [formControl]="formGroup.get('lastName')">
-          <mat-error>Lastname is required</mat-error>
-        </mat-form-field>
-        <mat-form-field [style.width.px]=300>
-          <mat-label>Email</mat-label>
-          <input name="email" type="email" ngModel [email]="true"
-                 [style.fontSize.px]="15"
-                 matInput [formControl]="emailFormField"
-                 pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
-          <mat-error>Invalid email</mat-error>
-        </mat-form-field>
-        <mat-dialog-actions>
-          <button [disabled]="!formGroup.valid || invalid" (click)="register()" mat-raised-button color="primary">Register</button>
-          <button (click)="closeDialog()" mat-raised-button color="warn">Close</button>
-          <br>
-          <mat-error style="margin-top: 10px" *ngIf="$requestStatus | async as status">
-            {{status.message}}
-          </mat-error>
-        </mat-dialog-actions>
-
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <div class="container2">
-        <mat-form-field [style.width.px]=300>
-          <mat-label>Password</mat-label>
-          <input (ngModelChange)="checkPasswords()"
-                 [style.fontSize.px]="15" type="password"
-                 matInput [formControl]="passwordFormField">
-          <mat-error>Invalid password</mat-error>
-        </mat-form-field>
-        <mat-form-field [style.width.px]=300>
-          <mat-label>Confirm password</mat-label>
-          <input (ngModelChange)="checkPasswords()"
-                 [style.fontSize.px]="15" type="password"
-                 matInput [formControl]="confirmPwdFormField">
-          <mat-error>Invalid password</mat-error>
-        </mat-form-field>
-        <div class="container">
-
-        </div>
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>-->
+  <br>
+  <mat-error style="margin-top: 10px" *ngIf="$requestStatus | async as status">
+    {{status.message}}
+  </mat-error>
 </div>
+<mat-progress-bar *ngIf="isLoading$ | async" mode="indeterminate"></mat-progress-bar>
+<span *ngIf="isLoading$ | async">Processing request</span>
 <div class="footer" fxLayout="row" fxLayoutAlign="space-between center">
   <span style="color: white">Powered by SpecShots</span>
-    <span fxLayout="row" fxLayoutAlign="space-between center" class="white-color" style="font-family: 'agave Nerd Font', sans-serif">
+  <span fxLayout="row" fxLayoutAlign="space-between center" class="white-color"
+        style="font-family: 'agave Nerd Font', sans-serif">
       &#169;2020
     </span>
 </div>
+
 

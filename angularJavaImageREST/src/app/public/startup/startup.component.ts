@@ -6,6 +6,10 @@ import {ActivatedRoute} from "@angular/router";
 import {parseArguments} from "@angular/cli/models/parser";
 import {MatDialog} from "@angular/material/dialog";
 import {VerificationDialogComponent} from "../verification-dialog/verification-dialog.component";
+import {Subject} from "rxjs";
+import {Overlay, OverlayPositionBuilder} from "@angular/cdk/overlay";
+import {ComponentPortal} from "@angular/cdk/portal";
+import {LoadingComponent} from "../loading/loading.component";
 
 @Component({
   selector: 'app-startup',
@@ -22,6 +26,7 @@ export class StartupComponent implements OnInit {
   public desktop: string = Device.DESKTOP;
   public tablet: Device.TABLET;
   public mobile: Device.MOBILE;
+  isLoading$: Subject<boolean> = new Subject<boolean>();
   constructor(public media: MediaProcessorService,
               public deviceObserverService: DeviceObserverService,
               private route: ActivatedRoute,
@@ -29,7 +34,7 @@ export class StartupComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+    this.isLoading$.next(true);
     this.route.paramMap
       .subscribe(param => {
         console.log(param.get('test'));

@@ -71,6 +71,7 @@ export class VerifyTooltipDirective implements OnInit, AfterViewInit {
         console.log(this.password);
         const tooltipRef: ComponentRef<VerifyTooltipComponent>
           = this.overlayRef.attach(new ComponentPortal(VerifyTooltipComponent));
+
         this.overlayRef.backdropClick().subscribe(() => console.log("clicked"));
         console.log(this.overlayRef.backdropElement);
         tooltipRef.instance.text = this.text;

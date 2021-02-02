@@ -74,7 +74,7 @@
         <span *ngIf="downloadError">Error while downloading file.</span>
         <div class="" *ngIf="showSpinner">
           <div class="load-image loading" style="">
-            <mat-spinner class="foo" diameter='30'></mat-spinner>
+            <mat-progress-bar mode="indeterminate" class="foo"></mat-progress-bar>
             <span style="font-size: 16px; margin-top: 20px">
               <strong style="color: #A9A9A9">
                 {{'Processing request. This can take a while..'}}
