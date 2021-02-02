@@ -25,6 +25,17 @@
 }
 
 
+.button-position  {
+  display: flex;
+}
+
+@media screen and (max-width: 1198px) {
+  .button-position  {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 
 
 @media screen and (max-width: 1198px) {
@@ -45,6 +56,8 @@
     align-items: center;
     row-gap: 10px;
   }
+
+
 }
 @media screen and (max-width: 1198px) {
   .title {
@@ -75,12 +88,13 @@
 @media screen and (min-width: 1200px) {
   .mat-tab-group {
     padding: 80px;
+    padding-top: 20px;
   }
 }
 
 @media screen and (min-width: 600px) and (max-width: 1198px) {
   .mat-tab-group {
-    margin-top: 12%;
+    margin-top: 1%;
 
     overflow: hidden !important;
     padding: 30px;
