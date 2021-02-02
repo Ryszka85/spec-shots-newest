@@ -1,8 +1,7 @@
 <h2 id="header">Publish to <strong>SpecShots</strong></h2>
 
-<mat-vertical-stepper></mat-vertical-stepper>
 
-<mat-horizontal-stepper [linear]="isLinear" #stepper>
+<mat-vertical-stepper [linear]="isLinear" #stepper>
   <mat-step [completed]="uploadSuccess" [stepControl]="firstFormGroup">
     <ng-template matStepLabel>Select image</ng-template>
     <div id="access-type">
@@ -117,7 +116,7 @@
         <button mat-button matStepperNext>Next</button>
       </div>
   </mat-step>
-</mat-horizontal-stepper>
+</mat-vertical-stepper>
 <mat-divider></mat-divider>
 <div class="action" style="margin-top: 100px">
   <button id="close_btn" *ngIf="!(this.spinner | async)" mat-raised-button (click)="close()" style="margin-right: 5px"  mat-flat-button>Cancel</button>

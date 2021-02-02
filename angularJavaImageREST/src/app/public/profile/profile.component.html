@@ -67,8 +67,8 @@
 <!--          Edit profile-->
 <!--        </button>-->
 <!--      </div>-->
-      <div *ngIf="editableProfile | async" class="edit">
-        <button routerLink="/edit-profile" style="" mat-icon-button>
+      <div  *ngIf="editableProfile | async" class="edit">
+        <button class="button-position"  routerLink="/edit-profile" mat-icon-button>
           <mat-icon>edit</mat-icon>
           Edit profile
         </button>

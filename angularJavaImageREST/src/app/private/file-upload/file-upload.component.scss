@@ -79,6 +79,18 @@ ngx-dropzone {
   }
 }
 
+@media screen and (max-width: 767px) {
+  #access-type {
+    flex-direction: column;
+  }
+
+  .options {
+    flex-direction: column;
+    align-content: normal;
+    align-items: normal;
+  }
+}
+
 #url_input {
   width: 100%;
 }
