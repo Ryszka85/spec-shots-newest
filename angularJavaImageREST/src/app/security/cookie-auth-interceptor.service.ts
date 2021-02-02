@@ -12,6 +12,7 @@ import {Router} from "@angular/router";
 import {DeviceDetectorService} from "ngx-device-detector";
 import {MatDialog} from "@angular/material/dialog";
 import {RenewExpiredAccountTokenComponent} from "../public/renew-expired-account-token/renew-expired-account-token.component";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,8 @@ export class CookieAuthInterceptorService implements HttpInterceptor{
           } else if (error.url === 'http://localhost:8880/image-app/users/signUp') {
             console.log(error.error);
             return throwError(error);
+          } else if (error.url === environment.apiUrl + 'users/signUp') {
+            this.store.dispatch(new RequestMessageAction({message: error.error, status: error.status}));
           } else if (error.url === UserAuthenticationService.USER_LOGIN ||
             error.url === UserAuthenticationService.GOOGLE_LOGIN) {
             this.store.dispatch(new RequestMessageAction({message: error.error, status: error.status}));

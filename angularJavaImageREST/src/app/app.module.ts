@@ -124,6 +124,9 @@ import {A11yModule} from "@angular/cdk/a11y";
 import { VerifyTooltipDirective } from './public/verify-tooltip.directive';
 import { VerifyTooltipComponent } from './public/verify-tooltip/verify-tooltip.component';
 import { ImageErrorDirective } from './public/image-error.directive';
+import { LoadingDialogDirective } from './public/loading-dialog.directive';
+import { LoadingComponent } from './public/loading/loading.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 
@@ -171,7 +174,9 @@ import { ImageErrorDirective } from './public/image-error.directive';
     PasswordResetTokenWrapperComponent,
     VerifyTooltipDirective,
     VerifyTooltipComponent,
-    ImageErrorDirective
+    ImageErrorDirective,
+    LoadingDialogDirective,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -200,6 +205,7 @@ import { ImageErrorDirective } from './public/image-error.directive';
     MatSelectModule,
     MatNativeDateModule,
     MatDialogModule,
+    MatProgressBarModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ScrollingModule,

@@ -24,6 +24,9 @@ import {ImageModel} from "../domain/imageModel/image.model";
 import {SignupState} from "../app-state/states/signup.state";
 import {RequestStatusState} from "../app-state/states/request-status.state";
 import {RequestMessageAction} from "../app-state/actions/request-message.action";
+import {ConnectedPosition, ConnectionPositionPair, Overlay, OverlayPositionBuilder} from "@angular/cdk/overlay";
+import {ComponentPortal} from "@angular/cdk/portal";
+import {LoadingComponent} from "../../public/loading/loading.component";
 
 @Component({
   selector: 'app-signup',
@@ -41,6 +44,8 @@ export class SignupComponent implements OnInit {
   zipCodeAndCities$ = new Subject<ZipCodeAndCity[]>();
   zipAndCities: ZipCodeAndCity[];
   errorMsg: string = "Password required";
+
+  isLoading$: Subject<boolean> = new Subject<boolean>();
 
 
   @Select(AddressValidationState.countries)
@@ -92,7 +97,10 @@ export class SignupComponent implements OnInit {
               private store: Store,
               private formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<SignupComponent>,
-              private addressService: AddressValidationService) {
+              private addressService: AddressValidationService,
+              private overlay: Overlay,
+              private posBuilder: OverlayPositionBuilder) {
+
     this.formGroup = this.formBuilder.group({
       firstName: this.firstNameFormField,
       lastName: this.lastNameFormField,
@@ -108,10 +116,16 @@ export class SignupComponent implements OnInit {
 
     /*this.formGroup.get('zipcode').disable();*/
 
+    this.$requestStatus.subscribe(status => {
+      if (status.status === 500) {
+        this.isLoading$.next(false);
+      }
+    })
 
   }
 
   ngOnInit(): void {
+
 
     this.store.dispatch(new RequestMessageAction(null))
 
@@ -185,7 +199,6 @@ export class SignupComponent implements OnInit {
     );
 
 
-
     /*const registrationModel = new UserRegistrationModel(
       this.formGroup.controls['firstName'].value,
       this.formGroup.controls['lastName'].value,
@@ -196,9 +209,18 @@ export class SignupComponent implements OnInit {
       this.formGroup.controls['zipcode'].value,
       this.formGroup.controls['country'].value
     );*/
+    this.isLoading$.next(true);
     this.store
       .dispatch(new AuthenticationActions.SignUpAction(registrationModel))
-      .subscribe(value => this.authService.isLoggedIn())
+      .subscribe(value => {
+        this.isLoading$.next(false);
+        this.authService
+          .isLoggedIn()
+          .subscribe(
+            isLogged => {
+              console.log("Fertig");
+            });
+      });
 
     /*this.closeDialog();*/
   }

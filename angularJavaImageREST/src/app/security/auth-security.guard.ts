@@ -28,29 +28,27 @@ export class AuthSecurityGuard implements CanActivate {
     Promise<boolean | UrlTree> | boolean | UrlTree {
     // return this.$isLoggedIn;
 
-    let isLoggedIn: boolean =
+
+    const isLoggedIn: boolean =
       this.store.selectSnapshot(LoginStateModel.isLoggedIn);
+    // When user is not logged then try to log in
     if (!isLoggedIn) {
-      console.log("could not login");
+      console.log('could not login');
       this.store.dispatch(new AuthenticationActions.IsLoggedIn())
         .pipe(map(loggedUser => {
-          if (loggedUser) return loggedUser.Authentication.status;
+          if (loggedUser) {
+            return loggedUser.Authentication.status;
+          }
         })).subscribe(status => {
-          if (!status) this.store.dispatch(new Navigate(['login']))
+        if (!status) {
+          this.store.dispatch(new Navigate(['login']));
+        }
         this.$test.next(status);
-      })
-    } else return isLoggedIn;
+      });
+    } else {
+      return isLoggedIn;
+    }
     return this.$test;
-    // this.store.dispatch(new AuthenticationActions.IsLoggedIn())
-    //   .pipe(
-    //     map(value => {
-    //       return !!value.Authentication.status;
-    //     })
-    //   ).subscribe(value => this.$diffRatio.next(value),
-    //   error => {
-    //     console.log(error)
-    //   });
-    // return this.$diffRatio;
   }
 
 }

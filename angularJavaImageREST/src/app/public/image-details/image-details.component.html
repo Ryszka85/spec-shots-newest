@@ -3,9 +3,10 @@
 <div *ngIf="$selectedImage | async as data" fxLayoutAlign.xs="center center"
      fxLayout.lg="row" fxLayout.xs="column" fxLayout.sm="column" class="container" fxLayoutGap="30px"
      fxLayoutAlign="center center" fxLayoutGap.lg="10px"
+     [ngStyle.lt-xl]="{'margin-top': '90px', 'margin-left': '22px','width': '97%'}"
      [ngStyle.md]="{'padding-top': '30px', 'margin-left': '22px', 'height': '820px', 'width': '97%'}"
-     [ngStyle.sm]="{'padding-top': '30px', 'margin-left': '3px', 'height': '1200px', 'width': '97%'}"
-     [ngStyle.xs]="{'padding-top': '5px', 'margin-left': '5px', 'height': '1200px', 'width': '100%'}"
+     [ngStyle.sm]="{'padding-top': '20px', 'margin-left': '3px', 'height': '1200px', 'width': '97%'}"
+     [ngStyle.xs]="{'margin-top': '5px', 'margin-left': '5px', 'height': '1200px', 'width': '100%'}"
      [ngStyle.gt-lg]="{'padding-top': '40px', 'margin-left': '5px', 'height': '900px', 'width': '97%'}">
   <mat-card class="example-card shadow color-and-radius">
     <mat-card-header>
@@ -85,32 +86,43 @@
     <mat-card-actions>
       <mat-list #option>
         <mat-list-item #downloadItem
-                       (click)="OpenDownloadBox(detail)"
+                       (click)="OpenDownloadBox(detail, i);"
                        class="hoverable border-radius"
-                       *ngFor="let detail of data.imageDetails; index as i"
-                        [class.clicked-details]="detail.width === clickedDownloadResolution.width">
+                       *ngFor="let detail of details; index as i"
+                       [class.clicked-details]="detail.width === clickedDownloadResolution.width">
           <mat-icon mat-list-icon>cloud_download</mat-icon>
           <div mat-line>
-          <strong>{{appendFileSizeName(i)}}</strong> {{detail.width + " x " + detail.height}}
+            <strong>{{appendFileSizeName(i)}}</strong> {{detail.width + " x " + detail.height}}
           </div>
           <div mat-line>
             <span>Size : {{(detail.size / 1024).toFixed(1) + " kB"}}</span>
           </div>
+
+          <mat-progress-bar *ngIf="detail.isLoading" mat-line mode="indeterminate"></mat-progress-bar>
         </mat-list-item>
 
         <mat-divider></mat-divider>
 
         <mat-list-item *ngIf="toggle">
           <button matLine
-                  (click)="download(clickedDownloadResolution)" style="font-size: 23px" color="primary" mat-line mat-raised-button>
+                  (click)="download(clickedDownloadResolution)" style="font-size: 23px" color="primary" mat-line
+                  mat-raised-button>
             Download
           </button>
         </mat-list-item>
+        <!--<mat-list-item *ngIf="toggle">
+
+        </mat-list-item>-->
 
         <mat-divider></mat-divider>
         <div mat-subheader>Individual download actions</div>
 
-        <mat-list-item class="hoverable" (click)="cropImageForDownload(data.imageDetails[0])">
+        <mat-list-item appLoadingDialog
+                       [isLoading]="loadingService.isLoading$"
+                       message="Preparing cropper."
+                       message2="Please wait...."
+                       class="hoverable"
+                       (click)="cropImageForDownload(data.imageDetails[0]); loadingService.isLoading$.next(true)">
           <mat-icon mat-list-icon>photo_size_select_large</mat-icon>
           <div mat-line>
             Crop image
@@ -260,7 +272,7 @@
   <div class="header">
     <h2>Related images : </h2>
   </div>
-  <app-image-content [isProfile]="false"
+  <app-image-content class="img-content" [isProfile]="false"
                      [data]="$relatedImages"></app-image-content>
 </div>
 
