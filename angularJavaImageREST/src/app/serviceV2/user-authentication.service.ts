@@ -68,6 +68,7 @@ export class UserAuthenticationService {
 
 
   public createNewUser(userSignupModel: UserRegistrationModel): Observable<LoggedInUserModel> {
+    console.log(userSignupModel);
     return this.http
       .post<LoggedInUserModel>(this.USER_SIGNUP, userSignupModel, {observe: "body" , responseType: "json"});
   }

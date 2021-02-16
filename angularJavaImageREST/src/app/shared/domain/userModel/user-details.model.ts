@@ -15,17 +15,13 @@ export interface BaseUserDetails {
 }
 
 export class UserRegistrationModel implements BaseUserDetails{
-  address?: UserAddressModel;
   email: string;
   firstName: string;
   lastName: string;
   password: string;
 
   constructor(firstName: string, lastName: string,
-              email: string, password: string,
-              street: string, region: string,
-              zipcode: string, country:string) {
-    this.address = new UserAddressModel(street, region, zipcode, country);
+              email: string, password: string) {
     this.email = email;
     this.firstName = firstName;
     this.lastName = lastName;

@@ -8,4 +8,5 @@ export class UploadImageModel {
   urlReference?: string;
   orgFile?: File;
   progress?: number;
+  tags?: Array<string>;
 }

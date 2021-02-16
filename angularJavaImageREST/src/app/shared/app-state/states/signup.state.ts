@@ -46,8 +46,7 @@ export class SignupState {
             firstName: action.userRegistration.firstName,
             lastName: action.userRegistration.lastName,
             email: action.userRegistration.email,
-            password: action.userRegistration.password,
-            address: action.userRegistration.address
+            password: action.userRegistration.password
           })
 
           return response;

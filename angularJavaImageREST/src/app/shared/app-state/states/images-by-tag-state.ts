@@ -65,6 +65,7 @@ export class ImagesByTagState {
         page)
       .pipe(
         map(res => {
+          console.log(res);
           ctx.patchState(
             {
               ...state,

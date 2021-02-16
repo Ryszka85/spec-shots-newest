@@ -36,7 +36,6 @@ export class TagViewComponent implements OnInit {
     this.store.dispatch(new ImagesByTagsAction(
       new ImagesByTagNameWithFilterOpt(null, tag.tag)))
       .subscribe(value => {
-        console.log(value);
         this.store.dispatch(new Navigate(['/image-by-tags']))
       });
   }

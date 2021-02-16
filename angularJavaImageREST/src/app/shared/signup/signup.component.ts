@@ -194,8 +194,7 @@ export class SignupComponent implements OnInit {
       this.formGroup.controls['firstName'].value,
       this.formGroup.controls['lastName'].value,
       this.formGroup.controls['email'].value,
-      this.formGroup.controls['password'].value,
-      null, null, null, null
+      this.formGroup.controls['password'].value
     );
 
 

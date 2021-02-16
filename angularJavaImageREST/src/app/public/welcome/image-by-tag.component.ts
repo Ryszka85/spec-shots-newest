@@ -17,7 +17,10 @@ import {DeviceDetectorService} from "ngx-device-detector";
 export class ImageByTagComponent implements OnInit {
   foo: string = "IHUTiYJ6Wdk.jpg";
   @Select(ImagesByTagState.getData) $imagesByTags: Observable<ImageModel[]>;
-  constructor(private store: Store, private service: ImageRequestService) { }
+  constructor(private store: Store, private service: ImageRequestService) {
+
+    this.$imagesByTags.subscribe(value => console.log(value));
+  }
 
   ngOnInit(): void {
 

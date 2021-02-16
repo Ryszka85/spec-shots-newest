@@ -4,7 +4,7 @@ import {Select, Store} from "@ngxs/store";
 import {
   AsignBase64ToOriginalImage,
   CropDownloadViewImage,
-  CropGalleryViewImage,
+  CropGalleryViewImage, ImageRecognitionTags,
   UploadImage
 } from "../../shared/app-state/actions/image.action";
 import {LoginStateModel} from "../../shared/app-state/states/login.state.model";
@@ -21,7 +21,7 @@ import {AuthenticationActions} from "../../shared/app-state/actions/authenticati
 import LoggedUserDetails = AuthenticationActions.LoggedUserDetails;
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatRadioChange} from "@angular/material/radio";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {UploadImageModel} from "../../shared/domain/imageModel/upload-image.model";
 import {Dimensions, ImageCroppedEvent} from "ngx-image-cropper";
@@ -34,6 +34,8 @@ import {MediaProcessorService} from "../../serviceV2/media-processor.service";
 import {Device, DeviceObserverService} from "../../serviceV2/device-observer.service";
 import {MediaObserver} from "@angular/flex-layout";
 import {PassDataToDialogAction} from "../../shared/app-state/actions/pass-data-to-dialog.action";
+import {ImageRecognitionTagsState} from "../../shared/app-state/states/Image-Recognition-Tags.state";
+import {MatChipList} from "@angular/material/chips";
 
 
 @Component({
@@ -63,6 +65,7 @@ export class FileUploadComponent implements OnInit {
   @Select(CropImageState.getData) $imageData;
   @Select(CropImageState.getCroppedDownloadImage) $croppedDownloadViewImage;
   @Select(CropImageState.getGalleryFile) $galleryFile;
+  @Select(ImageRecognitionTagsState.getRecognizedTags) tags$;
 
 
   isValidToUpload: boolean = false;
@@ -144,7 +147,8 @@ export class FileUploadComponent implements OnInit {
         request.append('file', $event.addedFiles[0]);
 
 
-        this.uploadService.validateImage($event.addedFiles[0])
+        this.uploadService
+          .validateImage($event.addedFiles[0])
           .subscribe(value => {
             const message = value.message;
             console.log(value.status);
@@ -152,10 +156,14 @@ export class FileUploadComponent implements OnInit {
               this.originalFileDimensions.width = value.width;
               this.originalFileDimensions.height = value.height;
               this.files.push(...$event.addedFiles);
+
               this.isValidToUpload = true;
               this.isLinear = true;
               this.uploadSuccess = true;
               this.isValidating = false;
+
+
+              console.log(value);
 
               // getting uploaded file and passing it to crop image
               const reader = new FileReader();
@@ -338,7 +346,8 @@ export class FileUploadComponent implements OnInit {
         this.imageUrlReference.value : null,
       file: request,
       galleryFile: imageFile,
-      downloadFile: downloadImageFile
+      downloadFile: downloadImageFile,
+      tags: this.store.selectSnapshot(ImageRecognitionTagsState.getRecognizedTags)
     }
 
     // sending request
@@ -419,4 +428,16 @@ export class FileUploadComponent implements OnInit {
   fileChangeEvent($event: Event) {
     this.imageChangedEvent = $event;
   }
+
+  remove(tag: string) {
+    const modifiedTagList = this.store
+      .selectSnapshot(ImageRecognitionTagsState.getRecognizedTags)
+      .filter(tagName => tagName !== tag);
+    this.store.dispatch(new ImageRecognitionTags(modifiedTagList));
+  }
+}
+
+
+export interface Req {
+  img: FormData
 }

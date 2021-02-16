@@ -45,7 +45,7 @@ export class CropImageState {
   @Action(AsignBase64ToOriginalImage)
   cropTempImage(ctx: StateContext<CropImageModel>, action: CropGalleryViewImage) {
     let state = ctx.getState();
-    console.log(state);
+
     ctx.patchState({
       ...state,
       data: action.data
@@ -56,7 +56,7 @@ export class CropImageState {
   @Action(CropGalleryViewImage)
   cropImage(ctx: StateContext<CropImageModel>, action: CropGalleryViewImage) {
     let state = ctx.getState();
-    console.log(state);
+
     ctx.patchState({
       ...state,
       galleryFile: action.data
@@ -66,7 +66,6 @@ export class CropImageState {
   @Action(CropDownloadViewImage)
   cropDownloadViewImage(ctx: StateContext<CropImageModel>, action: CropDownloadViewImage) {
     let state = ctx.getState();
-    console.log(state);
     ctx.patchState({
       ...state,
       downloadViewFile: action.data

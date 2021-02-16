@@ -89,6 +89,7 @@ export class ImageRequestService {
       req, {observe: 'response'})
       .pipe(
         map(resp => {
+          console.log(resp.body);
           console.log(resp.status);
           return resp.body;
         }),

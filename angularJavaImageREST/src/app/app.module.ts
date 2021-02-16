@@ -127,6 +127,7 @@ import { ImageErrorDirective } from './public/image-error.directive';
 import { LoadingDialogDirective } from './public/loading-dialog.directive';
 import { LoadingComponent } from './public/loading/loading.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {ImageRecognitionTagsState} from "./shared/app-state/states/Image-Recognition-Tags.state";
 
 
 
@@ -234,6 +235,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
       UserDetailsState,
       DownloadDetailsState,
       SearchByUsersState,
+      ImageRecognitionTagsState,
       ImagesByUserIdState,
       UploadImageState,
       SelectImageState,

@@ -96,3 +96,9 @@ export class AssignCropperPosToImageUpload {
 }
 
 
+export class ImageRecognitionTags {
+  static readonly type = '[ImageAPI] Set recognized image tags';
+  constructor(public imageTags: Array<string>) { }
+}
+
+
