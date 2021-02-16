@@ -216,8 +216,14 @@ export class DownloadCropperComponent implements OnInit {
     croppedDownloadRequest.selectedWidth = Number.parseFloat(detail.split(' x ')[0]);
     croppedDownloadRequest.selectedHeight = Number.parseFloat(detail.split(' x ')[1])
     console.log(croppedDownloadRequest.selectedWidth);
+    console.log(croppedDownloadRequest);
     this.downloadService
-      .downloadIndividualImage(croppedDownloadRequest, true)
+      .downloadIndividualImage({
+        imageId: croppedDownloadRequest.imageId,
+        offsetX: croppedDownloadRequest.offsetX, offsetY: croppedDownloadRequest.offsetY,
+        subImageWidth: croppedDownloadRequest.subImageWidth, subImageHeight: croppedDownloadRequest.subImageHeight,
+        selectedWidth: croppedDownloadRequest.selectedWidth, selectedHeight: croppedDownloadRequest.selectedHeight
+      }, true)
       .subscribe(res => {
         this.showSpinner = false;
         this.downloadError = false;

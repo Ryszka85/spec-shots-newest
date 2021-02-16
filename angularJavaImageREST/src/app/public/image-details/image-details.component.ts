@@ -92,7 +92,10 @@ export class ImageDetailsComponent implements OnInit {
     const imageId = this.store.selectSnapshot(GetImageByIdState.getImageDetail).imageId;
     console.log(detail);
     this.store
-      .dispatch(new GetDownloadDetails(imageId, detail))
+      .dispatch(new GetDownloadDetails(imageId, {
+        downloadLink: detail.downloadLink,
+        contentType: detail.contentType, height: detail.height, size: detail.size, width: detail.width
+      }))
       .subscribe(value1 => {
         console.log(value1.downloadDetails);
         window.location.href = value1.downloadDetails.downloadLink;

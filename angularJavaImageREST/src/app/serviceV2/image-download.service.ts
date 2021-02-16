@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
 import {DownloadImageByIndividualResolution, ImageModel} from "../shared/domain/imageModel/image.model";
 import {finalize, map, tap} from "rxjs/operators";
 import {ImageFileDetails, ImageDownloadResponse} from "../shared/domain/imageModel/image-file-details";
-import {CroppedDownloadRequest} from "../shared/domain/http/req/CroppedDownloadRequest";
+import {CroppedDownloadReq, CroppedDownloadRequest} from "../shared/domain/http/req/CroppedDownloadRequest";
 import {conditionallyCreateMapObjectLiteral} from "@angular/compiler/src/render3/view/util";
 import {BlobToBase64Pipe} from "../shared/util/blob-to-base64-pipe";
 import {GetImageByIdState} from "../shared/app-state/states/get-image-by-id.state";
@@ -32,7 +32,7 @@ export class ImageDownloadService {
   }
 
 
-  public downloadIndividualImage(croppedDetails: CroppedDownloadRequest |
+  public downloadIndividualImage(croppedDetails: CroppedDownloadReq |
     DownloadImageByIndividualResolution, wasCropped: boolean): Observable<string> {
     const url = wasCropped ? ImageDownloadService.DOWNLOAD_BY_CROPPED_RESOLUTION_URL :
       ImageDownloadService.DOWNLOAD_BY_INDIVIDUAL_RESOLUTION_URL;
