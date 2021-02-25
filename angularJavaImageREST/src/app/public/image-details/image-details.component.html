@@ -95,7 +95,7 @@
             <strong>{{appendFileSizeName(i)}}</strong> {{detail.width + " x " + detail.height}}
           </div>
           <div mat-line>
-            <span>Size : {{(detail.size / 1024).toFixed(1) + " kB"}}</span>
+            <span>Size : {{(detail.size / 1000).toFixed(1) + " kB"}}</span>
           </div>
 
           <mat-progress-bar *ngIf="detail.isLoading" mat-line mode="indeterminate"></mat-progress-bar>

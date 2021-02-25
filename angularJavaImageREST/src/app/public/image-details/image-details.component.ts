@@ -164,7 +164,12 @@ export class ImageDetailsComponent implements OnInit {
         contentType: value.contentType,
         downloadLink: value.downloadLink
       };
-    }).forEach(value => this.details.push(value));
+    })
+      .forEach(value => {
+        this.details.push(value);
+      this.details.sort((a, b) =>
+          a.width > a.height ? b.width - a.width : b.height - a.height)
+      });
     return this.details;
   }
 
