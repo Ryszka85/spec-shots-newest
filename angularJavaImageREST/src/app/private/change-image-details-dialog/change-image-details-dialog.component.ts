@@ -20,6 +20,8 @@ import {LoginStateModel} from "../../shared/app-state/states/login.state.model";
 import {ChangeImageDetailsModel} from "../../shared/image-content/image-content.component";
 import {ThemePalette} from "@angular/material/core";
 import {MediaObserver} from "@angular/flex-layout";
+import {TagModel} from "../../shared/domain/tagModel/tag-model";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-change-image-details-dialog',
@@ -38,10 +40,18 @@ export class ChangeImageDetailsDialogComponent implements OnInit {
   public finishedDeleting = null;
   public pressedDelete = false;
 
+  selectedTags: any[] = [];
+
+  public clickedDeleteTag = false;
+
   isMobile = '';
+
+  deleteTagProgress = 0;
 
   @Select(LoginStateModel.isLoggedIn) $isLoggedIn;
   public isMobileDevice: boolean;
+
+  isDeleting = false;
 
 
   constructor(private store: Store,
@@ -54,7 +64,8 @@ export class ChangeImageDetailsDialogComponent implements OnInit {
               private deleteImageService: DeleteImageService,
               private router: Router,
               private dialog: MatDialog,
-              private media: MediaObserver) {
+              private media: MediaObserver,
+              private imageUpdateService: ImageRequestService) {
   }
 
   ngOnInit(): void {
@@ -97,7 +108,9 @@ export class ChangeImageDetailsDialogComponent implements OnInit {
   public changeStuff(mrChange: MatRadioChange): void {
     if (this.selectedImage.isPublic !== this.tempPublic) {
       this.$detailsChanged.next(true);
-    } else { this.$detailsChanged.next(false); }
+    } else {
+      this.$detailsChanged.next(false);
+    }
 
   }
 
@@ -130,43 +143,48 @@ export class ChangeImageDetailsDialogComponent implements OnInit {
     console.log(this.selectedImage)
   }
 
-  public deleteImage(img: ImageModel): void {
-    console.log(img);
-    this.pressedDelete = true;
-    this.finishedDeleting = false;
-    this.store
-      .dispatch(new DeleteImage(img))
-      .subscribe(value => console.log(value),
-        error => {
-          this.snackBar.open('Deleting image was not successful',
-            null,
-            {
-              duration: 3000,
-              horizontalPosition: 'center',
-              verticalPosition: "top"
-            });
-        },
-        () => {
-          this.snackBar.open("Deleting image was successful",
-            null,
-            {
-              duration: 3000,
-              horizontalPosition: "center",
-              verticalPosition: "top"
-            });
-          this.dialogRef.close();
-          this.store.dispatch(new UserDetailsActions
-            .GetUserDetails(this.store
-              .selectSnapshot(SelectImageState.getSelectedImage).user.userId));
-          /*this.store.dispatch(new Navigate(
-            [
-              'profile',
+  public deleteImage(img: ImageModel, $event: number): void {
+    this.deleteTagProgress = $event / 10;
+    if (this.deleteTagProgress > 100) {
+      this.isDeleting = true;
+      console.log(img);
+      this.pressedDelete = true;
+      this.finishedDeleting = false;
+      this.store
+        .dispatch(new DeleteImage(img))
+        .subscribe(value => console.log(value),
+          error => {
+            this.snackBar.open('Deleting image was not successful',
+              null,
               {
-                userId: this.store.selectSnapshot(SelectImageState.getSelectedImage).user.userId
-              }
-            ]
-          ));*/
-        });
+                duration: 3000,
+                horizontalPosition: 'center',
+                verticalPosition: "top"
+              });
+          },
+          () => {
+            this.snackBar.open("Deleting image was successful",
+              null,
+              {
+                duration: 3000,
+                horizontalPosition: "center",
+                verticalPosition: "top"
+              });
+            this.dialogRef.close();
+            this.store.dispatch(new UserDetailsActions
+              .GetUserDetails(this.store
+                .selectSnapshot(SelectImageState.getSelectedImage).user.userId));
+            /*this.store.dispatch(new Navigate(
+              [
+                'profile',
+                {
+                  userId: this.store.selectSnapshot(SelectImageState.getSelectedImage).user.userId
+                }
+              ]
+            ));*/
+            this.deleteTagProgress = 0;
+          });
+    }
 
   }
 
@@ -189,7 +207,77 @@ export class ChangeImageDetailsDialogComponent implements OnInit {
       .subscribe(value => {
         console.log("ADDED TAG");
         /*this.store.dispatch(new SelectImage(item));*/
-    });
+      });
+  }
+
+  deleteTag($event: number) {
+    this.deleteTagProgress = $event / 10;
+    if (this.deleteTagProgress > 100) {
+      this.isDeleting = true;
+      const selectedImage: string = this.store.selectSnapshot(SelectImageState.getSelectedImageId);
+      const userId =
+        this.store.selectSnapshot(LoginStateModel.loggedUserId);
+
+      this.imageUpdateService.deleteTagsFromImage({
+        userId: userId,
+        imageId: selectedImage,
+        tags: this.selectedTags.map(tagModel => {
+          return {
+            tagId: tagModel.tagId,
+            tag: tagModel.tag
+          }
+        })
+      }).subscribe(response => {
+        this.isDeleting = false;
+        this.selectedTags = [];
+        this.clickedDeleteTag = false;
+        this.store
+          .dispatch(new UserDetailsActions.GetUserDetails(userId))
+          .pipe(
+            map(value1 =>   value1.UserDetails.images))
+          .subscribe(value2 => {
+            this.store.dispatch(
+              new SelectImage(
+                value2.filter(image => image.imageId === selectedImage)[0]))
+              .subscribe();
+            this.snackBar.open("Deleting tags was successful",
+              null,
+              {
+                duration: 3000,
+                horizontalPosition: "center",
+                verticalPosition: "top"
+              });
+          });
+        console.log(response);
+      });
+      console.log("Delete BITCH!!!!");
+      this.deleteTagProgress = 0;
+    }
+  }
+
+  setProgressBar($event: boolean) {
+    console.log($event);
+    this.deleteTagProgress = 0;
+    this.clickedDeleteTag = $event;
+  }
+
+  selectTag(tag: any, element: HTMLElement) {
+    if (this.selectedTags.findIndex(tagModel => tagModel.tagId === tag.tagId) === -1) {
+      this.selectedTags.push(tag);
+      element.style.backgroundColor = '#F65767';
+      element.style.color = 'white';
+    } else {
+      this.selectedTags = this.selectedTags
+        .filter(tagModel => tag.tagId !== tagModel.tagId);
+      element.style.backgroundColor = '#E0E0E0';
+      element.style.color = 'black';
+    }
+
+  }
+
+  test() {
+    console.log('clicked');
+    this.deleteTagProgress = 0;
   }
 }
 
@@ -204,7 +292,7 @@ export function urlValidator(value: string): ValidatorFn {
     console.log(control.value);
     return control.value.length === 0 ? null :
       forbidden || control.value > 0 ?
-      {forbiddenValue: {value: control.value}} :
+        {forbiddenValue: {value: control.value}} :
         null;
   };
 }

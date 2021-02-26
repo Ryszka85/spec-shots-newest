@@ -49,6 +49,10 @@ export class CookieAuthInterceptorService implements HttpInterceptor{
           } else if (error.url === 'http://localhost:8880/image-app/users/signUp') {
             console.log(error.error);
             return throwError(error);
+          } else if (error.url === environment.apiUrl + "image-app/images/insert/") {
+            this.store.dispatch(new RequestMessageAction({message: 'Error while uploading file..!', status: error.status}));
+            return throwError(error.error);
+
           } else if (error.url === environment.apiUrl + 'users/signUp') {
             this.store.dispatch(new RequestMessageAction({message: error.error, status: error.status}));
           } else if (error.url === UserAuthenticationService.USER_LOGIN ||

@@ -52,14 +52,14 @@
         </div>
 
         <div class="img-settings">
-          <a *ngIf="editable && isProfile" mat-icon-button>
+          <a *ngIf="logged && isProfile" mat-icon-button>
             <mat-icon class="setting-icon icon white-icon mobile-icon"
                       matTooltip="Open settings menu"
                       (click)="changeImageDetails(imgItem)"
                       *ngIf="imgItem.isPublic">settings
             </mat-icon>
           </a>
-          <a *ngIf="isProfile && !($isLoggedIn | async)" mat-icon-button>
+          <a *ngIf="isProfile && !logged" mat-icon-button>
             <mat-icon
               class="setting-icon icon white-icon mobile-icon"
               matTooltip="Open settings menu"

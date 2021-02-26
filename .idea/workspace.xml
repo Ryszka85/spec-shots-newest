@@ -24,8 +24,17 @@
   <component name="ChangeListManager">
     <list default="true" id="e6b407d3-ebd1-4611-ab70-a736be8ce20a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/public/image-details/image-details.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/public/image-details/image-details.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/public/image-details/image-details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/public/image-details/image-details.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/private/change-image-details-dialog/change-image-details-dialog.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/private/change-image-details-dialog/change-image-details-dialog.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/private/change-image-details-dialog/change-image-details-dialog.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/private/change-image-details-dialog/change-image-details-dialog.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/private/change-image-details-dialog/change-image-details-dialog.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/private/change-image-details-dialog/change-image-details-dialog.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/public/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/public/profile/profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/public/welcome/image-by-tag.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/public/welcome/image-by-tag.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/security/cookie-auth-interceptor.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/security/cookie-auth-interceptor.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/serviceV2/image-request.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/serviceV2/image-request.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/shared/image-content/image-content.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/shared/image-content/image-content.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/shared/image-content/image-content.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/shared/image-content/image-content.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/environments/environment.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +51,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="jaeger_ryszka_branch" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -75,12 +84,13 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="ts.external.directory.path" value="C:\Users\planb\angular-programing\SpecShots-angular\angularJavaImageREST\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\planb\angular-programing\SpecShots-angular\angularJavaImageREST\src\app\public" />
       <recent name="C:\Users\Ryder\WebstormProjects\spec-shots-newest\angularJavaImageREST\src\assets" />
       <recent name="C:\Users\Ryder\WebstormProjects\spec-shots-newest\angularJavaImageREST" />
     </key>
@@ -121,7 +131,8 @@
       <workItem from="1613757992234" duration="1208000" />
       <workItem from="1614097602623" duration="1257000" />
       <workItem from="1614179092158" duration="48000" />
-      <workItem from="1614198506347" duration="2502000" />
+      <workItem from="1614198506347" duration="9891000" />
+      <workItem from="1614256478619" duration="20237000" />
     </task>
     <task id="LOCAL-00001" summary="Search tool bar layout adjustments + Responsive startup page banner text">
       <created>1608405358277</created>
@@ -207,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613447965065</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="fixed fileSizeNames in downloadImageCardDetails">
+      <created>1614215709804</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1614215709804</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,6 +256,7 @@
     <MESSAGE value="Fixed search-toolbar responsiveness and adjusted profile text" />
     <MESSAGE value="Added imageRecognition feature which generates tags.&#10;User can choose tags and upload file." />
     <MESSAGE value="fixed strange bug in cropAndDownload-component" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed strange bug in cropAndDownload-component" />
+    <MESSAGE value="fixed fileSizeNames in downloadImageCardDetails" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed fileSizeNames in downloadImageCardDetails" />
   </component>
 </project>

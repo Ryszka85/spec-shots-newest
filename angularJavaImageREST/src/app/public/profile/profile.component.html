@@ -88,7 +88,7 @@
 <!--                       [data]="$imgs"></app-image-content>-->
     <ng-template matTabContent>
       <app-image-content class="gallery-content" [isProfile]="true"
-                         [data]="$userImages"></app-image-content>
+                         [data]="$userImages" [isLoggedIn]="editableProfile | async"></app-image-content>
     </ng-template>
   </mat-tab>
   <mat-tab label="Likes">
@@ -97,7 +97,7 @@
       Likes
     </ng-template>
     <ng-template matTabContent>
-      <app-image-content class="gallery-content" [isProfile]="false"
+      <app-image-content class="gallery-content" [isProfile]="true" [isLoggedIn]="editableProfile | async"
                          [data]="$userLikes"></app-image-content>
     </ng-template>
     <div>

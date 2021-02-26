@@ -37,6 +37,7 @@ export class ImageContentComponent implements OnInit {
   @Input('data') models: Observable<ImageModel[]>;
   @Input('dataArray') models2: ImageModel[];
   @Input('isProfile') isProfile: boolean;
+  @Input('isLoggedIn') logged: boolean;
 
 
   @Input() cols = 3;
@@ -207,7 +208,7 @@ export class ImageContentComponent implements OnInit {
   }
 
   changeImageDetails(item: ImageModel): void {
-    if (this.isProfile && this.editable) {
+    if (this.isProfile && this.editable && this.logged) {
       const param: ChangeImageDetailsModel = {model: item, isOwner: true};
       this.store.dispatch(new SelectImage(item));
       this.dialog.open(ChangeImageDetailsDialogComponent,
