@@ -30,8 +30,8 @@
 
   <div *ngIf="($selectedImage | async) as img" class="image-details">
     <img *ngIf="!isMobileDevice"
-      class="img-content"
-      [src]="img.link" alt="">
+         class="img-content"
+         [src]="img.link" alt="">
 
     <div class="image-detail">
       <a style="color: black" disabled disableRipple mat-icon-button>
@@ -77,17 +77,45 @@
     <mat-error *ngIf="urlReference.errors">Entered URL is invalid</mat-error>
   </mat-form-field>
 
-  <button style="margin-right: 5px" color="primary" *ngIf="($detailsChanged | async) && data.isOwner" mat-raised-button
-          (click)="saveChanges()">Save changes
-  </button>
-  <button *ngIf="data.isOwner" id="del_btn" mat-raised-button (click)="deleteImage(img)">Delete image</button>
-  <button *ngIf="data.isOwner" (click)="addTags(img)" class="add-tags" mat-raised-button>Add Tags</button>
+  <div fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutGap="10px">
+    <button style="margin-right: 5px" color="primary" *ngIf="($detailsChanged | async) && data.isOwner"
+            mat-raised-button
+            (click)="saveChanges()">Save changes
+    </button>
+    <!--<button *ngIf="data.isOwner" id="del_btn" mat-raised-button
+            (click)="deleteImage(img)">Delete image</button>-->
+    <button *ngIf="data.isOwner" id="del_btn" mat-raised-button
+            matTooltipClass="ttip"
+            matTooltip="In order to delete one of your Images, you have to hold the delete button till the progressbar is full."
+            matTooltipPosition="below"
+            appHoldable
+            (holdTime)="deleteImage(img, $event)"
+            (showProgessBar)="setProgressBar($event)">Delete image</button>
+
+    <button *ngIf="data.isOwner" (click)="addTags(img)" class="add-tags" mat-raised-button>Add Tags</button>
+    <button mat-raised-button
+            color="warn"
+            *ngIf="selectedTags.length > 0 && data.isOwner && !isDeleting"
+            matTooltipClass="ttip"
+            matTooltip="In order to delete one of your tags, you have to hold the delete button till the progressbar is full."
+            matTooltipPosition="below"
+            [matTooltipDisabled]="clickedDeleteTag"
+            appHoldable
+            (holdTime)="deleteTag($event)"
+            (showProgessBar)="setProgressBar($event)">Delete Tags
+    </button>
+    <div *ngIf="clickedDeleteTag && data.isOwner && !isDeleting"  fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+      <mat-hint style="margin-left: 5px" >Deleting selected items...</mat-hint>
+      <mat-progress-bar [color]="deleteTagProgress >= 55 ? 'warn' : 'primary'"
+                        [value]="deleteTagProgress" mode="determinate"></mat-progress-bar>
+    </div>
+  </div>
   <mat-spinner *ngIf="pressedDelete && finishedDeleting === false"></mat-spinner>
 
-
-  <div class="tags">
-    <mat-chip-list aria-label="Fish selection">
-      <mat-chip *ngFor="let tag of img.tags; index as i">
+  <div class="tags" style="padding: 10px">
+    <mat-chip-list aria-label="Tag selection">
+      <mat-chip #element (click)="selectTag(tag, element)" fxLayout="row" fxLayoutAlign="space-between center"
+                *ngFor="let tag of img.tags; index as i">
         {{tag.tag}}
       </mat-chip>
     </mat-chip-list>

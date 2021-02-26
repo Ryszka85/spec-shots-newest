@@ -25,6 +25,7 @@ export class ImageRequestService {
   private readonly SEARCH_URL: string = environment.apiUrl + 'library/search-by/tag/';
   private readonly UPLOAD_PROFILE_IMAGE = environment.apiUrl + 'user/set/profile-image/';
   private readonly UPLOAD_TAG = environment.apiUrl + 'image/update/tags/';
+  private readonly DELETE_TAG = environment.apiUrl + 'image/delete/tags/';
 
   constructor(private http: HttpClient,
               private sanitizer: DomSanitizer) {
@@ -47,6 +48,15 @@ export class ImageRequestService {
       this.UPLOAD_TAG,
       data,
       {observe: 'response'});
+  }
+
+  public deleteTagsFromImage(data: any): Observable<any> {
+    console.log(data);
+    return this.http.post(
+      this.DELETE_TAG,
+      data,
+      {observe: "response"}
+    );
   }
 
 

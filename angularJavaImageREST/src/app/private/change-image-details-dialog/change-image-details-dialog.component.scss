@@ -8,6 +8,20 @@
   }
 }
 
+progress::-webkit-progress-value {
+  transition: 0.1s all ease;
+}
+
+::ng-deep .ttip {
+  /*background-color: red !important;*/
+  font-size: 15px !important;
+}
+
+.mat-progress-bar {
+  height: 10px;
+  border-radius: 5px;
+  background-color: red;
+}
 
 .add-tags {
   /*margin-bottom: 150px;*/
