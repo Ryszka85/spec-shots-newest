@@ -200,6 +200,20 @@ export class FileUploadComponent implements OnInit {
                 }
               );
             }
+          }, error => {
+            this.onRemove($event.addedFiles[0]);
+            this.isValidToUpload = false;
+            this.isValidating = false;
+            console.log(this.isValidToUpload)
+            this.snackBar.open(
+              error.error,
+              "",
+              {
+                duration: 3000,
+                horizontalPosition: "center",
+                verticalPosition: "top"
+              }
+            );
           });
       }
     } else {

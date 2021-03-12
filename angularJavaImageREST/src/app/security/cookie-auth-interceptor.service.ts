@@ -43,10 +43,10 @@ export class CookieAuthInterceptorService implements HttpInterceptor{
           console.log(error);
           console.log(error.message);
           console.log();
-          if (error.url === 'http://localhost:8880/image-app/images/insert/') {
+          if (error.url === environment.apiUrl + '/images/insert/') {
             console.log(error.error);
             return throwError(error);
-          } else if (error.url === 'http://localhost:8880/image-app/users/signUp') {
+          } else if (error.url === environment.apiUrl + '/users/signUp') {
             console.log(error.error);
             return throwError(error);
           } else if (error.url === environment.apiUrl + "image-app/images/insert/") {
@@ -62,10 +62,13 @@ export class CookieAuthInterceptorService implements HttpInterceptor{
             this.store.dispatch(new RequestMessageAction({ message: error.error }))
             /*this.router.navigate(['not-found']);*/
             return throwError(error);
-          } else if (error.url === 'http://localhost:8880/image-app/library/download/cropped/file/') {
+          } else if (error.url === environment.apiUrl + '/library/download/cropped/file/') {
             this.store.dispatch(new RequestMessageAction({message: 'Error while downloading.'}));
             return throwError(error);
-          } else if (error.url === 'http://localhost:8880/image-app/verify/show-validated-token/') {
+          } else if (error.url === environment.apiUrl + 'library/validate-image/') {
+            this.store.dispatch(new RequestMessageAction({message: 'Error while validating image.'}));
+            return throwError(error);
+          } else if (error.url === environment.apiUrl + '/verify/show-validated-token/') {
             console.log("OIDA???");
             this.dialog.open(RenewExpiredAccountTokenComponent, {
               width: '450px',
@@ -77,7 +80,7 @@ export class CookieAuthInterceptorService implements HttpInterceptor{
               data : {tokenError: true}, hasBackdrop: true
             })
             this.router.navigate(['/welcome'])
-          } else if (error.url === 'http://localhost:8880/image-app/auth/renew/accountToken') {
+          } else if (error.url === environment.apiUrl + '/auth/renew/accountToken') {
             console.log('ASDASKASKAS');
             console.log(error.error.message);
             this.dialog.open(RenewExpiredAccountTokenComponent, {
@@ -89,7 +92,7 @@ export class CookieAuthInterceptorService implements HttpInterceptor{
               maxHeight: '300px',
               data : {tokenError: true, message: error.error.message}
             })
-          } else if (error.url === 'http://localhost:8880/image-app/reset/password/from-redirect/') {
+          } else if (error.url === environment.apiUrl + '/reset/password/from-redirect/') {
             this.store
               .dispatch(new RequestMessageAction({message: error.error.message, status: error.status}));
             this.dialog.open(RenewExpiredAccountTokenComponent, {
@@ -102,7 +105,7 @@ export class CookieAuthInterceptorService implements HttpInterceptor{
               data : {tokenError: true, message: error.error.message}
             })
             return throwError(error.error);
-          } else if(error.url === 'http://localhost:8880/image-app/reset/password/validate-tokenId/') {
+          } else if(error.url === environment.apiUrl + '/reset/password/validate-tokenId/') {
             this.router.navigate(['/welcome']);
             console.log("token id error");
             this.store
@@ -123,6 +126,7 @@ export class CookieAuthInterceptorService implements HttpInterceptor{
 
             console.log(`Backend returned code ${error.status}, body was: ${error.error.message}`);
           }
+
         }
 
         // If you want to return a new response:

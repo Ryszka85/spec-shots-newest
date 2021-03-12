@@ -22,19 +22,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6b407d3-ebd1-4611-ab70-a736be8ce20a" name="Default Changelist" comment="">
+    <list default="true" id="e6b407d3-ebd1-4611-ab70-a736be8ce20a" name="Default Changelist" comment="fixed fileSizeNames in downloadImageCardDetails">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/private/change-image-details-dialog/change-image-details-dialog.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/private/change-image-details-dialog/change-image-details-dialog.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/private/change-image-details-dialog/change-image-details-dialog.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/private/change-image-details-dialog/change-image-details-dialog.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/private/change-image-details-dialog/change-image-details-dialog.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/private/change-image-details-dialog/change-image-details-dialog.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/public/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/public/profile/profile.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/public/welcome/image-by-tag.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/public/welcome/image-by-tag.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/private/file-upload/file-upload.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/private/file-upload/file-upload.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/security/cookie-auth-interceptor.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/security/cookie-auth-interceptor.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/serviceV2/image-request.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/serviceV2/image-request.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/shared/image-content/image-content.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/shared/image-content/image-content.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/shared/image-content/image-content.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/shared/image-content/image-content.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/environments/environment.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,6 +124,12 @@
       <workItem from="1614179092158" duration="48000" />
       <workItem from="1614198506347" duration="9891000" />
       <workItem from="1614256478619" duration="20237000" />
+      <workItem from="1614362553902" duration="1292000" />
+      <workItem from="1614609347879" duration="2265000" />
+      <workItem from="1615069537313" duration="417000" />
+      <workItem from="1615149991062" duration="753000" />
+      <workItem from="1615289620563" duration="1252000" />
+      <workItem from="1615563964874" duration="1634000" />
     </task>
     <task id="LOCAL-00001" summary="Search tool bar layout adjustments + Responsive startup page banner text">
       <created>1608405358277</created>
