@@ -22,10 +22,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6b407d3-ebd1-4611-ab70-a736be8ce20a" name="Default Changelist" comment="fixed fileSizeNames in downloadImageCardDetails">
+    <list default="true" id="e6b407d3-ebd1-4611-ab70-a736be8ce20a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/private/file-upload/file-upload.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/private/file-upload/file-upload.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/security/cookie-auth-interceptor.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/security/cookie-auth-interceptor.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +68,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/barcode-test-project/BarcodeScanner" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
@@ -129,7 +127,11 @@
       <workItem from="1615069537313" duration="417000" />
       <workItem from="1615149991062" duration="753000" />
       <workItem from="1615289620563" duration="1252000" />
-      <workItem from="1615563964874" duration="1634000" />
+      <workItem from="1615563964874" duration="1880000" />
+      <workItem from="1615574352054" duration="1079000" />
+      <workItem from="1615654358760" duration="978000" />
+      <workItem from="1615740740622" duration="1689000" />
+      <workItem from="1615828716087" duration="741000" />
     </task>
     <task id="LOCAL-00001" summary="Search tool bar layout adjustments + Responsive startup page banner text">
       <created>1608405358277</created>
@@ -222,7 +224,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614215709804</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="added error handling for validating image method.&#10;when error occur in image recognition service then this error is now handled">
+      <created>1615566038273</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1615566038273</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -254,6 +263,7 @@
     <MESSAGE value="Added imageRecognition feature which generates tags.&#10;User can choose tags and upload file." />
     <MESSAGE value="fixed strange bug in cropAndDownload-component" />
     <MESSAGE value="fixed fileSizeNames in downloadImageCardDetails" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed fileSizeNames in downloadImageCardDetails" />
+    <MESSAGE value="added error handling for validating image method.&#10;when error occur in image recognition service then this error is now handled" />
+    <option name="LAST_COMMIT_MESSAGE" value="added error handling for validating image method.&#10;when error occur in image recognition service then this error is now handled" />
   </component>
 </project>
