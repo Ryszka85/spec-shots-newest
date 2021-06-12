@@ -17,13 +17,13 @@
           <mat-label>Firstname</mat-label>
           <input (ngModelChange)="firstNameChanged()" class="input-fontSize-desktop" [formControl]="firstNameControl"
                  matInput placeholder="John">
-          <mat-icon matSuffix>edit</mat-icon>
+          <!--<mat-icon matSuffix>edit</mat-icon>-->
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="example-full-width">
           <mat-label>Lastname</mat-label>
           <input (ngModelChange)="lastNameOnChange()" class="input-fontSize-desktop" [formControl]="lastNameControl" matInput placeholder="Doe">
-          <mat-icon matSuffix>edit</mat-icon>
+          <!--<mat-icon matSuffix>edit</mat-icon>-->
         </mat-form-field>
 
         <mat-form-field class="example-form-field" appearance="fill">
@@ -34,7 +34,7 @@
                  (ngModelChange)="emailChanged()"
                  matInput type="text">
           <button (click)="editEmail()" mat-button matSuffix mat-icon-button aria-label="Edit">
-            <mat-icon style="font-size: 17px">edit</mat-icon>
+            <!--<mat-icon style="font-size: 17px">edit</mat-icon>-->
           </button>
           <mat-error style="font-size: 16px" *ngIf="email.errors">{{email.errors.forbiddenValue.value}}</mat-error>
         </mat-form-field>
@@ -57,9 +57,9 @@
                [readonly]="readOnlyUserName"
                [formControl]="userNameControl" matInput placeholder="johnDoe"
                (ngModelChange)="userNameChanged()">
-        <button (click)="readOnlyUserName = false" mat-button matSuffix mat-icon-button aria-label="Edit">
+        <!--<button (click)="readOnlyUserName = false" mat-button matSuffix mat-icon-button aria-label="Edit">
           <mat-icon style="font-size: 17px">edit</mat-icon>
-        </button>
+        </button>-->
         <mat-error style="font-size: 16px" *ngIf="userName.errors">{{userName.errors.value}}</mat-error>
       </mat-form-field>
     </div>

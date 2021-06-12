@@ -21,7 +21,7 @@ export class SetResolutionDownloadDialogComponent implements OnInit {
   public isDownloading = false;
   @Select(GetImageByIdState.getFileDetails) $selectedImage;
 
-  constructor(private dialogRef: MatDialogRef<SetResolutionDownloadDialogComponent>,
+  constructor(public dialogRef: MatDialogRef<SetResolutionDownloadDialogComponent>,
               private fb: FormBuilder,
               private store: Store,
               private downloadService: ImageDownloadService) {

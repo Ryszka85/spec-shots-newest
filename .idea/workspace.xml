@@ -24,6 +24,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e6b407d3-ebd1-4611-ab70-a736be8ce20a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/private/edit-profile/edit-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/private/edit-profile/edit-profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/public/set-resolution-download-dialog/set-resolution-download-dialog.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/public/set-resolution-download-dialog/set-resolution-download-dialog.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/public/set-resolution-download-dialog/set-resolution-download-dialog.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/public/set-resolution-download-dialog/set-resolution-download-dialog.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/app/public/startup/startup.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/app/public/startup/startup.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angularJavaImageREST/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angularJavaImageREST/src/environments/environment.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +137,24 @@
       <workItem from="1615654358760" duration="978000" />
       <workItem from="1615740740622" duration="1689000" />
       <workItem from="1615828716087" duration="741000" />
-      <workItem from="1616177971603" duration="675000" />
+      <workItem from="1616177971603" duration="1392000" />
+      <workItem from="1616779981443" duration="3885000" />
+      <workItem from="1616944369069" duration="1890000" />
+      <workItem from="1617296896375" duration="5033000" />
+      <workItem from="1617360012625" duration="1189000" />
+      <workItem from="1617478222368" duration="1837000" />
+      <workItem from="1617553754661" duration="4404000" />
+      <workItem from="1617721879657" duration="2409000" />
+      <workItem from="1618066305096" duration="3919000" />
+      <workItem from="1619130574525" duration="676000" />
+      <workItem from="1619197717152" duration="7865000" />
+      <workItem from="1619254472266" duration="1263000" />
+      <workItem from="1620424866842" duration="2099000" />
+      <workItem from="1620662369055" duration="1128000" />
+      <workItem from="1621203174631" duration="17000" />
+      <workItem from="1621610236882" duration="2113000" />
+      <workItem from="1621622875495" duration="769000" />
+      <workItem from="1623514964560" duration="901000" />
     </task>
     <task id="LOCAL-00001" summary="Search tool bar layout adjustments + Responsive startup page banner text">
       <created>1608405358277</created>
@@ -239,7 +261,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616178155529</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="updated project">
+      <created>1616178760166</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1616178760166</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
